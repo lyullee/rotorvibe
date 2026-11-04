@@ -4,18 +4,54 @@ Python 배열을 직접 연결해 파형·FFT·베어링 주파수·정상 기�
 연구용 라이브러리입니다. 웹 서버를 띄우지 않고 다른 모듈의 함수·객체와 조립할 수 있습니다.
 기존 `vibration` import를 유지하며 새 `rotorvibe` 진입점도 제공합니다.
 
-**이 작업본은 0.1.0a3 알파 후보이며 아직 게시되지 않았습니다. 다른 장비와 베어링으로 옮기는 무학습 진단은 검증에
+**이 작업본은 0.1.0a4 알파 후보이며 아직 게시되지 않았습니다. 다른 장비와 베어링으로 옮기는 무학습 진단은 검증에
 실패했습니다. 고장 자동 확정·자동 정지·잔여수명·ISO 적합성 인증을 제공하지 않습니다.**
+
+## P2 세부 모듈과 입출력
+
+각 함수의 전체 서명은 [API 명세](docs/API_REFERENCE.md), 사용 조건과 오류 처리는
+[P2 사용 지침](docs/P2_GUIDE.md), 실행 결과와 남은 검증은 [검증 보고서](docs/P2_VERIFICATION.md)에 있습니다.
+웹 서버 없이 Python 객체와 함수로 연결합니다.
+
+| 모듈·API | 목적 | 입력 파라미터 | 반환값·연결 조건 |
+|---|---|---|---|
+| `AnalysisResult.detached()` / `VibrationAnalyzer` | 결과 소비자 간 수정 격리 | 기존 결과 / `stages`, `sinks` | 중첩 사전·배열·메타데이터의 독립 복사본. 각 단계·sink와 호출자 객체가 달라짐 |
+| `process_adapter_info()` | 외부 패키지 호환 확인 | 설치된 배포 메타데이터 | 지원/설치 버전·호환 여부. 지원 버전은 `process-monitoring-toolkit==0.1.0` |
+| `from_process_batch(batch, *, sample_rate_hz, clock_id, rpm=None)` | 외부 원시 파형 → 진동 입력 | 실제 `SignalBatch`, 샘플링률 Hz, 시계 ID, 독립 RPM 값/추적 배열 | `SignalBlock`. 균일 시간·공통 단위·단일 episode/mode 필요. 누락·혼합 조건·특징 배열은 거부 |
+| `to_process_batch(results)` | 진동 특징 → 외부 분석 | 시간순 결과 목록, 동일 시계·취득 조건·출처·특징 정의 | `[창 수, 7×채널 수]` `SignalBatch`. 창 끝 시각·유효 마스크·원래 단위 기준을 전달 |
+| `condition_evidence(result, *, asset_id)` | 중립적인 상태 관측 전달 | 분석 결과, 설비 ID | 독립 복사한 관측 사전. 사고 확률이 아님 |
+| `create_profile`, `validate_profile`, `profile_digest` | 공통 프로파일 계약·해시 | 모델 payload, ID/종류/알고리즘/특징 정의, 전처리, 원본 학습 그룹, 교정 이력, 적용 범위 | 유한 JSON 봉투·SHA-256·호환 검사. 모델 변환이나 작성자 인증을 하지 않음 |
+| `ProfileRegistry` | 버전별 프로파일 명시적 관리 | `register(envelope)`, `get/load(..., expected_contract, expected_scope)`; `load`에는 원래 모델 로더 | 복사된 봉투/원래 모델. ID 덮어쓰기 거부, 원래 수치 검증 유지 |
+| `SpectrogramAccumulator` | 시간·주파수 이력 누적 | `hop_seconds`, `max_frames`, `max_age_seconds`, `max_frequencies`; `update(result)` | `snapshot()`에 Hz 축·구간 경계·창 시작/끝 초·유효성·누락·구간 ID. 개수와 시간으로 보관 제한 |
+| `SpectrogramStage(accumulator)` | 분석기와 누적기 연결 | 누적기 | 작은 갱신 요약. 전체 이력은 누적기에서 조회하며 reset 시 제거 |
+| `vibration.iso.RuleDocument / RuleProvider / MemoryRuleProvider` | 검토된 사용자 기준 공급 | 원래 `Rule`, 판본, 출처 URI/해시, 검토자/날짜, 설비·조건 범위 | 일치 문서 또는 없음. 중복·모호한 선택 거부. ISO 기준표는 배포하지 않음 |
+| `evaluate_with_provider` / `IsoStage(rule_provider=...)` | 출처를 보존한 기준 평가 | 기준 식별자, `MachineContext`, 교정된 `Measurement`, 제공자. stage는 실제 입력 식별정보도 검사 | 위치별 구간 판정/보류, 검토 이력·문서 해시. 설비 전체 인증이 아님 |
+| `vibration.experimental.ReferenceLifeEstimator` | 참고 수명 실험 분리 | 가속시험 이력, `experimental_enabled=True`, 현재까지의 관측 prefix | 벤치 종료까지의 유사도 참고값. 기존 `LifeEstimator`와 `LifeStage`도 기본 비활성화 |
+| `vibration.experimental.LifeHistory / evaluate_life_predictions` | 완전·검열 수명 평가 | 원본 그룹, RPM·부하·단위·설치, 경과시간/RMS, 고장 또는 관측 종료 시각, 최종 예측·학습/교정 그룹 목록 | 수명별 동일 가중 MAE/RMSE, 경험적 구간 포함률, 검열 생존과의 양립 여부. 검열 자료의 정확한 고장 시간을 만들지 않음 |
+
+스펙트로그램은 성긴 격자의 점 보간 대신 **주파수 구간 평균 PSD**로 변경했습니다.
+기존 `frequencies`, `db` 키는 유지하고 구간 경계·표현 방식·단위를 추가했습니다.
+좁은 피크가 사라지는 문제를 수정했으며, 표시 하한을 제외한 PSD 적분을 보존합니다.
+분류 특징 계산식은 변경하지 않았습니다.
+
+실행 예제는 [기본 연결](examples/p2_composition.py)과 [실제 외부 패키지 연결](examples/process_bridge.py)에 있습니다.
+외부 0.1.0은 조회한 패키지 인덱스에서 설치되지 않아 검토한 Git 커밋을 고정해 설치합니다.
+설치 명령은 [영문 README의 P2 절](README.md#p2-composition-apis--010a4-candidate)을 참고하세요.
+코어를 사용할 때는 외부 패키지가 필요하지 않습니다.
+
+**호환성 변경:** sink와 반환 결과의 `is` 동일성은 유지하지 않습니다. sink가 결과를
+수정해 다음 소비자에게 전달하던 방식은 명시적인 stage 반환값으로 바꿔야 합니다.
+참고 수명 실험은 명시적으로 켜야 하며, 현장 잔여수명 정답률·신뢰구간은 아직 검증되지 않았습니다.
 
 ## 설치와 시작
 
-준비된 0.1.0a3 소스 작업본에서 설치합니다.
+준비된 0.1.0a4 소스 작업본에서 설치합니다.
 
 ```console
 python -m pip install .
 ```
 
-PyPI 공개본은 `rotorvibe==0.1.0a1`이며 새 P0 API는 포함하지 않습니다.
+PyPI 공개본은 `rotorvibe==0.1.0a1`이며 P0/P1/P2 추가 API는 포함하지 않습니다.
 
 Python 3.11 이상, NumPy 2.x, SciPy 1.13 이상이 필요합니다. 합성 파형으로 실행 가능한
 전체 코드는 [영문 README](README.md)의 첫 계산 예제에 있습니다. 실제 사용 시에는
@@ -68,7 +104,7 @@ analyze()의 스트림 경계는 호스트가 reset으로 선언하고, 자동 �
 ## P0 수정과 공통 입출력 계약 — 0.1.0a2 후보
 
 이 작업본에는 앞선 0.1.0a2 후보의 P0 수정도 포함됩니다. 이미 공개된 PyPI/Zenodo **0.1.0a1** 파일은
-그대로이며, 아래 새 API는 이 작업본 또는 새로 빌드한 0.1.0a3 wheel로 설치해야 합니다.
+그대로이며, 아래 새 API는 이 작업본 또는 새로 빌드한 0.1.0a4 wheel로 설치해야 합니다.
 이번 수정은 새 실측 데이터 학습이나 현장 진단 성능 합격을 의미하지 않습니다.
 
 | 모듈 / API | 입력 변경 | 출력·호환성 |
@@ -157,9 +193,9 @@ release dispatch만 게시 경로를 시작합니다. 후보 검증과 실제 �
 | `fit_fault_discriminator` | 조건부 고장 종류 원형 학습 | `x`, `labels`, `rpms`, `groups`; keyword `names`, `scope`, `mode='morphology'`, `rpm_penalty=1`, `margin=0.03` | 고장 전용 profile; 정상 클래스 없음 |
 | `FaultDiscriminator(profile)` | 이상이 확인된 창의 고장 종류 | `.predict(features, rpm, *, scope)` 또는 `.analyze(values, sample_rate_hz, rpm, *, scope)` | `hold` / `anomaly_unknown` / `fault_candidate`와 label·거리 증거 |
 | `FaultDiscriminationStage(model, gate_key='conditioned')` | 게이트 후 고장 head 순서 강제 | 이전 `payload[gate_key]['anomaly'] is True`, 유효 창·적용 범위·RPM 변화율 <=3% | 고장 후보 사전; 조건 미충족이면 이유와 함께 보류 |
-| [`stages.ClassifierStage(registry)` / `LifeStage(estimator)`](vibration/stages.py) | 호스트 객체를 stage로 연결 | 주입한 registry/estimator와 결과/원시 창 | 분류/수명 payload; 생성자에서 자동 학습하지 않음 |
+| [`stages.ClassifierStage(registry)` / `LifeStage(estimator, experimental_enabled=False)`](vibration/stages.py) | 호스트 객체를 stage로 연결 | 주입한 registry/estimator와 결과/원시 창 | 분류/수명 payload; 생성자에서 자동 학습하지 않음 |
 | [`models.ModelRegistry(storage, catalog)`](vibration/models.py) | 선택적 모델 저장·학습 작업 | 저장소/자료목록, `load(name)`, `use_two_stage(profile)`, `use_conditioned(profile)`, `train(name)` | 분류 결과/작업 상태; `.close()` 필수 |
-| `models.LifeEstimator(catalog).estimate(source)` | PRONOSTIA 참고 수명 유사도 | 학습용 완전 수명 catalog, 현재까지의 dataset·record_id·RPM·baseline/recent RMS 이력 | 거부 상태 또는 실험적 `remaining_seconds`·참고 범위·매칭; **현장 잔여수명 검증 미완료**, 범위는 신뢰구간 아님 |
+| `models.LifeEstimator(catalog, experimental_enabled=False).estimate(source)` | PRONOSTIA 참고 수명 유사도 | 학습용 완전 수명 catalog, 현재까지의 dataset·record_id·RPM·baseline/recent RMS 이력 | 거부 상태 또는 실험적 `remaining_seconds`·참고 범위·매칭; **현장 잔여수명 검증 미완료**, 범위는 신뢰구간 아님 |
 
 ### 측정량과 사용자 제공 평가 기준
 

@@ -150,3 +150,20 @@ test an isolated installed wheel, audit its content, and retain digests. PyPI ve
 are not editable replacements; use a new version for fixes. Zenodo archives should
 cite the exact version/repository and retain failure qualifications in their metadata.
 Never describe a successfully uploaded package or DOI as diagnostic certification.
+
+## Current local P2 continuation point
+
+Use branch feat/p2-composability (0.1.0a4 candidate); published 0.1.0a1 is older.
+Read P2_GUIDE.md and P2_VERIFICATION.md, then research/p2_verification.json,
+p2_external_contract.json and p2_realtime_benchmark.json. Rebuild API declarations
+with python tools/generate_api_reference.py. Tests are portable; the optional real
+process bridge needs its pinned upstream source installed first (README commands).
+
+Keep source, test environment and final artifact identities separate. Use the
+native model loader after common profile envelope checks. Do not re-enable life
+experiments in operational paths; acquire scoped complete/censored original life
+groups and freeze an independent evaluation before claiming RUL performance.
+
+P1's twin-spool numerical archives remain sealed/unassigned. Their unit/shaft and
+session review still precedes any frozen training/calibration/final-test split.
+P2 adds no new measured classifier validation and does not resolve that data gap.

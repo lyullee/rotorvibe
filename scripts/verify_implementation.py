@@ -27,7 +27,8 @@ def check(category,name,fn):
         with warnings.catch_warnings():
             warnings.simplefilter('error',RuntimeWarning)
             detail=fn()
-        row={'category':category,'name':name,'status':'pass','detail':detail}
+        status='not_executed' if isinstance(detail,dict) and detail.get('status')=='not_executed' else 'pass'
+        row={'category':category,'name':name,'status':status,'detail':detail}
     except Exception:
         row={'category':category,'name':name,'status':'fail','traceback':traceback.format_exc()}
     row['elapsed_seconds']=time.perf_counter()-begin; CHECKS.append(row)
@@ -177,15 +178,14 @@ def connection_checks():
         a=VibrationAnalyzer(cfg(),stages={'first':lambda r:{'asset':'machine-A','value':r.metrics['rms']},
                                         'second':lambda r:{'upstream':r.payload['first']['value']}},sinks=(received.append,))
         r=a.analyze(SignalBlock(wave(),FS,unit='m/s^2'))
-        assert received[0] is r; near(r.payload['second']['upstream'],np.sqrt(2))
+        assert received[0] is not r and received[0].to_dict()==r.to_dict(); near(r.payload['second']['upstream'],np.sqrt(2))
         return condition_evidence(r,asset_id='machine-A')['asset_id']
     check('connection','stages_sink_and_asset_evidence',dependency_chain)
     def source_contract():
-        path=ROOT/'docs/integration/upstream/contracts.py.source.txt'
-        spec=importlib.util.spec_from_loader('verified_upstream_contract',loader=None)
-        module=importlib.util.module_from_spec(spec); sys.modules[spec.name]=module
-        exec(compile(path.read_text(encoding='utf-8'),str(path),'exec'),module.__dict__)
-        module.__path__=[]; sys.modules['process_monitoring']=module
+        from vibration.adapters import process_adapter_info
+        if not process_adapter_info()['compatible']:
+            return {'status':'not_executed','reason':'optional real process-monitoring-toolkit 0.1.0 required'}
+        import process_monitoring as module
         c=cfg(); a=VibrationAnalyzer(c)
         rows=a.push(SignalBlock(wave(n=18000),FS,unit=c.unit,clock_id='daq',episode_id='A'))
         b=to_process_batch(rows)
@@ -195,7 +195,7 @@ def connection_checks():
         near(VibrationAnalyzer(c).analyze(restored).metrics['rms'],np.sqrt(2))
         bad=replace(raw,time_s=np.arange(FS)/FS*2)
         rejects(lambda:from_process_batch(bad,sample_rate_hz=FS,clock_id='daq'))
-        return {'upstream_commit':'79b4cf52a0acd0d0cbd3addbe82c3d98d6385e5a','feature_shape':list(b.values.shape),'scope':'Actual upstream SignalBatch contract snapshot; not full Monitor pipeline.'}
+        return {'upstream_commit':'79b4cf52a0acd0d0cbd3addbe82c3d98d6385e5a','feature_shape':list(b.values.shape),'scope':'Installed upstream SignalBatch; real Monitor exercised separately by test_p2_composition.'}
     check('connection','actual_upstream_signalbatch_contract',source_contract)
 
 def regression_checks():
@@ -274,6 +274,10 @@ def end_to_end_checks():
         from vibration.datasets import DatasetCatalog
         from vibration.bearings import Bearings
         catalog=DatasetCatalog(); observations=[]
+        missing=[d for d in ('CWRU','Paderborn','IMS','Brito','KAIST','FEMTO') if not any(r['dataset']==d for r in catalog.rows)]
+        if missing:
+            return {'status':'not_executed','reason':'External raw fixtures are not distributed; set VIBRATION_PROJECT_HOME to an existing private data workspace',
+                    'missing_datasets':missing}
         for dataset in ('CWRU','Paderborn','IMS','Brito','KAIST','FEMTO'):
             item=next(r for r in catalog.rows if r['dataset']==dataset)
             a,meta=catalog.load(item['id'])
@@ -330,6 +334,7 @@ if __name__=='__main__':
     report={'started_utc':start,'finished_utc':datetime.now(timezone.utc).isoformat(),
             'python':sys.version,'numpy':np.__version__,'checks':CHECKS,
             'passed':sum(r['status']=='pass' for r in CHECKS),'failed':sum(r['status']=='fail' for r in CHECKS),
+            'not_executed':sum(r['status']=='not_executed' for r in CHECKS),
             'scope':'Engineering software verification, not field diagnostic accuracy or RUL validation. No classifier training.'}
     (OUT/'results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     print(f"RESULT: {report['passed']} passed / {report['failed']} failed",flush=True)

@@ -1,7 +1,8 @@
 # Complete public API reference
 
-Source-derived declarations for RotorVibe 0.1.0a3 candidate.
-README and P1_GUIDE.md explain purpose, units, shapes, outputs and lifecycle. Candidate not yet published.
+Source-derived declarations for RotorVibe 0.1.0a4 candidate.
+README and P1_GUIDE.md/P2_GUIDE.md explain purpose, units, shapes, outputs and lifecycle.
+Candidate not yet published. Experimental life APIs are explicitly separate.
 
 ## vibration/acquisition.py
 
@@ -54,6 +55,10 @@ AcquisitionQualityStage.__call__(self, result)
 ## vibration/adapters.py
 
 [Implementation](../vibration/adapters.py)
+
+```python
+process_adapter_info()
+```
 
 ```python
 from_process_batch(batch, *, sample_rate_hz, clock_id, rpm=None)
@@ -449,6 +454,10 @@ AnalysisResult.features(self)
 ```
 
 ```python
+AnalysisResult.detached(self)
+```
+
+```python
 AnalysisResult.feature_names(self)
 ```
 
@@ -680,6 +689,41 @@ Engine.baseline_load(self, name)
 
 ```python
 evaluate_observations(observations, *, fault_onsets=None, max_gap_seconds=2.0)
+```
+
+## vibration/experimental/life.py
+
+[Implementation](../vibration/experimental/life.py)
+
+### LifeHistory
+
+| Constructor field | Type | Default |
+|---|---|---|
+| `record_id` | `str` | `required` |
+| `group_id` | `str` | `required` |
+| `condition` | `dict` | `required` |
+| `times_s` | `tuple` | `required` |
+| `rms` | `tuple` | `required` |
+| `event_observed` | `bool` | `required` |
+| `terminal_time_s` | `float` | `required` |
+| `role` | `str` | `required` |
+
+```python
+LifeHistory.validate(self)
+```
+
+```python
+evaluate_life_predictions(histories, predictions, *, training_groups)
+```
+
+### ReferenceLifeEstimator
+
+```python
+ReferenceLifeEstimator.__init__(self, catalog, *, experimental_enabled=False)
+```
+
+```python
+ReferenceLifeEstimator.estimate(self, source)
 ```
 
 ## vibration/fault_discrimination.py
@@ -971,6 +1015,62 @@ EnergyEquivalentAccumulator.reset(self)
 EnergyEquivalentAccumulator.push(self, measurement)
 ```
 
+## vibration/iso/providers.py
+
+[Implementation](../vibration/iso/providers.py)
+
+### RuleDocument
+
+| Constructor field | Type | Default |
+|---|---|---|
+| `rule` | `Rule` | `required` |
+| `edition` | `str` | `required` |
+| `source_uri` | `str` | `required` |
+| `source_sha256` | `str` | `required` |
+| `reviewed_by` | `str` | `required` |
+| `reviewed_on` | `str` | `required` |
+| `context_scope` | `dict` | `required` |
+
+```python
+RuleDocument.validate(self)
+```
+
+```python
+RuleDocument.matches(self, context)
+```
+
+```python
+RuleDocument.provenance(self)
+```
+
+### RuleProvider
+
+```python
+RuleProvider.resolve(self, standard: str, context: MachineContext)
+```
+
+### MemoryRuleProvider
+
+```python
+MemoryRuleProvider.__init__(self, documents=())
+```
+
+```python
+MemoryRuleProvider.register(self, document)
+```
+
+```python
+MemoryRuleProvider.resolve(self, standard, context)
+```
+
+```python
+resolve_document(provider, standard, context)
+```
+
+```python
+evaluate_with_provider(standard, context, measurement, provider)
+```
+
 ## vibration/iso/stage.py
 
 [Implementation](../vibration/iso/stage.py)
@@ -978,7 +1078,7 @@ EnergyEquivalentAccumulator.push(self, measurement)
 ### IsoStage
 
 ```python
-IsoStage.__init__(self, standard, context, *, custom_rule=None, point_id, axis='radial', calibrated=False, acquisition_verified=False)
+IsoStage.__init__(self, standard, context, *, custom_rule=None, rule_provider=None, point_id, axis='radial', calibrated=False, acquisition_verified=False)
 ```
 
 ```python
@@ -1030,7 +1130,7 @@ ModelRegistry.close(self)
 ### LifeEstimator
 
 ```python
-LifeEstimator.__init__(self, catalog)
+LifeEstimator.__init__(self, catalog, *, experimental_enabled=False)
 ```
 
 ```python
@@ -1063,6 +1163,48 @@ WindowStage.analyze_window(self, result: AnalysisResult, values: Any)
 
 ```python
 ResultSink.__call__(self, result: AnalysisResult)
+```
+
+## vibration/profiles.py
+
+[Implementation](../vibration/profiles.py)
+
+```python
+profile_digest(value)
+```
+
+```python
+create_profile(payload, *, profile_id, kind, algorithm, feature_schema, preprocessing, training_groups, calibration_history, scope)
+```
+
+```python
+validate_profile(envelope, *, expected_contract=None, expected_scope=None)
+```
+
+### ProfileRegistry
+
+```python
+ProfileRegistry.__init__(self)
+```
+
+```python
+ProfileRegistry.register(self, envelope)
+```
+
+```python
+ProfileRegistry.get(self, profile_id, *, expected_contract, expected_scope)
+```
+
+```python
+ProfileRegistry.load(self, profile_id, loader, *, expected_contract, expected_scope)
+```
+
+```python
+ProfileRegistry.remove(self, profile_id)
+```
+
+```python
+ProfileRegistry.list(self)
 ```
 
 ## vibration/realtime.py
@@ -1226,6 +1368,46 @@ Handler.do_POST(self)
 main()
 ```
 
+## vibration/spectrogram.py
+
+[Implementation](../vibration/spectrogram.py)
+
+### SpectrogramAccumulator
+
+```python
+SpectrogramAccumulator.__init__(self, *, hop_seconds, max_frames=512, max_age_seconds=600.0, max_frequencies=4096)
+```
+
+```python
+SpectrogramAccumulator.clear(self)
+```
+
+```python
+SpectrogramAccumulator.reset_state(self, *, preserve_profiles=True)
+```
+
+```python
+SpectrogramAccumulator.update(self, result)
+```
+
+```python
+SpectrogramAccumulator.snapshot(self)
+```
+
+### SpectrogramStage
+
+```python
+SpectrogramStage.__init__(self, accumulator)
+```
+
+```python
+SpectrogramStage.__call__(self, result)
+```
+
+```python
+SpectrogramStage.reset_state(self, *, preserve_profiles=True)
+```
+
 ## vibration/stages.py
 
 [Implementation](../vibration/stages.py)
@@ -1247,7 +1429,7 @@ ClassifierStage.analyze_window(self, result, values)
 ### LifeStage
 
 ```python
-LifeStage.__init__(self, estimator)
+LifeStage.__init__(self, estimator, *, experimental_enabled=False)
 ```
 
 ```python

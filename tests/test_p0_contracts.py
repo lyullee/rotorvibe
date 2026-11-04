@@ -119,7 +119,10 @@ class DecisionChecks(unittest.TestCase):
         for i in range(20): analyzer.analyze(block(i))
         result=analyzer.analyze(block(20))
         self.assertEqual(result.payload['decision']['status'],'scored')
-        self.assertEqual(result.payload['alarm']['level'],'normal'); self.assertIs(received[-1],result)
+        self.assertEqual(result.payload['alarm']['level'],'normal')
+        # P2 intentionally isolates sink objects; values and routing stay equal.
+        self.assertIsNot(received[-1],result)
+        self.assertEqual(received[-1].to_dict(),result.to_dict())
         held=analyzer.analyze(block(21,'other'))
         self.assertEqual(held.payload['decision']['status'],'hold')
         self.assertEqual(held.payload['alarm']['level'],'unavailable')

@@ -6,7 +6,7 @@ RotorVibe turns calibrated waveform blocks into spectra, bearing-frequency marke
 condition-relative evidence and inspectable diagnostic candidates. Use the NumPy API
 inside your own application; the local web dashboard is optional.
 
-**Alpha research candidate, version 0.1.0a3 (not yet published).** Signal calculations and bounded software
+**Alpha research candidate, version 0.1.0a4 (not yet published).** Signal calculations and bounded software
 checks are documented. Fault classifiers have **not** qualified for unattended field
 diagnosis: new-bearing and independent-rig transfer tests failed. No remaining-life
 prediction, automatic shutdown authority or standards certification is supplied.
@@ -19,13 +19,13 @@ prediction, automatic shutdown authority or standards certification is supplied.
 
 Python 3.11+ with NumPy 2.x and SciPy 1.13+ is required.
 
-From the prepared 0.1.0a3 source checkout:
+From the prepared 0.1.0a4 source checkout:
 
 ```console
 python -m pip install .
 ```
 
-The archived PyPI release is still `rotorvibe==0.1.0a1`; it lacks the new P0 APIs.
+The archived PyPI release is still `rotorvibe==0.1.0a1`; it lacks the P0/P1/P2 additions below.
 
 For an editable checkout and verification tools:
 
@@ -40,12 +40,75 @@ The public facade is `rotorvibe`; the earlier `vibration` namespace remains avai
 so existing Python integrations can keep their imports. Raw experimental data and
 trained rig-specific profiles are acquired separately, not installed by pip.
 
+## P2 composition APIs — 0.1.0a4 candidate
+
+These are in-process Python APIs. No server or database is required. All times are
+seconds in the named caller clock; frequency axes are Hz. See [P2 guide](docs/P2_GUIDE.md)
+for full parameter contracts and [verification](docs/P2_VERIFICATION.md) for results.
+
+| Module / API | Purpose | Required inputs | Outputs / mutation policy |
+|---|---|---|---|
+| `AnalysisResult.detached()`; `VibrationAnalyzer` | Isolate consumers | Existing result; configured stages/sinks | Independent nested payload/metadata/array copies. Each stage/sink receives a separate snapshot; object identity with the returned result is intentionally different |
+| `process_adapter_info()` | Inspect optional bridge compatibility | Installed distribution metadata | Installed/supported version and compatibility; supported `process-monitoring-toolkit==0.1.0` |
+| `from_process_batch(batch, *, sample_rate_hz, clock_id, rpm=None)` | Process waveform into vibration | Actual supported `SignalBatch`, uniform time, common physical unit, one episode/mode, independent scalar or per-sample RPM | `SignalBlock`; validity and `metadata['vibration_source']` preserved. Reject gaps, mixed identities and feature rows |
+| `to_process_batch(results)` | Vibration features into process pipeline | Ordered results with matching clock, measurement/source and feature schemas | `SignalBatch[windows, 7*channels]`, dimensionless log/ratio features at exclusive window end; invalid rows masked, raw RMS reference unit retained in metadata |
+| `condition_evidence(result, *, asset_id)` | Neutral condition observation | Result and explicit asset ID | Detached evidence mapping; no accident probability |
+| `create_profile(...)`, `validate_profile(...)`, `profile_digest(value)` | Common inert model envelope | Payload, ID/kind, algorithm, feature schema, preprocessing, original training groups, calibration history and scope | Finite JSON envelope, SHA-256s and compatibility checks; no model conversion or authenticity guarantee |
+| `ProfileRegistry.register/get/load/remove/list` | Explicit profile selection | Envelope; on get/load exact expected contract and scope; on load algorithm-specific callable | Detached envelope or native loaded model. Duplicate IDs rejected; native loader still validates numerical contents |
+| `SpectrogramAccumulator(hop_seconds=..., ...)` | Bounded time-frequency history | `AnalysisResult` rows; `max_frames`, `max_age_seconds`, `max_frequencies` | `update` summary and detached `snapshot` with Hz/bin edges, start/end times, validity, segment IDs and gaps; missing windows are not fabricated |
+| `SpectrogramStage(accumulator)` | Connect history to analyzer | Accumulator with matching hop | Small update summary; reset clears history. Full history remains in accumulator |
+| `vibration.iso.RuleDocument`, `RuleProvider`, `MemoryRuleProvider` | Supply reviewed engineering rules | Caller-owned `Rule`, edition/source/hash, reviewer/date, exact reviewed context | Scoped document or no match; ambiguity rejected. No standard tables included |
+| `vibration.iso.evaluate_with_provider(...)`; `IsoStage(..., rule_provider=...)` | Evaluate caller rules with provenance | Standard identifier, context, qualified measurement/provider; stage additionally checks live asset/condition/location/state/RPM | Per-location zone or indeterminate result, source/review hashes; never whole-machine certification |
+| `vibration.experimental.ReferenceLifeEstimator` | Explicit reference-life experiment | Legacy accelerated-bench catalog and `experimental_enabled=True`; causally available prefix | Experimental benchmark-end similarity only. Legacy `models.LifeEstimator` and `LifeStage` now default disabled |
+| `vibration.experimental.LifeHistory`, `evaluate_life_predictions(...)` | Evaluate complete/censored life forecasts | Original group IDs, operating conditions, elapsed RMS history, event/censor follow-up, final forecasts and excluded training/calibration groups | Equal-life MAE/RMSE, empirical interval coverage and censored-survival compatibility; unavailable exact errors stay `None` |
+
+The DSP heatmap now averages PSD within explicit frequency bins instead of
+interpolating isolated grid points. Narrow tones remain visible and discrete PSD
+power is preserved (apart from the declared display floor). The existing
+`spectrogram['frequencies']` and `['db']` fields remain; bin edges and representation
+metadata are added. This display is not a lossless STFT or a model feature matrix.
+
+```python
+import numpy as np
+from rotorvibe import (AnalysisConfig, SignalBlock, VibrationAnalyzer,
+                      SpectrogramAccumulator, SpectrogramStage)
+
+fs = 12000
+history = SpectrogramAccumulator(hop_seconds=0.25, max_frames=32, max_age_seconds=10)
+seen = []
+def consumer(result):
+    result.payload['metrics']['rms'] = -999  # isolated local edit
+
+analyzer = VibrationAnalyzer(AnalysisConfig(unit='m/s^2'),
+    stages={'history': SpectrogramStage(history)}, sinks=(consumer, seen.append))
+t = np.arange(2 * fs) / fs
+rows = analyzer.push(SignalBlock(np.sin(2 * np.pi * 100 * t), fs,
+    unit='m/s^2', channels=('radial',), metadata={'asset_id': 'demo-motor'}))
+assert len(rows) == 5 and len(history.snapshot()['rows']) == 5
+assert rows[-1].metrics['rms'] > 0 and seen[-1] is not rows[-1]
+```
+
+Run `python examples/p2_composition.py` for a reviewed illustrative-rule chain.
+For the optional **actual package** bridge, first install the inspected Git commit
+(the version was unavailable from the queried package index), then the local extra:
+
+```console
+python -m pip install "git+https://github.com/lyullee/process-monitoring-toolkit.git@79b4cf52a0acd0d0cbd3addbe82c3d98d6385e5a"
+python -m pip install ".[process]"
+python examples/process_bridge.py
+```
+
+That example runs `SignalBatch -> SignalBlock -> AnalysisResult -> feature SignalBatch
+-> Monitor`. Reused synthetic rows demonstrate wiring only. Production fit,
+calibration and final acquisitions must remain independent. Real remaining-life
+accuracy and statistical interval calibration are still unqualified.
+
 ## P1 monitoring APIs — 0.1.0a3 candidate
 
 P1 adds installation/RPM/load-scoped normal registration, recording-disjoint
 calibration, actionable holds, coverage-aware evaluation, measured-speed angle
 features, explicit lifecycle hooks and a bounded host-driven processing queue.
-It is a local **unpublished candidate**; install this checkout or its 0.1.0a3 wheel.
+These P1 APIs are included in the local **unpublished 0.1.0a4 candidate**; install this checkout or its wheel.
 
 | Unit / API | Inputs | Outputs / boundary |
 |---|---|---|
@@ -146,7 +209,7 @@ and [new data receipt](research/p1_data_receipt.json).
 ## P0 fixes and common module I/O (0.1.0a2 candidate)
 
 This checkout includes the P0 fixes introduced in the earlier 0.1.0a2 candidate. The archived/PyPI **0.1.0a1** distribution remains
-unchanged; install this checkout or its newly built 0.1.0a3 wheel for these APIs.
+unchanged; install this checkout or its newly built 0.1.0a4 wheel for these APIs.
 No new measured-data accuracy or field qualification is claimed.
 
 | API / module | Input changes | Output / compatibility |
@@ -279,9 +342,9 @@ acquisitions disjoint. These models are experimental, with `operational_use=Fals
 | `fit_fault_discriminator(x, labels, rpms, groups, *, names, scope, mode='morphology', rpm_penalty=1, margin=0.03)` | Fit conditional fault-type prototypes | Fault-only feature matrix, labels, RPM per row, acquisition groups, names, scope, feature mode and rejection parameters | Profile dict; excludes a healthy class |
 | `FaultDiscriminator(profile)` | Conditional fault-type inference | `.predict(features, rpm, *, scope)` or `.analyze(values, sample_rate_hz, rpm, *, scope)` | `{status, label, ...}`: hold / anomaly_unknown / fault_candidate; requires prior anomaly screening |
 | `FaultDiscriminationStage(model, gate_key='conditioned')` | Enforce gate-before-head composition | Earlier `payload[gate_key]['anomaly'] is True`, valid window and scope; RPM variation <=3% | Fault-head dict; otherwise hold with explicit reason |
-| [`stages`](vibration/stages.py): `ClassifierStage(registry)` / `LifeStage(estimator)` | Bridge host registry / reference-life estimator into stages | Injected registry or estimator and result/raw window | Classification / life payload; constructor does not start training |
+| [`stages`](vibration/stages.py): `ClassifierStage(registry)` / `LifeStage(estimator, experimental_enabled=False)` | Bridge host registry / reference-life estimator into stages | Injected registry or estimator and result/raw window | Classification / life payload; constructor does not start training |
 | [`models`](vibration/models.py): `ModelRegistry(storage, catalog)` | Optional stored models and explicit training jobs | Storage/catalog; `load(name)`, `use_two_stage(profile)`, `use_conditioned(profile)`, `train(name)` | Classification dict or training-job status; `.close()` releases worker resources |
-| `models.LifeEstimator(catalog).estimate(source)` | Experimental PRONOSTIA reference-life similarity | Training complete-life catalog and observed-prefix metadata: dataset, record ID, RPM, baseline/recent RMS | Refusal state or experimental `remaining_seconds`, reference range and matches; **not validated field RUL**, reference range is not a confidence interval |
+| `models.LifeEstimator(catalog, experimental_enabled=False).estimate(source)` | Experimental PRONOSTIA reference-life similarity | Training complete-life catalog and observed-prefix metadata: dataset, record ID, RPM, baseline/recent RMS | Refusal state or experimental `remaining_seconds`, reference range and matches; **not validated field RUL**, reference range is not a confidence interval |
 
 ### Engineering measurement and user-supplied criteria
 
@@ -297,7 +360,7 @@ selectors**. Limits come from the caller. `available_standards()` returns `()`.
 | `energy_equivalent_average(measurements)` / `EnergyEquivalentAccumulator(period_s).push(measurement)` | Duration-weighted RMS averaging | Compatible RMS observations with matching units/point/band/time context; accumulation period seconds | Averaged `Measurement`; accumulator returns `None` until period reached |
 | [`iso.evaluation`](vibration/iso/evaluation.py): `evaluate(standard, context, measurement, *, custom_rule=None)` | Assess one observation against explicit limits | Rule ID, context, measurement, caller `Rule` | Dict: `status`, `zone`, canonical value/unit and rule provenance; no rule / mismatch -> no zone; equality stays in lower interval |
 | `iso.evaluation.aggregate(results)` | Preserve assessed-point coverage | Nonempty per-point results for same asset/rule/condition | Combined dict; `whole_machine_compliance=False` |
-| [`iso.stage`](vibration/iso/stage.py): `IsoStage(standard, context, *, custom_rule=None, point_id, axis='radial', calibrated=False, acquisition_verified=False)` | Raw waveform -> measurement -> rule in one stage | One-channel window and explicit context/rule/qualification flags | Named evaluation payload; no rule -> indeterminate; multi-channel input requires separate per-channel use |
+| [`iso.stage`](vibration/iso/stage.py): `IsoStage(standard, context, *, custom_rule=None, rule_provider=None, point_id, axis='radial', calibrated=False, acquisition_verified=False)` | Raw waveform -> measurement -> rule in one stage | One-channel window and explicit context/rule/qualification flags | Named evaluation payload; no rule -> indeterminate; multi-channel input requires separate per-channel use |
 
 ### Integration, acquisition, data access and optional service
 
@@ -436,7 +499,8 @@ result = analyzer.analyze(SignalBlock(
     clock_id="daq_elapsed", episode_id="run-001",
     metadata={"asset_id": "motor-01", "condition_id": "rated_load"},
 ))
-assert received[0] is result
+assert received[0] is not result  # Independent sink snapshot; same output values.
+assert received[0].to_dict() == result.to_dict()
 assert result.payload["host_calculation"]["quality_accepted"] is True
 print(result.metrics["rms"], result.payload["host_calculation"])
 ```

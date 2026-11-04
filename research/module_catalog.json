@@ -5,9 +5,22 @@
     "interfaces": []
   },
   {
-    "module": "vibration/adapters.py",
-    "role": "host object interoperability",
+    "module": "vibration/acquisition.py",
+    "role": "Declared acquisition evidence. Software checks cannot certify sensor mounting.",
     "interfaces": [
+      "AcquisitionInfo(asset_id, sensor_id, sensor_installation_id, calibration_id, measured_on, calibration_due, channel_names, axes, sample_rate_hz, unit, sensor_band_hz, anti_alias_cutoff_hz, rpm_source, frame, calibrated, mounting_verified, anti_alias_verified)",
+      "AcquisitionInfo.validate(self)",
+      "AcquisitionInfo.to_dict(self)",
+      "check_acquisition(result, *, required_band_hz=None, require_measured_rpm=False)",
+      "AcquisitionQualityStage.__init__(self, *, required_band_hz=None, require_measured_rpm=False)",
+      "AcquisitionQualityStage.__call__(self, result)"
+    ]
+  },
+  {
+    "module": "vibration/adapters.py",
+    "role": "Optional process-monitoring-toolkit bridge; no hard dependency.",
+    "interfaces": [
+      "process_adapter_info()",
       "from_process_batch(batch, *, sample_rate_hz, clock_id, rpm=None)",
       "to_process_batch(results)",
       "condition_evidence(result, *, asset_id)"
@@ -15,45 +28,80 @@
   },
   {
     "module": "vibration/alarm.py",
-    "role": "observation-time state machine",
+    "role": "Caller-clock alarm policy; gaps/invalid observations never imply recovery.",
     "interfaces": [
-      "class AlarmStage — reset"
+      "AlarmStage.__init__(self, *, score_stage='baseline', warning=3, danger=6, persistence_seconds=2, release_seconds=3, max_gap_seconds=2, expected_score_name=None)",
+      "AlarmStage.reset(self)",
+      "AlarmStage.reset_state(self, *, preserve_profiles=True)",
+      "AlarmStage.__call__(self, result)"
+    ]
+  },
+  {
+    "module": "vibration/angle.py",
+    "role": "Experimental angle-domain features with explicit measured speed and anti-aliasing.",
+    "interfaces": [
+      "angle_resample(values, sample_rate_hz, rpm_trace, *, samples_per_revolution=256, revolutions=16)",
+      "AngleFeatures(names, values, metadata, schema)",
+      "angle_features(values, sample_rate_hz, rpm_trace, *, samples_per_revolution=256, revolutions=16)",
+      "fit_angle_fault_discriminator(x, labels, rpms, groups, *, names, scope, samples_per_revolution=256, revolutions=16, margin=0.03)",
+      "AngleFaultDiscriminator.__init__(self, profile)",
+      "AngleFaultDiscriminator.analyze(self, values, sample_rate_hz, rpm_trace, *, scope)",
+      "AngleFaultStage.__init__(self, model, *, gate_key='reference', experimental_enabled=False)",
+      "AngleFaultStage.analyze_window(self, result, values)",
+      "AngleFaultStage.__call__(self, result)"
     ]
   },
   {
     "module": "vibration/baseline.py",
-    "role": "robust normal references",
+    "role": "See implementation and operating guides.",
     "interfaces": [
       "utcnow()",
-      "class Baseline — begin, observe",
-      "class BaselineStage — begin, export_profile"
+      "Baseline.__init__(self)",
+      "Baseline.begin(self, name, config, target=60)",
+      "Baseline.observe(self, vector, names, config, rpm)",
+      "BaselineStage.__init__(self, config, *, profile=None)",
+      "BaselineStage.begin(self, name='normal', windows=60)",
+      "BaselineStage.export_profile(self)",
+      "BaselineStage.reset_state(self, *, preserve_profiles=True)",
+      "BaselineStage.__call__(self, result)"
     ]
   },
   {
     "module": "vibration/bearings.py",
-    "role": "Supporting implementation",
+    "role": "See implementation and operating guides.",
     "interfaces": [
-      "class Bearings — frequencies, custom"
+      "Bearings.__init__(self)",
+      "Bearings.frequencies(self, id, rpm)",
+      "Bearings.custom(self, values)"
     ]
   },
   {
     "module": "vibration/bootstrap.py",
-    "role": "Supporting implementation",
+    "role": "See implementation and operating guides.",
     "interfaces": []
   },
   {
     "module": "vibration/classifier.py",
-    "role": "experimental Gaussian baseline",
+    "role": "Pure NumPy Gaussian classifier: class-dependent variance needs log determinant.",
     "interfaces": [
       "fit_gaussian(x, y, groups, *, variance_floor=0.25, feature_schema=FEATURE_SCHEMA)",
-      "class GaussianClassifier — scores, predict_many, predict"
+      "GaussianClassifier.__init__(self, profile)",
+      "GaussianClassifier.scores(self, features)",
+      "GaussianClassifier.predict_many(self, features, *, reject_unknown=True)",
+      "GaussianClassifier.predict(self, features)"
     ]
   },
   {
     "module": "vibration/client.py",
     "role": "Device-neutral HTTP/UDP writer. Use measured arrays; no generated signals.",
     "interfaces": [
-      "class VibrationClient — request, start, packet, push, push_udp, stop"
+      "VibrationClient.__init__(self, base_url='http://127.0.0.1:8765', token='', timeout=30)",
+      "VibrationClient.request(self, path, payload=None)",
+      "VibrationClient.start(self, sample_rate_hz, channels, unit='unknown', rpm=None, **configuration)",
+      "VibrationClient.packet(self, samples, rpm=None, rpm_trace=None, timestamp=None)",
+      "VibrationClient.push(self, samples, **kwargs)",
+      "VibrationClient.push_udp(self, samples, host='127.0.0.1', port=9001, **kwargs)",
+      "VibrationClient.stop(self)"
     ]
   },
   {
@@ -61,59 +109,96 @@
     "role": "Versioned new recording holdout and explicitly exposed development data readers.",
     "interfaces": [
       "file_sha(path)",
-      "class UosRotorCatalog — rows, load",
-      "class ExposedCrossSpeedDevelopment — rows, load"
+      "UosRotorCatalog.__init__(self, root)",
+      "UosRotorCatalog.rows(self, role=None)",
+      "UosRotorCatalog.load(self, record_id, *, frozen_model_sha256=None)",
+      "ExposedCrossSpeedDevelopment.__init__(self, root)",
+      "ExposedCrossSpeedDevelopment.rows(self)",
+      "ExposedCrossSpeedDevelopment.load(self, record_id)"
     ]
   },
   {
     "module": "vibration/conditioned.py",
-    "role": "RPM-scoped normal bank",
+    "role": "Conditioned normal-reference bank with bounded interpolation and recording prototypes.",
     "interfaces": [
       "canonical_values(values, source_rate, target_rate=4000)",
       "selected_features(names, mode)",
       "matrix(values)",
       "reference_at(references, rpm, *, interpolate, max_gap, uncertainty)",
       "fit_conditioned(normal, normal_rpm, normal_groups, calibration, calibration_rpm, calibration_groups, faults, fault_rpm, fault_labels, fault_groups, *, feature_names, scope, mode='levels_orders', interpolate=False, max_rpm_gap=800.0, interpolation_uncertainty=1.0, min_margin=0.1)",
-      "class ConditionedDiagnostic — predict, analyze",
-      "class ConditionedStage — analyze_window"
+      "ConditionedDiagnostic.__init__(self, profile)",
+      "ConditionedDiagnostic.predict(self, features, *, scope)",
+      "ConditionedDiagnostic.analyze(self, values, sample_rate_hz, rpm, *, scope, channel_names=None)",
+      "ConditionedStage.__init__(self, model)",
+      "ConditionedStage.__call__(self, result)",
+      "ConditionedStage.analyze_window(self, result, values)"
     ]
   },
   {
     "module": "vibration/config.py",
-    "role": "analysis settings and validation",
+    "role": "See implementation and operating guides.",
     "interfaces": [
-      "class AnalysisConfig — validate, create, to_dict, signature, for_source"
+      "AnalysisConfig(sample_rate_hz, channels, channel, window_seconds, hop_seconds, unit, input_representation, sensitivity_mv_per_g, conditioner_gain, bias_voltage_v, calibration_id, rpm, bearing_id, condition, load, window, envelope_low_hz, envelope_high_hz, velocity_low_hz, velocity_high_hz, peak_tolerance_ratio, warning_score, danger_score, persistence_seconds, release_seconds, rms_warning, rms_danger, clip_abs, model_enabled, order_tracking)",
+      "AnalysisConfig.validate(self)",
+      "AnalysisConfig.create(cls, values=None)",
+      "AnalysisConfig.to_dict(self)",
+      "AnalysisConfig.signature(self)",
+      "AnalysisConfig.for_source(self, fs, channels, duration, unit, rpm, bearing_id)"
     ]
   },
   {
     "module": "vibration/contracts.py",
-    "role": "typed array/result contracts",
+    "role": "In-process contracts. Times are seconds in the explicitly named caller clock.",
     "interfaces": [
-      "class SignalBlock",
+      "SignalBlock(values, sample_rate_hz, unit, start_time_s, clock_id, episode_id, channels, valid, rpm, sequence, metadata)",
       "json_value(value)",
-      "class AnalysisResult — features, feature_names, metrics, to_dict"
+      "AnalysisResult(start_time_s, end_time_s, clock_id, episode_id, channels, valid, payload, metadata)",
+      "AnalysisResult.features(self)",
+      "AnalysisResult.detached(self)",
+      "AnalysisResult.feature_names(self)",
+      "AnalysisResult.metrics(self)",
+      "AnalysisResult.rpm_trace(self)",
+      "AnalysisResult.to_dict(self, *, include_features=True)"
     ]
   },
   {
     "module": "vibration/core.py",
-    "role": "stream and synchronous analysis",
+    "role": "Synchronous NumPy API: no database, server, files, worker or global runtime.",
     "interfaces": [
-      "class VibrationAnalyzer — config, reset, analyze, push",
+      "VibrationAnalyzer.__init__(self, config=None, *, bearing_provider=None, stages=None, sinks=())",
+      "VibrationAnalyzer.config(self)",
+      "VibrationAnalyzer.reset(self, *, reset_stages=False, preserve_profiles=True)",
+      "VibrationAnalyzer.analyze(self, block: SignalBlock)",
+      "VibrationAnalyzer.push(self, block: SignalBlock)",
       "analyze_signal(values, config=None, **block_options)"
     ]
   },
   {
     "module": "vibration/datasets.py",
-    "role": "Supporting implementation",
+    "role": "See implementation and operating guides.",
     "interfaces": [
       "local_path(root, relative)",
       "matrix(a)",
-      "class DatasetCatalog — search, details, trial_ids, load, imported"
+      "DatasetCatalog.__init__(self)",
+      "DatasetCatalog.search(self, query='', dataset='', offset=0, limit=100)",
+      "DatasetCatalog.details(self, id)",
+      "DatasetCatalog.trial_ids(self, id)",
+      "DatasetCatalog.load(self, id, snapshot=0)",
+      "DatasetCatalog.imported(self, filename, payload, fs=None, unit='unknown', channels_axis=1, skip_columns=0)"
+    ]
+  },
+  {
+    "module": "vibration/decisions.py",
+    "role": "Explicit stage-output adapter; scores remain distances, never probabilities.",
+    "interfaces": [
+      "normalize_decision(output, *, source_stage, valid=True)",
+      "DecisionStage.__init__(self, source_stage)",
+      "DecisionStage.__call__(self, result)"
     ]
   },
   {
     "module": "vibration/dsp.py",
-    "role": "spectral and physical numerical features",
+    "role": "See implementation and operating guides.",
     "interfaces": [
       "spectrum(x, fs, window='hann')",
       "compact_spectrum(f, a, maximum=1800, *, native=False)",
@@ -125,36 +210,95 @@
   },
   {
     "module": "vibration/engine.py",
-    "role": "optional acquisition/replay worker",
+    "role": "See implementation and operating guides.",
     "interfaces": [
-      "class EventHub — subscribe, unsubscribe, publish",
-      "class Ring — append, snapshot",
-      "class Engine — state, configure, live, stop, replay, ingest, close, save_window, baseline_start, baseline_load"
+      "EventHub.__init__(self)",
+      "EventHub.subscribe(self)",
+      "EventHub.unsubscribe(self, q)",
+      "EventHub.publish(self, kind, payload)",
+      "Ring.__init__(self, n, channels)",
+      "Ring.append(self, a, rpm)",
+      "Ring.snapshot(self)",
+      "Engine.__init__(self, storage, catalog, bearings, models)",
+      "Engine.state(self)",
+      "Engine.configure(self, values)",
+      "Engine.live(self, values=None)",
+      "Engine.stop(self)",
+      "Engine.replay(self, id, speed=1, loop=False, snapshot=0, loaded=None, sequence=False)",
+      "Engine.ingest(self, payload)",
+      "Engine.close(self)",
+      "Engine.save_window(self)",
+      "Engine.baseline_start(self, name, target)",
+      "Engine.baseline_load(self, name)"
+    ]
+  },
+  {
+    "module": "vibration/evaluation.py",
+    "role": "Coverage-aware validation and observation-time alarm episodes, not a field guarantee.",
+    "interfaces": [
+      "ValidationObservation(record_id, acquisition_id, start_s, end_s, truth, decision, alarm_level, clock_id, asset_id)",
+      "evaluate_observations(observations, *, fault_onsets=None, max_gap_seconds=2.0)"
+    ]
+  },
+  {
+    "module": "vibration/experimental/__init__.py",
+    "role": "Explicit experimental APIs; no field-qualified remaining-life predictor.",
+    "interfaces": []
+  },
+  {
+    "module": "vibration/experimental/life.py",
+    "role": "Experimental accelerated-bench reference similarity, never field RUL.",
+    "interfaces": [
+      "LifeHistory(record_id, group_id, condition, times_s, rms, event_observed, terminal_time_s, role)",
+      "LifeHistory.validate(self)",
+      "evaluate_life_predictions(histories, predictions, *, training_groups)",
+      "ReferenceLifeEstimator.__init__(self, catalog, *, experimental_enabled=False)",
+      "ReferenceLifeEstimator.estimate(self, source)"
     ]
   },
   {
     "module": "vibration/fault_discrimination.py",
-    "role": "conditional morphology head",
+    "role": "Experimental rotor fault candidates with subharmonics, impacts and optional RPM weighting.",
     "interfaces": [
       "fault_features(values, sample_rate_hz, rpm)",
       "fit_fault_discriminator(x, labels, rpms, groups, *, names, scope, mode='morphology', rpm_penalty=1.0, margin=0.03)",
-      "class FaultDiscriminator — predict, analyze",
-      "class FaultDiscriminationStage — analyze_window"
+      "FaultDiscriminator.__init__(self, profile)",
+      "FaultDiscriminator.predict(self, features, rpm, *, scope)",
+      "FaultDiscriminator.analyze(self, values, sample_rate_hz, rpm, *, scope)",
+      "FaultDiscriminationStage.__init__(self, model, gate_key='conditioned')",
+      "FaultDiscriminationStage.__call__(self, result)",
+      "FaultDiscriminationStage.analyze_window(self, result, values)"
     ]
   },
   {
     "module": "vibration/geometry.py",
-    "role": "ideal bearing frequency providers",
+    "role": "See implementation and operating guides.",
     "interfaces": [
-      "class BearingGeometry — validate, frequencies",
-      "class BearingMap — frequencies"
+      "BearingGeometry(rolling_elements, rolling_diameter, pitch_diameter, contact_angle_deg)",
+      "BearingGeometry.validate(self)",
+      "BearingGeometry.frequencies(self, rpm)",
+      "BearingMap.__init__(self, geometries)",
+      "BearingMap.frequencies(self, id, rpm)"
+    ]
+  },
+  {
+    "module": "vibration/guidance.py",
+    "role": "Machine-readable next steps for holds; no automatic scope relabeling.",
+    "interfaces": [
+      "hold_guidance(output)",
+      "GuidanceStage.__init__(self, source_stage='decision')",
+      "GuidanceStage.__call__(self, result)"
     ]
   },
   {
     "module": "vibration/independent_data.py",
     "role": "Explicitly grouped public rotor data reader. Reserved target arrays stay closed.",
     "interfaces": [
-      "class IndependentRotorCatalog — rows, load, marra_members, load_marra"
+      "IndependentRotorCatalog.__init__(self, root)",
+      "IndependentRotorCatalog.rows(self, *, role=None, normal_only=False)",
+      "IndependentRotorCatalog.load(self, record_id, *, frozen_model_sha256=None)",
+      "IndependentRotorCatalog.marra_members(self)",
+      "IndependentRotorCatalog.load_marra(self, archive_name, member)"
     ]
   },
   {
@@ -164,13 +308,16 @@
   },
   {
     "module": "vibration/iso/contracts.py",
-    "role": "typed array/result contracts",
+    "role": "Measurement contracts for edition-pinned, per-location ISO evaluations.",
     "interfaces": [
-      "class MachineContext — validate",
-      "class Measurement — validate, canonical_value",
-      "class Rule — validate, to_dict",
-      "class NotApplicable",
-      "class MissingInformation",
+      "MachineContext(asset_id, machine, power_kw, rated_rpm, operating_rpm, max_continuous_rpm, bearing_type, support, shaft_height_mm, operating_state, location, condition_id, thrust_bearing, land_based, aero_derivative, coupled, category, impeller_blades, nominal_clearance_um, orientation, reciprocating_class, hydro_group, hydro_type, bearing_position, runner_blades, guide_vanes, load_fraction, journal_diameter_mm, smooth_pelton_operation, hydraulic_normal_operation, pumping_at_rated_capacity, geared, offshore, icing, purpose, flow_region, support_design_confirmed, hydro_extended_housing_band, exclusions)",
+      "MachineContext.validate(self)",
+      "Measurement(value, quantity, unit, statistic, frame, band_hz, duration_s, axis, point_id, start_s, clock_id, calibrated, acquisition_verified, valid, averaging, observations, revolutions_per_observation, order, filter_bandwidth_hz, provenance)",
+      "Measurement.validate(self)",
+      "Measurement.canonical_value(self)",
+      "Rule(standard, key, quantity, statistic, frames, limits, band_hz, source_page, source_clause, zones, authority, minimum_duration_s, minimum_upper_band, notes)",
+      "Rule.validate(self)",
+      "Rule.to_dict(self)",
       "require(context, *names)",
       "check(condition, message)",
       "structural_axis(context, measurement)"
@@ -192,75 +339,196 @@
     "interfaces": [
       "measure_waveform(values, *, sample_rate_hz, input_unit, quantity, statistic, frame, band_hz, point_id, axes, calibrated=False, acquisition_verified=False, start_s=0, clock_id='measurement_clock', order=None, filter_bandwidth_hz=None)",
       "energy_equivalent_average(measurements)",
-      "class EnergyEquivalentAccumulator — reset, push"
+      "EnergyEquivalentAccumulator.__init__(self, period_s)",
+      "EnergyEquivalentAccumulator.reset(self)",
+      "EnergyEquivalentAccumulator.push(self, measurement)"
+    ]
+  },
+  {
+    "module": "vibration/iso/providers.py",
+    "role": "Pluggable reviewed user rules. No normative thresholds are supplied here.",
+    "interfaces": [
+      "RuleDocument(rule, edition, source_uri, source_sha256, reviewed_by, reviewed_on, context_scope)",
+      "RuleDocument.validate(self)",
+      "RuleDocument.matches(self, context)",
+      "RuleDocument.provenance(self)",
+      "RuleProvider.resolve(self, standard: str, context: MachineContext)",
+      "MemoryRuleProvider.__init__(self, documents=())",
+      "MemoryRuleProvider.register(self, document)",
+      "MemoryRuleProvider.resolve(self, standard, context)",
+      "resolve_document(provider, standard, context)",
+      "evaluate_with_provider(standard, context, measurement, provider)"
     ]
   },
   {
     "module": "vibration/iso/stage.py",
     "role": "Raw-window integration of independently supplied engineering rules.",
     "interfaces": [
-      "class IsoStage — analyze_window"
+      "IsoStage.__init__(self, standard, context, *, custom_rule=None, rule_provider=None, point_id, axis='radial', calibrated=False, acquisition_verified=False)",
+      "IsoStage.__call__(self, result)",
+      "IsoStage.analyze_window(self, result, values)"
     ]
   },
   {
     "module": "vibration/models.py",
-    "role": "Supporting implementation",
+    "role": "See implementation and operating guides.",
     "interfaces": [
-      "class ModelRegistry — load, use_two_stage, use_conditioned, classify_window, classify, train, close",
-      "class LifeEstimator — estimate"
+      "ModelRegistry.__init__(self, storage, catalog)",
+      "ModelRegistry.load(self, name)",
+      "ModelRegistry.use_two_stage(self, profile)",
+      "ModelRegistry.use_conditioned(self, profile)",
+      "ModelRegistry.classify_window(self, values, config, source, *, vector=None, channel_names=None, rpm=None, rpm_variation_ratio=0.0)",
+      "ModelRegistry.classify(self, vector, config, source)",
+      "ModelRegistry.train(self, name)",
+      "ModelRegistry.close(self)",
+      "LifeEstimator.__init__(self, catalog, *, experimental_enabled=False)",
+      "LifeEstimator.estimate(self, source)"
     ]
   },
   {
     "module": "vibration/ports.py",
-    "role": "structural Python interfaces",
+    "role": "Structural interfaces: ordinary Python objects can implement these ports.",
     "interfaces": [
-      "class BearingProvider — frequencies",
-      "class ResultStage",
-      "class WindowStage — analyze_window",
-      "class ResultSink"
+      "BearingProvider.frequencies(self, id: str, rpm: float)",
+      "ResultStage.__call__(self, result: AnalysisResult)",
+      "WindowStage.analyze_window(self, result: AnalysisResult, values: Any)",
+      "ResultSink.__call__(self, result: AnalysisResult)"
+    ]
+  },
+  {
+    "module": "vibration/profiles.py",
+    "role": "Common, inert JSON envelopes. Hashes detect changes, not author authenticity.",
+    "interfaces": [
+      "profile_digest(value)",
+      "create_profile(payload, *, profile_id, kind, algorithm, feature_schema, preprocessing, training_groups, calibration_history, scope)",
+      "validate_profile(envelope, *, expected_contract=None, expected_scope=None)",
+      "ProfileRegistry.__init__(self)",
+      "ProfileRegistry.register(self, envelope)",
+      "ProfileRegistry.get(self, profile_id, *, expected_contract, expected_scope)",
+      "ProfileRegistry.load(self, profile_id, loader, *, expected_contract, expected_scope)",
+      "ProfileRegistry.remove(self, profile_id)",
+      "ProfileRegistry.list(self)"
+    ]
+  },
+  {
+    "module": "vibration/realtime.py",
+    "role": "Bounded producer queue and measured processing times; host owns scheduling.",
+    "interfaces": [
+      "RealtimeProcessor.__init__(self, analyzer, *, max_pending=4, max_chunk_samples=None, max_pending_bytes=64 * 1024 * 1024, overflow='reject', latency_budget_seconds=None)",
+      "RealtimeProcessor.submit(self, block)",
+      "RealtimeProcessor.process_next(self)",
+      "RealtimeProcessor.drain(self, *, limit=None)",
+      "RealtimeProcessor.stats(self)",
+      "RealtimeProcessor.close(self)"
+    ]
+  },
+  {
+    "module": "vibration/references.py",
+    "role": "Explicit installation/RPM/load normal references with recording-disjoint calibration.",
+    "interfaces": [
+      "NormalRecording(record_id, group_id, observations, confirmed_normal, role, sha256)",
+      "NormalRecording.from_plan(cls, record, observations, *, confirmed_normal)",
+      "fit_normal_reference(fit_records, calibration_records, *, name, rpm_range, load_range, quantile=0.99, representation='time', samples_per_revolution=256, revolutions=16)",
+      "NormalReferenceBank.__init__(self, profiles=())",
+      "NormalReferenceBank.register(self, profile)",
+      "NormalReferenceBank.export(self)",
+      "NormalReferenceBank.clear(self)",
+      "NormalReferenceBank.analyze(self, result, *, representation='time')",
+      "ReferenceStage.__init__(self, bank, *, representation='time')",
+      "ReferenceStage.reset_state(self, *, preserve_profiles=True)",
+      "ReferenceStage.activate(self)",
+      "ReferenceStage.__call__(self, result)"
     ]
   },
   {
     "module": "vibration/rotor_features.py",
     "role": "Measured-speed rotor features: harmonic power, directional ratios, absolute levels.",
     "interfaces": [
-      "class RotorFeatures",
+      "RotorFeatures(names, values, sample_rate_hz, rpm, channel_names, sample_count, schema)",
       "rotor_features(values, sample_rate_hz, rpm, *, channel_names=None)",
       "feature_indices(names, mode='combined')"
     ]
   },
   {
     "module": "vibration/server.py",
-    "role": "optional local HTTP/SSE application",
+    "role": "HTTP/SSE service and device-neutral live input transport.",
     "interfaces": [
-      "class Application — start_udp, close",
-      "class Handler — app, handle, log_message, do_GET, do_POST",
+      "Application.__init__(self, token='')",
+      "Application.start_udp(self, host, port)",
+      "Application.close(self)",
+      "Handler.app(self)",
+      "Handler.handle(self)",
+      "Handler.log_message(self, fmt, *args)",
+      "Handler.do_GET(self)",
+      "Handler.do_POST(self)",
       "main()"
+    ]
+  },
+  {
+    "module": "vibration/spectrogram.py",
+    "role": "Bounded history of DSP display PSD rows; never infer missing observations.",
+    "interfaces": [
+      "SpectrogramAccumulator.__init__(self, *, hop_seconds, max_frames=512, max_age_seconds=600.0, max_frequencies=4096)",
+      "SpectrogramAccumulator.clear(self)",
+      "SpectrogramAccumulator.reset_state(self, *, preserve_profiles=True)",
+      "SpectrogramAccumulator.update(self, result)",
+      "SpectrogramAccumulator.snapshot(self)",
+      "SpectrogramStage.__init__(self, accumulator)",
+      "SpectrogramStage.__call__(self, result)",
+      "SpectrogramStage.reset_state(self, *, preserve_profiles=True)"
     ]
   },
   {
     "module": "vibration/stages.py",
     "role": "Bridges to the optional local supervised and reference-life modules.",
     "interfaces": [
-      "class ClassifierStage — analyze_window",
-      "class LifeStage"
+      "ClassifierStage.__init__(self, registry)",
+      "ClassifierStage.__call__(self, result)",
+      "ClassifierStage.analyze_window(self, result, values)",
+      "LifeStage.__init__(self, estimator, *, experimental_enabled=False)",
+      "LifeStage.__call__(self, result)"
     ]
   },
   {
     "module": "vibration/storage.py",
-    "role": "optional local SQLite persistence",
+    "role": "See implementation and operating guides.",
     "interfaces": [
       "utcnow()",
-      "class Storage — close, start_session, frame, event, save, get, documents, history"
+      "Storage.__init__(self)",
+      "Storage.close(self)",
+      "Storage.start_session(self, id, source, config)",
+      "Storage.frame(self, session_id, frame)",
+      "Storage.event(self, session_id, level, kind, payload)",
+      "Storage.save(self, kind, name, value)",
+      "Storage.get(self, kind, name)",
+      "Storage.documents(self, kind)",
+      "Storage.history(self, kind='events', limit=200, session_id=None)"
     ]
   },
   {
     "module": "vibration/two_stage.py",
-    "role": "normal-first prototype hypotheses",
+    "role": "Asset-scoped normal reference -> fault candidates -> explicit abstention.",
     "interfaces": [
       "fit_two_stage(normal_fit, normal_fit_groups, normal_calibration, calibration_groups, faults, fault_labels, fault_groups, *, feature_names, scope, mode='relative', normal_quantile=0.8, anomaly_quantile=0.99, min_margin=0.1)",
-      "class TwoStageDiagnostic — relative_features, predict, analyze",
-      "class TwoStageStage — analyze_window"
+      "TwoStageDiagnostic.__init__(self, profile)",
+      "TwoStageDiagnostic.relative_features(self, features, *, scope)",
+      "TwoStageDiagnostic.predict(self, features, *, scope)",
+      "TwoStageDiagnostic.analyze(self, values, sample_rate_hz, rpm, *, scope, channel_names=None)",
+      "TwoStageStage.__init__(self, model)",
+      "TwoStageStage.__call__(self, result)",
+      "TwoStageStage.analyze_window(self, result, values)"
+    ]
+  },
+  {
+    "module": "vibration/validation_plan.py",
+    "role": "Prospective split/freeze/access contracts. This is not a sandbox for host code.",
+    "interfaces": [
+      "DatasetRecord(record_id, acquisition_id, session_id, installation_id, rig_id, label, role, sha256)",
+      "ValidationPlan.__init__(self, records, *, independent_by='acquisition')",
+      "ValidationPlan.fitting_records(self, role)",
+      "ValidationPlan.freeze(self, path, *, model_sha256, preprocessing_sha256)",
+      "FrozenEvaluation.__init__(self, plan_path, *, plan_sha256, access_log, max_record_bytes=128 * 1024 * 1024)",
+      "FrozenEvaluation.load_test(self, record_id, path, loader, *, model_sha256, preprocessing_sha256, replay=False)"
     ]
   }
 ]

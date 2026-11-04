@@ -1,9 +1,18 @@
-RotorVibe 0.1.0a3 is an unshipped P1 candidate including the earlier P0 fixes.
-It adds acquisition declarations, scoped normal registration and separate calibration,
-angle-domain experimental models, actionable holds, lifecycle hooks, bounded queues,
-coverage/alarm metrics and prospective validation access. See docs/P1_VERIFICATION.md.
+RotorVibe 0.1.0a4 is an unshipped P2 candidate including P0 and P1.
 
-New archives remain sealed candidates; no new independent measured-data accuracy is
-claimed. A 48 kHz/4-channel burst workload exceeded a 0.25 s latency budget. No field
-diagnostic certification or hard realtime guarantee is supplied. Existing archived
-0.1.0a1 remains unchanged. External data rights remain separate from software MIT.
+P2 adds protected callback snapshots, an exact-version optional process bridge,
+common inert profile envelopes, bounded spectrogram accumulation, reviewed rule
+providers and explicitly disabled-by-default experimental reference-life matching.
+See P2_GUIDE.md and P2_VERIFICATION.md for contracts, migration and executed checks.
+
+Compatibility changes: sink identity differs from the returned result; sink edits
+are private; unknown optional-package versions are refused; life experiments need
+explicit opt-in. Heatmap rows use mean PSD frequency bins with preserved integrated
+power rather than interpolation that could omit narrow tones. Model features stay
+unchanged. Existing raw acquisition, model and output scopes remain enforced.
+
+No new measured fault accuracy or field remaining-life accuracy is claimed.
+Complete/censored operating lives and statistically calibrated prediction intervals
+still require independent qualification. P1's high-rate burst latency limitation
+remains; no hard realtime guarantee. The archived public 0.1.0a1 is unchanged.
+External datasets/standards and the optional package retain their own rights.

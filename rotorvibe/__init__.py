@@ -1,5 +1,5 @@
 """RotorVibe public facade; historical ``vibration`` imports remain supported."""
-__version__='0.1.0a3'
+__version__='0.1.0a4'
 __all__=['AnalysisConfig','SignalBlock','AnalysisResult','VibrationAnalyzer','analyze_signal',
     'BearingGeometry','BearingMap','BaselineStage','AlarmStage','GaussianClassifier','extract_rotor_features',
     'RotorFeatures','TwoStageDiagnostic','TwoStageStage','fit_two_stage','IndependentRotorCatalog',
@@ -11,6 +11,8 @@ __all__+=['AcquisitionInfo','AcquisitionQualityStage','check_acquisition','Norma
           'ValidationObservation','evaluate_observations','angle_resample','angle_features','AngleFeatures',
           'fit_angle_fault_discriminator','AngleFaultDiscriminator','AngleFaultStage',
           'DatasetRecord','ValidationPlan','FrozenEvaluation']
+__all__+=['ProfileRegistry', 'create_profile', 'validate_profile', 'profile_digest', 'SpectrogramAccumulator', 'SpectrogramStage', 'process_adapter_info', 'from_process_batch', 'to_process_batch', 'condition_evidence']
+
 def __getattr__(name):
     if name not in __all__: raise AttributeError(name)
     from importlib import import_module

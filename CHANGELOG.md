@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0a4 — P2 candidate, not published
+
+- Isolate each stage/sink with detached nested result copies; preserve stage output order.
+- Add exact-version optional process bridge, pinned upstream CI and actual bidirectional example.
+- Add common finite JSON profile envelopes, integrity/preprocessing hashes, calibration provenance and explicit native loaders.
+- Add bounded spectrogram history with axes, gaps and segments; fix narrow-tone display loss using power-conserving frequency bins.
+- Add reviewed scoped RuleProvider contracts, source/edition/review hashes and live-context checks; no standard tables.
+- Move reference-life similarity into explicit experimental APIs, default disabled; add complete/censored-life evaluation contracts.
+- No new measured-data classification, field RUL or hard realtime qualification.
+
 ## 0.1.0a3 — P1 candidate, not published
 
 - Add declared acquisition quality contracts and installation/RPM/load normal banks with original-group calibration.

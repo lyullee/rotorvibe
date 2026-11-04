@@ -1,5 +1,9 @@
 # Module and API catalog
 
+P2 adds profiles.py, spectrogram.py, iso/providers.py and experimental/life.py, plus
+result snapshots and versioned adapters. README tables show purpose and inputs/outputs;
+P2_GUIDE.md covers use, compatibility and limitations.
+
 P1 adds acquisition.py, references.py, angle.py, guidance.py, evaluation.py, realtime.py
 and validation_plan.py. See README for purpose/input/output tables and P1_GUIDE.md for
 operating contracts; API_REFERENCE.md contains complete signatures.

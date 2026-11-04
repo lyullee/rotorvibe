@@ -1,0 +1,18 @@
+{
+  "distribution": "process-monitoring-toolkit",
+  "supported_version": "0.1.0",
+  "source_repository": "https://github.com/lyullee/process-monitoring-toolkit",
+  "source_commit": "79b4cf52a0acd0d0cbd3addbe82c3d98d6385e5a",
+  "source_file_sha256": {
+    "pyproject.toml": "02fa2ad86f73eddeb996ad5b7dfe2ceb62d575e69b4b21c47820f65d9d9a4bb1",
+    "src/process_monitoring/contracts.py": "4f8dfbf4fc6c09b9397d9b40de88307ae4ca13312ae687b5ca530e36c842c0b8",
+    "src/process_monitoring/__init__.py": "69c25a0a8ead77689b71de5356e1591887c76b18411de5c912d45f8bed5516c7"
+  },
+  "source_copied_into_distribution": false,
+  "license": "MIT (external package, separately installed)",
+  "package_index_resolution": "No matching distribution found for pinned version in queried pip index; installed from pinned source checkout",
+  "bridge_contract": "SignalBatch -> SignalBlock -> AnalysisResult -> SignalBatch -> actual Monitor",
+  "accuracy_claim": false,
+  "installed_source_python_files_compared": 28,
+  "installed_source_matches_pinned_checkout": true
+}

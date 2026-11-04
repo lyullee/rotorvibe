@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rotorvibe"
-version = "0.1.0a3"
+version = "0.1.0a4"
 description = "Composable rotating-machine vibration analysis with explicit evidence and applicability limits"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -23,6 +23,7 @@ Issues = "https://github.com/lyullee/rotorvibe/issues"
 Archive = "https://doi.org/10.5281/zenodo.23937890"
 
 [project.optional-dependencies]
+process = ["process-monitoring-toolkit==0.1.0"]
 verification = ["build>=1.2,<2", "setuptools>=77", "wheel", "twine>=6,<7"]
 
 [project.scripts]

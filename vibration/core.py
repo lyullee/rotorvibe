@@ -15,7 +15,8 @@ from .dsp import analyze, G0
 class VibrationAnalyzer:
     """One instance per stream; caller owns scheduling and synchronization.
 
-    Stages add named outputs, sinks receive completed results. Exceptions propagate
+    Stages and sinks receive detached snapshots, including arrays and metadata.
+    Stage outputs are copied before attaching. Exceptions propagate
     to the caller; a failed downstream component is never silently marked healthy.
     """
     def __init__(self, config=None, *, bearing_provider=None, stages=None, sinks=()):
@@ -84,12 +85,15 @@ class VibrationAnalyzer:
         result=AnalysisResult(block.start_time_s,block.start_time_s+len(a)/c.sample_rate_hz,
                               block.clock_id,block.episode_id,block.channels,not quality,payload,metadata)
         for name,stage in self.stages.items():
+            snapshot=result.detached()
             hook=getattr(stage,'analyze_window',None)
             if callable(hook):
-                readonly=a.view(); readonly.setflags(write=False)
-                payload[name]=hook(result,readonly)
-            else: payload[name]=stage(result)
-        for sink in self.sinks: sink(result)
+                # Immutable backing prevents re-enabling writes in a plugin.
+                readonly=np.frombuffer(a.tobytes(),dtype=a.dtype).reshape(a.shape)
+                output=hook(snapshot,readonly)
+            else: output=stage(snapshot)
+            payload[name]=copy.deepcopy(output)
+        for sink in self.sinks: sink(result.detached())
         return result
 
     def push(self, block: SignalBlock) -> list[AnalysisResult]:
@@ -100,7 +104,7 @@ class VibrationAnalyzer:
         if block.unit!=expected: raise ValueError(f'Expected input unit {expected!r}.')
         identity_fields=('asset_id','asset','sensor_id','sensor_ids','calibration_id','condition_id','condition',
                          'operating_mode','measurement_frame','source_id','sensor_installation',
-                         'sensor_installation_id','load_unit','acquisition')
+                         'sensor_installation_id','load_unit','acquisition','location','operating_state')
         try:
             source_identity=json.dumps(json_value({k:block.metadata[k] for k in identity_fields if k in block.metadata}),sort_keys=True,allow_nan=False)
         except (TypeError,ValueError) as ex: raise ValueError('Stream identity metadata must be JSON-compatible and finite.') from ex

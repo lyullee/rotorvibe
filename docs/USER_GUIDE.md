@@ -5,7 +5,7 @@ standards-table implementations that are intentionally absent here.
 
 ## 1. Installation and environment ownership
 
-Use Python 3.11 or newer. This source is the 0.1.0a3 candidate; install it with
+Use Python 3.11 or newer. This source is the 0.1.0a4 candidate; install it with
 `python -m pip install .`. PyPI 0.1.0a1 remains the earlier archived version. For an editable
 checkout with `python -m pip install -e ".[verification]"`. NumPy and SciPy are numerical
 dependencies, not bundled source copies. The optional verification extra provides
@@ -231,3 +231,9 @@ See [P1_GUIDE.md](P1_GUIDE.md) for acquisition evidence, recording-disjoint norm
 references, angle-domain models, bounded processing, lifecycle and prospective
 validation access. These are additive research APIs; measured cross-rig qualification
 and a strict real-time service guarantee remain unestablished.
+
+## P2 composition and compatibility
+
+See [P2_GUIDE.md](P2_GUIDE.md) for isolated results, optional real-package bridge,
+profile envelopes, bounded spectrogram history, reviewed rule providers and explicit
+experimental life APIs. See [P2_VERIFICATION.md](P2_VERIFICATION.md) for executed checks.
