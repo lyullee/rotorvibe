@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-04",
+  "authentication": "none; anonymous HTTPS",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "installed": {
+    "rotorvibe": "0.1.0a1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "anonymous_downloads": [
+    {
+      "service": "github",
+      "file": "rotorvibe-0.1.0a1-py3-none-any.whl",
+      "size": 103443,
+      "sha256": "011002b53c2c79635ef89d9895afac08229b0cf8cfedb5da7e9d3618ac44bccd",
+      "status": "pass"
+    },
+    {
+      "service": "github",
+      "file": "rotorvibe-0.1.0a1.tar.gz",
+      "size": 637992,
+      "sha256": "063ceafaed83778709e6c9bd7b879cecf2ab4dce22842170ecab128899bda685",
+      "status": "pass"
+    },
+    {
+      "service": "pypi",
+      "file": "rotorvibe-0.1.0a1-py3-none-any.whl",
+      "size": 103443,
+      "sha256": "011002b53c2c79635ef89d9895afac08229b0cf8cfedb5da7e9d3618ac44bccd",
+      "status": "pass"
+    },
+    {
+      "service": "pypi",
+      "file": "rotorvibe-0.1.0a1.tar.gz",
+      "size": 637992,
+      "sha256": "063ceafaed83778709e6c9bd7b879cecf2ab4dce22842170ecab128899bda685",
+      "status": "pass"
+    },
+    {
+      "service": "zenodo",
+      "file": "rotorvibe-0.1.0a1.tar.gz",
+      "size": 637992,
+      "sha256": "063ceafaed83778709e6c9bd7b879cecf2ab4dce22842170ecab128899bda685",
+      "status": "pass"
+    },
+    {
+      "service": "zenodo",
+      "file": "rotorvibe-0.1.0a1-py3-none-any.whl",
+      "size": 103443,
+      "sha256": "011002b53c2c79635ef89d9895afac08229b0cf8cfedb5da7e9d3618ac44bccd",
+      "status": "pass"
+    }
+  ],
+  "public_metadata": {
+    "github": "https://github.com/lyullee/rotorvibe",
+    "release": "https://github.com/lyullee/rotorvibe/releases/tag/v0.1.0a1",
+    "pypi": "https://pypi.org/project/rotorvibe/",
+    "zenodo": "https://zenodo.org/records/23937890"
+  },
+  "ci": [
+    {
+      "name": "Verify Python API",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41782143647"
+    },
+    {
+      "name": "Verify Python API",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41782014169"
+    },
+    {
+      "name": "Verify Python API",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41781842057"
+    },
+    {
+      "name": "Publish RotorVibe",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41781773380"
+    }
+  ],
+  "readme_examples": [
+    {
+      "document": "README.md",
+      "block": 1,
+      "status": "pass",
+      "stdout": "True {'rms': 0.14142135623730953, 'rms_raw': 0.14142135623730953, 'mean': 0.0, 'peak': 0.2, 'peak_to_peak': 0.4, 'crest_factor': 1.414213562373095, 'kurtosis': 1.4999999999999993, 'skewness': 0.0, 'velocity_rms_mm_s': 1.1268071359839675, 'envelope_rms': 2.7273225904993133e-06, 'band_power': [{'low_hz': 10, 'high_hz': 100, 'power': 0.019999999999999997}, {'low_hz': 100, 'high_hz': 500, 'power': 3.244982590026299e-33}, {'low_hz': 500, 'high_hz': 2000, 'power': 1.5188111768435688e-31}, {'low_hz': 2000, 'high_hz': 6000.0, 'power': 2.471375126240414e-31}], 'unit': 'm/s^2', 'definitions': 'RMS/peak are AC; rms_raw includes DC; kurtosis is Pearson (Gaussian=3). Velocity is band-limited PSD integration.'}\n",
+      "analytic_check": "AC RMS 0.2/sqrt(2), peak 0.2 and finite JSON"
+    },
+    {
+      "document": "README.md",
+      "block": 2,
+      "status": "pass",
+      "stdout": "0.14142135623730953 {'quality_accepted': True}\n"
+    },
+    {
+      "document": "README.md",
+      "block": 3,
+      "status": "pass",
+      "stdout": "{'BPFI': 96.0, 'BPFO': 64.0, 'FTF': 8.0, 'BSF': 48.0, '2BSF': 96.0}\n",
+      "analytic_check": "BPFO 64 Hz"
+    },
+    {
+      "document": "docs/USER_GUIDE.md",
+      "block": 1,
+      "status": "pass",
+      "stdout": "{'schema': 'vibration.user-rule-evaluation.v1', 'standard': 'example-only', 'asset_id': 'demo', 'condition_id': 'rated', 'point_id': 'DE', 'axis': 'radial', 'zone': 'B', 'whole_machine_compliance': False, 'automatic_shutdown': False, 'authority': 'user_supplied_limits', 'status': 'evaluated', 'value': 2.0, 'rule': {'standard': 'example-only', 'key': 'invented', 'quantity': 'velocity', 'statistic': 'rms', 'frames': ('housing',), 'limits': (1.1, 2.2, 3.3), 'band_hz': (12.0, 850.0), 'source_page': 0, 'source_clause': 'invented demonstration values', 'zones': ('A', 'B', 'C', 'D'), 'authority': 'user_supplied_limits', 'minimum_duration_s': 0, 'minimum_upper_band': False, 'notes': ()}, 'canonical_unit': 'mm/s'}\n"
+    }
+  ],
+  "pip_check": "No broken requirements found.",
+  "status": "pass",
+  "isolation": "New venv without system site packages; no-cache PyPI install; imports verified inside that venv; working directory outside source checkout",
+  "public_tests": {
+    "count": 97,
+    "failures": 0,
+    "errors": 0,
+    "note": "Public checkout tests exercised installed PyPI package. Copied only scripts/external_blind_metrics.py beside test runner because it is a research helper, not an installed library module. An initial outside-checkout run lacked that helper and failed test discovery; after supplying it all 97 checks passed."
+  },
+  "scope": "Software/publication validation, not new measured-data predictive validation; models and training unchanged",
+  "documentation": "GitHub main clarified after immutable 0.1.0a1 publication; release archives and PyPI embedded README remain original snapshots",
+  "optional_service_smoke": {
+    "status": "pass",
+    "entry_point": "installed vibration.server:main (same entry point as rotorvibe-monitor)",
+    "requests": [
+      "GET /api/state -> 200 JSON",
+      "GET / -> 200 dashboard HTML"
+    ],
+    "port": "ephemeral loopback port; avoids other running services",
+    "state_directory": "temporary directory, removed after owned process exits",
+    "process_cleanup": "terminated only subprocess started by this check"
+  }
+}
