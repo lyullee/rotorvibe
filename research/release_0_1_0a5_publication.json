@@ -1,0 +1,244 @@
+{
+  "version": "0.1.0a5",
+  "github_release": "https://github.com/lyullee/rotorvibe/releases/tag/v0.1.0a5",
+  "github_release_published_at": "2026-11-04T08:56:46Z",
+  "tag_commit": "68f03d000ab5b98bfedc65189bc8e4abb9d3464c",
+  "pypi_url": "https://pypi.org/project/rotorvibe/0.1.0a5/",
+  "github_pypi_same_bytes": true,
+  "checksums": {
+    "rotorvibe-0.1.0a5-py3-none-any.whl": "7b800e7b21a610d6cdb1e300893350d07fdc49e4777e4ebb541e62a4d6d1ab20",
+    "rotorvibe-0.1.0a5.tar.gz": "e4b98f4d78a84b47d0bb7f344471f263931f44a1f0a917d3da38478b7b8620b3"
+  },
+  "downloads": [
+    {
+      "service": "github",
+      "filename": "rotorvibe-0.1.0a5-py3-none-any.whl",
+      "sha256": "7b800e7b21a610d6cdb1e300893350d07fdc49e4777e4ebb541e62a4d6d1ab20",
+      "bytes": 154216
+    },
+    {
+      "service": "github",
+      "filename": "rotorvibe-0.1.0a5.tar.gz",
+      "sha256": "e4b98f4d78a84b47d0bb7f344471f263931f44a1f0a917d3da38478b7b8620b3",
+      "bytes": 808665
+    },
+    {
+      "service": "pypi",
+      "filename": "rotorvibe-0.1.0a5-py3-none-any.whl",
+      "sha256": "7b800e7b21a610d6cdb1e300893350d07fdc49e4777e4ebb541e62a4d6d1ab20",
+      "bytes": 154216
+    },
+    {
+      "service": "pypi",
+      "filename": "rotorvibe-0.1.0a5.tar.gz",
+      "sha256": "e4b98f4d78a84b47d0bb7f344471f263931f44a1f0a917d3da38478b7b8620b3",
+      "bytes": 808665
+    },
+    {
+      "service": "zenodo",
+      "filename": "rotorvibe-0.1.0a5-py3-none-any.whl",
+      "sha256": "7b800e7b21a610d6cdb1e300893350d07fdc49e4777e4ebb541e62a4d6d1ab20",
+      "bytes": 154216
+    },
+    {
+      "service": "zenodo",
+      "filename": "rotorvibe-0.1.0a5.tar.gz",
+      "sha256": "e4b98f4d78a84b47d0bb7f344471f263931f44a1f0a917d3da38478b7b8620b3",
+      "bytes": 808665
+    }
+  ],
+  "canonical_runtime_files_matched": 45,
+  "ci_installed_tests": {
+    "status": "pass",
+    "version": "0.1.0a5",
+    "tests": 224,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "python": "3.12.15",
+    "optional_bridge": {
+      "distribution": "process-monitoring-toolkit",
+      "supported_version": "0.1.0",
+      "installed_version": "0.1.0",
+      "compatible": true,
+      "contract": "process-monitoring.SignalBatch/0.1.0"
+    },
+    "isolation": "venv site-packages outside source; only tests and helpers copied",
+    "skips_allowed": false
+  },
+  "pypi_embedded_readme_module_contracts": "present",
+  "zenodo": "pass",
+  "zenodo_doi": "10.5281/zenodo.23941252",
+  "zenodo_url": "https://zenodo.org/records/23941252",
+  "all_three_services_same_bytes": true,
+  "zenodo_checksum_file_matches": true,
+  "date": "2026-11-04",
+  "license": "MIT",
+  "ci": {
+    "run_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969",
+    "run_id": 41803037969,
+    "head_sha": "68f03d000ab5b98bfedc65189bc8e4abb9d3464c",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "process-qualification (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:58Z",
+        "completed_at": "2026-11-04T08:55:20Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483216761"
+      },
+      {
+        "name": "qualification (windows-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:58Z",
+        "completed_at": "2026-11-04T08:55:01Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483217038"
+      },
+      {
+        "name": "qualification (windows-latest, 3.13)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:59Z",
+        "completed_at": "2026-11-04T08:55:07Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483217147"
+      },
+      {
+        "name": "process-qualification (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:59Z",
+        "completed_at": "2026-11-04T08:54:34Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483217170"
+      },
+      {
+        "name": "qualification (windows-latest, 3.12)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:58Z",
+        "completed_at": "2026-11-04T08:54:45Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483217229"
+      },
+      {
+        "name": "qualification (ubuntu-latest, 3.11)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:58Z",
+        "completed_at": "2026-11-04T08:54:22Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483217288"
+      },
+      {
+        "name": "qualification (ubuntu-latest, 3.12)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:58Z",
+        "completed_at": "2026-11-04T08:54:26Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483217336"
+      },
+      {
+        "name": "qualification (ubuntu-latest, 3.13)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:53:58Z",
+        "completed_at": "2026-11-04T08:54:27Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483217390"
+      },
+      {
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:55:22Z",
+        "completed_at": "2026-11-04T08:56:14Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126483833063"
+      },
+      {
+        "name": "pypi",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:56:17Z",
+        "completed_at": "2026-11-04T08:56:35Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126484227042"
+      },
+      {
+        "name": "github-release",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-04T08:56:38Z",
+        "completed_at": "2026-11-04T08:56:51Z",
+        "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41803037969/job/126484382621"
+      }
+    ]
+  },
+  "pypi_installed_tests": {
+    "status": "pass",
+    "version": "0.1.0a5",
+    "tests": 224,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "python": "3.12.14",
+    "optional_bridge": {
+      "distribution": "process-monitoring-toolkit",
+      "supported_version": "0.1.0",
+      "installed_version": "0.1.0",
+      "compatible": true,
+      "contract": "process-monitoring.SignalBatch/0.1.0"
+    },
+    "isolation": "venv site-packages outside source; only tests and helpers copied",
+    "skips_allowed": false
+  },
+  "pypi_readme_examples": [
+    {
+      "document": "README.md",
+      "block": 1,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 2,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 3,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 4,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 5,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 6,
+      "status": "pass"
+    },
+    {
+      "document": "docs/USER_GUIDE.md",
+      "block": 1,
+      "status": "pass"
+    }
+  ],
+  "pypi_runtime_identity": {
+    "version": "0.1.0a5",
+    "canonical_python_files_matched": 45,
+    "installed_wheel_sha256": "7b800e7b21a610d6cdb1e300893350d07fdc49e4777e4ebb541e62a4d6d1ab20",
+    "install_source": "https://files.pythonhosted.org/packages/ad/c9/42739f2cbb5fedd78371f490d755857f3f54a9294aa2ccf2342fbff38f92/rotorvibe-0.1.0a5-py3-none-any.whl",
+    "runtime_source_matches_tag": true
+  },
+  "dependency_check": "pip check passed after actual public PyPI installation and pinned optional source",
+  "pypi_index_propagation": "Initial post-publication simple-index lookup still listed a1; retry after index update installed a5 successfully",
+  "source_dist_audit": "pass; original raw data, protected tables, credentials and personal paths excluded",
+  "first_blocked_attempt": "v0.1.0a4 remains unchanged; Windows shell preflight prevented publishing; see release_0_1_0a4_ci_failure.json",
+  "physical_limits_retained": [
+    "No new independent fault accuracy or field RUL qualification",
+    "48kHz four-channel burst deadline budget still missed 17 times",
+    "P1 raw waveform arrays remain sealed and unassigned"
+  ]
+}
