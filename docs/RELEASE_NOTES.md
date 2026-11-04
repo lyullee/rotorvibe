@@ -1,18 +1,12 @@
-RotorVibe 0.1.0a1 is the first public alpha of a composable Python vibration-analysis
-research library. It provides typed signal blocks, direct NumPy/stage/sink APIs,
-spectral calculations, bearing kinematics, explicit normal-reference scope and
-experimental fault-candidate algorithms, plus an optional local service.
+RotorVibe 0.1.0a2 candidate fixes four P0 contracts: strict fault-profile scope and
+schema loading, finite numeric distance handling, explicit common decision/alarm
+composition, and immutable tag-based build/publish without source restoration.
 
-The release preserves development and measured-data evidence, including unfavorable
-results. A 99.82% fault-only test was limited to the same apparatus/bearing/severities.
-New-bearing and independent-rig transfer subsequently failed: the strict API held all
-580 new windows. No operational FPR or general field diagnostic qualification is claimed.
+DecisionStage and normalize_decision are additive APIs. Malformed profiles previously
+accepted now raise ValueError; invalid caller scope holds, extreme features raise
+ValueError, and held scores cannot recover an alarm. Set alarm thresholds for the
+selected score definition; no automatic recalibration or fault probability is supplied.
 
-Original code and original documentation are MIT. Raw third-party data, trained
-rig-specific profiles, source PDFs, standards tables/selectors and external repository
-snapshots are excluded. Public rule evaluation requires caller-supplied lawful limits.
-Historical private standards-test counts are not counts of public built-in profiles.
-
-See the README, detailed user guide, algorithm notes, development history, evidence
-archive, rights inventory and continuation handoff before reusing or extending results.
-The legacy vibration import remains compatible with the new rotorvibe facade.
+This is an unshipped candidate until an explicit validated release tag is published.
+No new training or independent measured-data performance claim is made. Cross-rig
+limitations and copyright exclusions remain. See docs/P0_VERIFICATION.md and README.

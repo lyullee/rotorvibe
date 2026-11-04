@@ -6,7 +6,7 @@ RotorVibe turns calibrated waveform blocks into spectra, bearing-frequency marke
 condition-relative evidence and inspectable diagnostic candidates. Use the NumPy API
 inside your own application; the local web dashboard is optional.
 
-**Alpha research release, version 0.1.0a1.** Signal calculations and bounded software
+**Alpha research candidate, version 0.1.0a2 (not yet published).** Signal calculations and bounded software
 checks are documented. Fault classifiers have **not** qualified for unattended field
 diagnosis: new-bearing and independent-rig transfer tests failed. No remaining-life
 prediction, automatic shutdown authority or standards certification is supplied.
@@ -19,9 +19,13 @@ prediction, automatic shutdown authority or standards certification is supplied.
 
 Python 3.11+ with NumPy 2.x and SciPy 1.13+ is required.
 
+From the prepared 0.1.0a2 source checkout:
+
 ```console
-python -m pip install rotorvibe==0.1.0a1
+python -m pip install .
 ```
+
+The archived PyPI release is still `rotorvibe==0.1.0a1`; it lacks the new P0 APIs.
 
 For an editable checkout and verification tools:
 
@@ -35,6 +39,87 @@ python -m unittest discover -s tests -v
 The public facade is `rotorvibe`; the earlier `vibration` namespace remains available
 so existing Python integrations can keep their imports. Raw experimental data and
 trained rig-specific profiles are acquired separately, not installed by pip.
+
+## P0 fixes and common module I/O (0.1.0a2 candidate)
+
+This checkout contains the P0 fixes. The archived/PyPI **0.1.0a1** distribution remains
+unchanged; install this checkout or its newly built 0.1.0a2 wheel for these APIs.
+No new measured-data accuracy or field qualification is claimed.
+
+| API / module | Input changes | Output / compatibility |
+|---|---|---|
+| `FaultDiscriminator(profile)` | Load now validates required fields, nonempty asset_id/condition_id, calibrated acceleration unit g or m/s^2, finite JSON scope, unique nonempty feature names, selected mode/indices and original-acquisition groups. Multiple original groups per class and operational_use=False are required. | Valid existing fit-generated profiles remain supported. Malformed profiles formerly accepted now raise ValueError. Do not remove identity to bypass scope. |
+| `fit_fault_discriminator(...)` | Uses the same scope/name contract as loading. Feature magnitudes <=1e100; model parameters finite and bounded. | Same algorithm identifier, features and normal-range calculation; verifies its returned profile through the loader. |
+| `FaultDiscriminator.predict(features, rpm, *, scope)` | Missing/invalid caller scope -> hold. Nonfinite/out-of-range features or overflowing intermediate distance calculation -> ValueError. | Returns a finite decision or raises explicitly; never emits NaN/Infinity as a successful numeric result. |
+| `normalize_decision(output, *, source_stage, valid=True)` | Stage mapping, explicit producer name, bool window validity. Recognizes score or normal_score; simultaneous scores must agree; no conversion of similarity weights to scores. | Common vibration.decision.v1 mapping described below; does not mutate producer output or calibrate thresholds. |
+| `DecisionStage(source_stage)` | Add after the named producer and before alarm/other consumers. Missing producer -> explicit hold. | Adds the common mapping under the host-chosen stage name; legacy producer fields remain untouched. |
+| `AlarmStage(..., expected_score_name=None)` | Optional expected source score definition (score or normal_score). Existing score_stage/threshold/time parameters retain their meaning. | Handles the common mapping. Holds/invalid/mismatched score kinds -> unavailable with retained_level, never implicit normal/recovery. Legacy score callbacks still work; stale scores attached to legacy holds are ignored. |
+
+Common mapping fields:
+
+| Field | Type / meaning |
+|---|---|
+| schema, source_stage | vibration.decision.v1 and named producer |
+| status | normal / scored / candidate / anomaly_unknown / fault_candidate / hold / invalid |
+| score, score_name, score_unit | Finite nonnegative float or None; source definition (score / normal_score) and dimensionless unit. No score is fabricated for fault-only heads. |
+| label, anomaly | Optional label and bool/None anomaly evidence. A Gaussian known_candidate becomes candidate; it does not prove a physical anomaly. |
+| alarm_eligible | True only with a supported non-held/non-invalid state and a numeric score. A held borderline score can remain visible but is never used for alarm updates. |
+| reason, operational_use | Nonempty reason and False for this research decision contract |
+
+**Thresholds are not interchangeable:** a baseline score and a conditioned
+normal_score have different calibration. Set warning/danger for the selected model
+and optionally enforce expected_score_name. The adapter does not infer new thresholds.
+
+### Executable baseline → common decision → alarm example
+
+Synthetic repeated waves below demonstrate integration, not independent healthy
+acquisitions or a field-calibrated alarm. Zero persistence is for this short example.
+
+```python
+import numpy as np
+from rotorvibe import (AnalysisConfig, SignalBlock, VibrationAnalyzer,
+                       BaselineStage, DecisionStage, AlarmStage)
+
+fs = 12000
+values = 0.2 * np.sin(2 * np.pi * 20 * np.arange(fs) / fs)
+config = AnalysisConfig(sample_rate_hz=fs, unit="g", rpm=1200,
+                        window_seconds=1, hop_seconds=1)
+baseline = BaselineStage(config)
+baseline.begin(name="synthetic-demo", windows=20)
+analyzer = VibrationAnalyzer(config, stages={
+    "baseline": baseline,
+    "decision": DecisionStage("baseline"),
+    "alarm": AlarmStage(score_stage="decision", expected_score_name="score",
+                        persistence_seconds=0, release_seconds=0),
+})
+for index in range(21):
+    result = analyzer.analyze(SignalBlock(
+        values, fs, unit="g", start_time_s=index, rpm=1200,
+        metadata={"asset_id": "demo-rig", "condition_id": "steady"},
+    ))
+assert result.payload["decision"]["status"] == "scored"
+assert result.payload["alarm"]["level"] == "normal"
+held = analyzer.analyze(SignalBlock(
+    values, fs, unit="g", start_time_s=21, rpm=1200,
+    metadata={"asset_id": "different-rig", "condition_id": "steady"},
+))
+assert held.payload["decision"]["status"] == "hold"
+assert held.payload["alarm"]["level"] == "unavailable"
+print(result.payload["decision"], held.payload["alarm"])
+```
+
+### Release workflow contract
+
+The initial archive-restoration workflow has been replaced. Release dispatch requires
+an existing version tag (e.g. v0.1.0a2), never main. The guard checks tag syntax,
+package/facade versions, HEAD/tag equality and a clean checkout. It performs no source
+restoration, commit, ref update or push. Build/tests/content audits and an installed
+wheel/example check precede publishing. PyPI and GitHub use the same build artifacts;
+SHA256SUMS accompanies the GitHub release. Publishing is triggered only by an explicit
+version-tag push or release dispatch, not an ordinary branch push.
+
+The candidate has not been published merely by running local validation. See
+[P0 validation and compatibility notes](docs/P0_VERIFICATION.md) for actual checks.
 
 ## Module map: purpose, inputs and outputs
 

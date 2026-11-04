@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Please cite the software version and the relevant experiment protocol separately."
+message: "This DOI identifies archived 0.1.0a1. For the unshipped 0.1.0a2 candidate cite the exact Git commit separately."
 type: software
 title: "RotorVibe: Composable Rotating-Machine Vibration Analysis"
 version: 0.1.0a1

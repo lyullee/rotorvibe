@@ -1,0 +1,41 @@
+{
+  "status": "pass",
+  "tests": 122,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "import_isolation": "rotorvibe and vibration loaded inside fresh venv, outside source checkout",
+  "version": "0.1.0a2",
+  "python": "3.12.14",
+  "test_helpers": "Public research metric helper and release guard copied alongside tests; application package is installed wheel",
+  "date": "2026-11-04",
+  "candidate": "0.1.0a2",
+  "previous_public_tests": 97,
+  "new_p0_tests": 25,
+  "source_suite": "122 passed",
+  "readme_and_guide_python_examples": 5,
+  "legacy_parity": {
+    "status": "pass",
+    "baseline_version": "0.1.0a1 public source",
+    "baseline_source_sha256": "1d499f9ced401b7766f3055de83341485eddca4494da5ca77ccbb5a8c8aff656",
+    "supported_fit_profiles_identical": 2,
+    "supported_predictions_exactly_equal": 6000,
+    "dimensions": [
+      2,
+      61
+    ],
+    "rpm_boundaries": [
+      590,
+      1200,
+      1620
+    ],
+    "scope_mismatch_outcomes_equal": 4,
+    "scope": "synthetic regression, not new predictive validation"
+  },
+  "historical_frozen_morphology_profile_load": "pass; no profile edits or holdout access",
+  "workflow_validation": "actionlint 1.7.12 passed for release.yml and verify.yml; ShellCheck disabled",
+  "release_guard": "7 tests using actual local Git refs and artifact checksums",
+  "publication": "not performed; candidate only",
+  "remote_ci": "new source not run remotely",
+  "note": "Software compatibility and synthetic checks; no new predictive qualification"
+}

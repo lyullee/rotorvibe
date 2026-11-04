@@ -4,6 +4,15 @@ Generated from public source. An entry is an interface, not an independent physi
 
 Detailed method conventions are in ALGORITHMS.md; experimental model scope is mandatory.
 
+## vibration/decisions.py — added in 0.1.0a2 candidate
+
+Common finite decision adapter; original producer outputs are preserved.
+
+- `normalize_decision(output, *, source_stage, valid=True)` returns a `vibration.decision.v1` mapping with status, score, score_name, label/anomaly, reason and alarm_eligible.
+- `DecisionStage(source_stage)` adapts an earlier named payload for downstream consumers.
+- `AlarmStage(..., expected_score_name=None)` now optionally enforces the source score definition and refuses held/invalid observations even when they carry a numeric score.
+- See README for input/output units, scope and migration contracts; see P0_VERIFICATION.md for actual checks.
+
 ## vibration/__init__.py
 
 Local rotating-machinery vibration analysis workbench.

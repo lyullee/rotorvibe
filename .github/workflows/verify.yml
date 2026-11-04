@@ -23,4 +23,6 @@ jobs:
       - run: python -m pip install -e ".[verification]"
       - run: python -m pip check
       - run: python -m unittest discover -s tests -v
+      - run: python tools/run_readme_examples.py
+      - run: python tools/audit_release.py
       - run: python -m build --no-isolation

@@ -5,7 +5,8 @@ standards-table implementations that are intentionally absent here.
 
 ## 1. Installation and environment ownership
 
-Use Python 3.11 or newer. Install `rotorvibe==0.1.0a1` from PyPI, or install an editable
+Use Python 3.11 or newer. This source is the 0.1.0a2 candidate; install it with
+`python -m pip install .`. PyPI 0.1.0a1 remains the earlier archived version. For an editable
 checkout with `python -m pip install -e ".[verification]"`. NumPy and SciPy are numerical
 dependencies, not bundled source copies. The optional verification extra provides
 build and publication checks; no trained model or measurement dataset is downloaded
@@ -212,3 +213,14 @@ rejects everything has no demonstrated working-domain false-alarm rate.
 Follow `docs/CONTINUATION.md` before starting new data collection. Raw holdouts already
 opened in this project are now exposed. Collect a genuinely new acquisition/session
 for the next final test, and freeze the evaluation protocol before reading it.
+
+## 11. P0 migration
+
+See the README P0 input/output table for the common `DecisionStage` adapter,
+`normalize_decision` schema, `AlarmStage.expected_score_name`, stricter fault-profile
+loading and finite-distance errors. Existing raw producer outputs remain unchanged.
+Add the adapter after its producer; a missing/misordered producer returns hold.
+The adapter never invents probabilities, scores for unscored heads or new thresholds.
+Held/invalid outputs do not recover a previously raised alarm. Old malformed profiles
+with blank scope or missing original-acquisition metadata must be repaired from actual
+provenance, not filled with invented asset identities.

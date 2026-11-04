@@ -4,14 +4,18 @@ Python 배열을 직접 연결해 파형·FFT·베어링 주파수·정상 기�
 연구용 라이브러리입니다. 웹 서버를 띄우지 않고 다른 모듈의 함수·객체와 조립할 수 있습니다.
 기존 `vibration` import를 유지하며 새 `rotorvibe` 진입점도 제공합니다.
 
-**0.1.0a1은 알파 공개본입니다. 다른 장비와 베어링으로 옮기는 무학습 진단은 검증에
+**이 작업본은 0.1.0a2 알파 후보이며 아직 게시되지 않았습니다. 다른 장비와 베어링으로 옮기는 무학습 진단은 검증에
 실패했습니다. 고장 자동 확정·자동 정지·잔여수명·ISO 적합성 인증을 제공하지 않습니다.**
 
 ## 설치와 시작
 
+준비된 0.1.0a2 소스 작업본에서 설치합니다.
+
 ```console
-python -m pip install rotorvibe==0.1.0a1
+python -m pip install .
 ```
+
+PyPI 공개본은 `rotorvibe==0.1.0a1`이며 새 P0 API는 포함하지 않습니다.
 
 Python 3.11 이상, NumPy 2.x, SciPy 1.13 이상이 필요합니다. 합성 파형으로 실행 가능한
 전체 코드는 [영문 README](README.md)의 첫 계산 예제에 있습니다. 실제 사용 시에는
@@ -21,6 +25,45 @@ Python 3.11 이상, NumPy 2.x, SciPy 1.13 이상이 필요합니다. 합성 파�
 `push(block)`은 연속 입력을 분석 창으로 나누어 완료된 결과 목록을 반환합니다.
 `stages`로 사용자 계산을 추가하고 `sinks`로 결과를 전달합니다. 스케줄링과 저장은
 호스트가 맡습니다. 한 분석기 인스턴스를 여러 설비 스트림이 동시에 공유하지 않습니다.
+
+## P0 수정과 공통 입출력 계약 — 0.1.0a2 후보
+
+이 작업본에는 P0 수정이 들어 있습니다. 이미 공개된 PyPI/Zenodo **0.1.0a1** 파일은
+그대로이며, 아래 새 API는 이 작업본 또는 새로 빌드한 0.1.0a2 wheel로 설치해야 합니다.
+이번 수정은 새 실측 데이터 학습이나 현장 진단 성능 합격을 의미하지 않습니다.
+
+| 모듈 / API | 입력 변경 | 출력·호환성 |
+|---|---|---|
+| `FaultDiscriminator(profile)` | 로딩 시에도 필수 필드, asset_id/condition_id, 교정 가속도 단위 g/m/s^2, 유한 JSON scope, 고유 특징 이름·순서·mode·indices, 원본 취득 그룹을 검사. 클래스별 원본 그룹 2개 이상, operational_use=False 요구 | 기존 정상 학습 생성 profile은 유지. 예전에는 통과하던 잘못된 profile은 ValueError로 거부 |
+| `fit_fault_discriminator(...)` | 로더와 같은 scope·특징 계약 적용. 특징 절댓값 <=1e100, 모델 인자 유한·범위 검사 | 반환 profile을 로더로 다시 검사. 알고리즘 ID와 정상 범위 계산식 유지 |
+| `FaultDiscriminator.predict(features, rpm, *, scope)` | 호출 scope 누락/오류는 hold. 비유한·범위 초과 특징이나 거리 중간 계산 넘침은 ValueError | 유한 결과 또는 명시적 오류. NaN/Infinity를 포함한 결과를 반환하지 않음 |
+| `normalize_decision(output, *, source_stage, valid=True)` | stage 사전·생산자 이름·bool 품질. score/normal_score 인식, 둘이 있으면 값 일치 요구. 상대 일치도를 점수로 추정하지 않음 | 아래 vibration.decision.v1 공통 사전. 원래 stage 출력과 문턱값은 변경하지 않음 |
+| `DecisionStage(source_stage)` | 생산 stage 다음, 경보 등 소비 stage 앞에 연결. 생산자 누락은 명시적 hold | 호스트가 정한 이름으로 공통 사전 추가. 기존 생산 stage 필드는 유지 |
+| `AlarmStage(..., expected_score_name=None)` | score 또는 normal_score 정의를 선택적으로 고정. 기존 score_stage·문턱값·시간 인자는 유지 | 공통 사전 지원. 보류·무효·점수 정의 불일치는 unavailable + retained_level. 기존 score 콜백 유지, 보류에 남은 점수로 경보 해제하지 않음 |
+
+공통 사전의 출력 필드:
+
+| 필드 | 자료형·의미 |
+|---|---|
+| schema, source_stage | vibration.decision.v1, 생산 stage 이름 |
+| status | normal / scored / candidate / anomaly_unknown / fault_candidate / hold / invalid |
+| score, score_name, score_unit | 유한한 음이 아닌 수 또는 None, 원래 score/normal_score 정의, 무차원. 점수 없는 고장 전용 head에 점수를 만들지 않음 |
+| label, anomaly | 선택적 label, bool/None 이상 증거. Gaussian known_candidate는 candidate로 옮기며 이상을 확정하지 않음 |
+| alarm_eligible | 보류·무효가 아니고 수치 점수가 있을 때만 True. 경계 보류 점수는 표시할 수 있어도 경보에는 사용하지 않음 |
+| reason, operational_use | 비어 있지 않은 이유, 연구용 계약에서 False |
+
+**정상 기준 score와 조건부 모델 normal_score의 문턱값을 서로 바꿔 쓰면 안 됩니다.**
+선택한 모델에 맞게 warning/danger를 교정하고 expected_score_name으로 정의를
+고정할 수 있습니다. 어댑터가 문턱값을 자동 보정하지는 않습니다.
+
+실행 예제는 [영문 README의 baseline→decision→alarm 예제](README.md)에 있으며,
+정상 기준 수집·점수·경보 연결 후 다른 설비 입력이 보류되는 동작까지 포함합니다.
+
+배포 workflow는 초기 압축본 복원 방식에서 **명시적 버전 태그 기반 빌드**로 교체했습니다.
+태그/패키지/진입점 버전 일치, HEAD 일치, 작업본 청결을 검사합니다. 소스 복원·commit·push는
+수행하지 않습니다. 일반 브랜치 push는 게시하지 않으며, 버전 태그 push 또는 명시적
+release dispatch만 게시 경로를 시작합니다. 후보 검증과 실제 게시 상태는
+[P0 검증 보고서](docs/P0_VERIFICATION.md)에 구분해 기록합니다.
 
 ## 단위 모듈 선택표: 목적 · 입력 · 출력
 

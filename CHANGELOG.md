@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0a2 — candidate, not published
+
+- Apply the same required scope/feature/acquisition contract at fault-model fitting and loading.
+- Reject unsupported feature magnitudes and overflowing distance calculations explicitly.
+- Add DecisionStage / normalize_decision and score-kind-aware alarm integration; keep legacy producer APIs.
+- Replace archive restoration with read-only tag validation and build-from-tag publishing.
+- Add reproduced-defect, actual stage composition, real local Git release-guard and installed-wheel regressions.
+- Preserve original measured-data failures and immutable 0.1.0a1 artifacts; no retraining or new field qualification.
+
 ## 0.1.0a1 — 2026-11-04
 
 First public alpha of RotorVibe, released from an existing local research workspace.

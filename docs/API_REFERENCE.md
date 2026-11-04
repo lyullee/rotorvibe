@@ -1,8 +1,7 @@
 # Complete public API reference
 
-Source-derived declarations for RotorVibe 0.1.0a1. The README explains purpose, units, shapes, outputs and composition.
-Defaults below are source expressions; this page does not construct a service or train a model.
-Dataclass annotations describe constructor fields; functions list all declared parameters.
+Source-derived declarations for RotorVibe 0.1.0a2 candidate. README explains purpose, units, shapes, outputs and composition.
+The candidate is not yet published. Dataclass annotations describe constructor fields; defaults are source expressions.
 
 ## vibration/adapters.py
 
@@ -27,7 +26,7 @@ condition_evidence(result, *, asset_id)
 ### AlarmStage
 
 ```python
-AlarmStage.__init__(self, *, score_stage='baseline', warning=3, danger=6, persistence_seconds=2, release_seconds=3, max_gap_seconds=2)
+AlarmStage.__init__(self, *, score_stage='baseline', warning=3, danger=6, persistence_seconds=2, release_seconds=3, max_gap_seconds=2, expected_score_name=None)
 ```
 
 ```python
@@ -422,6 +421,24 @@ DatasetCatalog.load(self, id, snapshot=0)
 
 ```python
 DatasetCatalog.imported(self, filename, payload, fs=None, unit='unknown', channels_axis=1, skip_columns=0)
+```
+
+## vibration/decisions.py
+
+[Implementation](../vibration/decisions.py)
+
+```python
+normalize_decision(output, *, source_stage, valid=True)
+```
+
+### DecisionStage
+
+```python
+DecisionStage.__init__(self, source_stage)
+```
+
+```python
+DecisionStage.__call__(self, result)
 ```
 
 ## vibration/dsp.py
