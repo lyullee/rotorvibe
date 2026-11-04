@@ -1,5 +1,5 @@
 """RotorVibe public facade; historical ``vibration`` imports remain supported."""
-__version__='0.1.0a4'
+__version__='0.1.0a5'
 __all__=['AnalysisConfig','SignalBlock','AnalysisResult','VibrationAnalyzer','analyze_signal',
     'BearingGeometry','BearingMap','BaselineStage','AlarmStage','GaussianClassifier','extract_rotor_features',
     'RotorFeatures','TwoStageDiagnostic','TwoStageStage','fit_two_stage','IndependentRotorCatalog',

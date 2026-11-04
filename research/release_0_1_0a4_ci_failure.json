@@ -1,0 +1,77 @@
+{
+  "version": "0.1.0a4",
+  "tag_retained": true,
+  "workflow_run": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560",
+  "publication_performed": false,
+  "failure": "Windows default PowerShell interpreted $RELEASE_TAG as an unset local variable; tag argument empty before tests",
+  "fix": "Explicit bash shell for cross-platform tag check",
+  "successor_version": "0.1.0a5",
+  "jobs": [
+    {
+      "name": "process-qualification (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479636917"
+    },
+    {
+      "name": "qualification (windows-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479637193"
+    },
+    {
+      "name": "qualification (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479637198"
+    },
+    {
+      "name": "qualification (ubuntu-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479637207"
+    },
+    {
+      "name": "process-qualification (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479637343"
+    },
+    {
+      "name": "qualification (ubuntu-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479637435"
+    },
+    {
+      "name": "qualification (windows-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479637447"
+    },
+    {
+      "name": "qualification (windows-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126479637463"
+    },
+    {
+      "name": "build",
+      "status": "completed",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126480186549"
+    },
+    {
+      "name": "pypi",
+      "status": "completed",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126480187479"
+    },
+    {
+      "name": "github-release",
+      "status": "completed",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/lyullee/rotorvibe/actions/runs/41801960560/job/126480189705"
+    }
+  ]
+}

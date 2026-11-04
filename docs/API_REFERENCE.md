@@ -1,6 +1,6 @@
 # Complete public API reference
 
-Source-derived declarations for RotorVibe 0.1.0a4.
+Source-derived declarations for RotorVibe 0.1.0a5.
 README and P1_GUIDE.md/P2_GUIDE.md explain purpose, units, shapes, outputs and lifecycle.
 Version-pinned alpha API; experimental life APIs are explicitly separate.
 

@@ -1,4 +1,4 @@
-RotorVibe 0.1.0a4 integrates the P0–P2 development series into a new alpha release.
+RotorVibe 0.1.0a5 integrates the P0–P2 development series into a new alpha release.
 
 P0 fixes model scope/numeric validation, common decisions and version-tagged
 publishing. P1 adds scoped normal fit/calibration, acquisition provenance,
@@ -7,7 +7,7 @@ P2 adds isolated callback results, an actual exact-version process bridge, hashe
 profile envelopes, bounded PSD history, reviewed rules and explicit life experiments.
 
 The README lists module purposes, input/output parameters, units and composition
-contracts. Reproduction and continuation details are in docs/RELEASE_0_1_0a4.md,
+contracts. Reproduction and continuation details are in docs/RELEASE_0_1_0a5.md,
 P0/P1/P2 reports, API_REFERENCE.md and CONTINUATION.md. Local preparation passed
 224 tests, seven documentation examples in two clean environments and 58 additional
 engineering checks. Publication is gated by cross-environment CI and installed-wheel

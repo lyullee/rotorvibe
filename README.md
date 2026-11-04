@@ -6,7 +6,7 @@ RotorVibe turns calibrated waveform blocks into spectra, bearing-frequency marke
 condition-relative evidence and inspectable diagnostic candidates. Use the NumPy API
 inside your own application; the local web dashboard is optional.
 
-**Alpha research release, version 0.1.0a4.** Signal calculations and bounded software
+**Alpha research release, version 0.1.0a5.** Signal calculations and bounded software
 checks are documented. Fault classifiers have **not** qualified for unattended field
 diagnosis: new-bearing and independent-rig transfer tests failed. No remaining-life
 prediction, automatic shutdown authority or standards certification is supplied.
@@ -22,11 +22,11 @@ Python 3.11+ with NumPy 2.x and SciPy 1.13+ is required.
 Install the explicit alpha version (Python 3.11+):
 
 ```console
-python -m pip install rotorvibe==0.1.0a4
+python -m pip install rotorvibe==0.1.0a5
 ```
 
-The 0.1.0a4 release integrates P0–P2. [GitHub release](https://github.com/lyullee/rotorvibe/releases/tag/v0.1.0a4),
-[PyPI](https://pypi.org/project/rotorvibe/0.1.0a4/) and
+The 0.1.0a5 release integrates P0–P2. [GitHub release](https://github.com/lyullee/rotorvibe/releases/tag/v0.1.0a5),
+[PyPI](https://pypi.org/project/rotorvibe/0.1.0a5/) and
 [Zenodo version DOI](https://doi.org/10.5281/zenodo.23941252) identify this release.
 The earlier 0.1.0a1 files remain historical, immutable artifacts.
 
@@ -53,7 +53,7 @@ trained rig-specific profiles are acquired separately, not installed by pip.
 
 The release preparation passed **224 tests**, seven documentation blocks in two
 clean environments, and 58 additional engineering checks using previously exposed
-reader fixtures. See [combined release record](docs/RELEASE_0_1_0a4.md) for exact
+reader fixtures. See [combined release record](docs/RELEASE_0_1_0a5.md) for exact
 scope, reproduction commands and final publication-check locations. Release CI gates
 Windows/Linux Python 3.11–3.13, real optional-package checks and installed-wheel
 regressions before publishing. Counts from historical phases are not added together.
@@ -62,7 +62,7 @@ This is software verification. New measured fault accuracy and field remaining-l
 accuracy remain unqualified. A 48 kHz/four-channel burst case missed its 250 ms
 latency budget 17 times. The sealed P1 waveforms were not fitted or tested.
 
-## P2 composition APIs — 0.1.0a4
+## P2 composition APIs — 0.1.0a5
 
 These are in-process Python APIs. No server or database is required. All times are
 seconds in the named caller clock; frequency axes are Hz. See [P2 guide](docs/P2_GUIDE.md)
@@ -125,12 +125,12 @@ That example runs `SignalBatch -> SignalBlock -> AnalysisResult -> feature Signa
 calibration and final acquisitions must remain independent. Real remaining-life
 accuracy and statistical interval calibration are still unqualified.
 
-## P1 monitoring APIs — included in 0.1.0a4
+## P1 monitoring APIs — included in 0.1.0a5
 
 P1 adds installation/RPM/load-scoped normal registration, recording-disjoint
 calibration, actionable holds, coverage-aware evaluation, measured-speed angle
 features, explicit lifecycle hooks and a bounded host-driven processing queue.
-These P1 APIs are included in 0.1.0a4; install the pinned version above or this source checkout.
+These P1 APIs are included in 0.1.0a5; install the pinned version above or this source checkout.
 
 | Unit / API | Inputs | Outputs / boundary |
 |---|---|---|
@@ -231,7 +231,7 @@ and [new data receipt](research/p1_data_receipt.json).
 ## P0 fixes and common module I/O (0.1.0a2 candidate)
 
 This checkout includes the P0 fixes introduced in the earlier 0.1.0a2 candidate. The archived/PyPI **0.1.0a1** distribution remains
-unchanged; use the pinned 0.1.0a4 distribution or its matching source tag for these APIs.
+unchanged; use the pinned 0.1.0a5 distribution or its matching source tag for these APIs.
 No new measured-data accuracy or field qualification is claimed.
 
 | API / module | Input changes | Output / compatibility |

@@ -282,3 +282,13 @@ imports; skipped optional tests are refused in release mode. No model retraining
 or opening of P1 sealed waveforms is part of this publication. Final remote CI,
 public anonymous download and artifact-hash receipts are appended after publishing
 in PUBLICATION_CHECK.md and research/release_0_1_0a4_publication.json on main.
+
+## Windows release preflight correction and 0.1.0a5
+
+Run 41801960560 retained its a4 tag and stopped publication: three Windows base
+jobs used PowerShell's empty local RELEASE_TAG variable. Three Linux base jobs and
+two actual optional-package jobs passed. The failing step preceded Windows tests,
+so it is not recorded as a passed Windows numerical test. The command now declares
+bash. Current package/version documentation advances to a5; no tag was force-moved
+and no a4 PyPI/Zenodo distribution was uploaded. The reserved Zenodo draft version
+is updated to a5 before publication. Full receipts preserve the failed attempt.
