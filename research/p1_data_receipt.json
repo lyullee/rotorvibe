@@ -1,0 +1,122 @@
+{
+  "schema": "vibration.p1-data-receipt.v1",
+  "collected_utc": "2026-11-04T07:15:50.525309+00:00",
+  "total_bytes": 1344341975,
+  "files": [
+    {
+      "dataset": "b6bfd7v86d",
+      "name": "data description.pdf",
+      "bytes": 718397,
+      "sha256": "5d0bba074431a28990252fcf485684c16b5f0217add1b4832618ec472b3f8d88",
+      "status": "verified"
+    },
+    {
+      "dataset": "b6bfd7v86d",
+      "name": "data label.xlsx",
+      "bytes": 49518,
+      "sha256": "475e2a459a1324a0cff8b360bbbf6df1d0c963dce82929f0fa99967c2f631629",
+      "status": "verified"
+    },
+    {
+      "dataset": "b6bfd7v86d",
+      "name": "data.zip",
+      "bytes": 825912695,
+      "sha256": "8e1abf47cc0e238ed29fbe7f0b0838d99b1a2f12dad8e01a8f5e694f819737b7",
+      "status": "verified"
+    },
+    {
+      "dataset": "z7jts4xc7p",
+      "name": "data description.pdf",
+      "bytes": 274233,
+      "sha256": "bd15b5f4ab8f0017facfa4c63e405ec81090628dc2c7ec82b1161ee15086039a",
+      "status": "verified"
+    },
+    {
+      "dataset": "z7jts4xc7p",
+      "name": "data label.xlsx",
+      "bytes": 30615,
+      "sha256": "0e1365008e88255e67c83ec9737e3f82c63708ea4b7cd66b39b28b74f1b8198c",
+      "status": "verified"
+    },
+    {
+      "dataset": "z7jts4xc7p",
+      "name": "data.zip",
+      "bytes": 517356517,
+      "sha256": "d41c3b88e738ee3ae5de04bd884aa45898cb5c26c918ef36ef86e48f257c60e1",
+      "status": "verified"
+    }
+  ],
+  "sources": [
+    {
+      "dataset": "b6bfd7v86d",
+      "version": 2,
+      "source": "https://data.mendeley.com/datasets/b6bfd7v86d/2",
+      "doi": "10.17632/b6bfd7v86d.2",
+      "license": "CC-BY-4.0",
+      "archive_members": 750,
+      "archive_uncompressed_bytes": 2943458334,
+      "sample_member_names": [
+        "C_-1.2_S_0.05_1000.csv",
+        "C_-1.2_S_0.05_1500.csv",
+        "C_-1.2_S_0.05_2000.csv",
+        "C_-1.2_S_0.05_500.csv",
+        "C_-1.2_S_0.15_1000.csv",
+        "C_-1.2_S_0.15_1500.csv",
+        "C_-1.2_S_0.15_2000.csv",
+        "C_-1.2_S_0.15_500.csv"
+      ],
+      "annotation_sheets": [
+        "Sheet1"
+      ],
+      "annotation_text_fields_inspected": true,
+      "conditions": "looseness/misalignment/rubbing and compound conditions",
+      "rig": "Northwestern Polytechnical University twin-spool rig; independent of previous UOS/Brito/UFRJ rigs",
+      "qualification_gaps": [
+        "map LP/HP shaft and speed ratio before applying a single-shaft model",
+        "confirm per-record acquisition/session/installation group membership",
+        "confirm channel/layout changes; channels1-4 are displacement, not acceleration",
+        "public source does not provide this API's complete calibration/mounting/anti-alias evidence"
+      ],
+      "role": "sealed_candidate_unassigned",
+      "waveform_members_decoded": false,
+      "used_in_fit_tuning_calibration_or_test": false
+    },
+    {
+      "dataset": "z7jts4xc7p",
+      "version": 1,
+      "source": "https://data.mendeley.com/datasets/z7jts4xc7p/1",
+      "doi": "10.17632/z7jts4xc7p.1",
+      "license": "CC-BY-4.0",
+      "archive_members": 450,
+      "archive_uncompressed_bytes": 1767783481,
+      "sample_member_names": [
+        "U4_2_S_5_2000.csv",
+        "F_1.1_S_0_500.csv",
+        "F_-1.1_S_0_500.csv",
+        "F_1.1_S_0_1000.csv",
+        "F_-1.1_S_0_1000.csv",
+        "F_1.1_S_0_1500.csv",
+        "F_-1.1_S_0_1500.csv",
+        "F_1.1_S_0_2000.csv"
+      ],
+      "annotation_sheets": [
+        "无故障工况",
+        "质量不平衡"
+      ],
+      "annotation_text_fields_inspected": true,
+      "conditions": "fault-free and four disk unbalance configurations",
+      "rig": "Northwestern Polytechnical University twin-spool rig; independent of previous UOS/Brito/UFRJ rigs",
+      "qualification_gaps": [
+        "map LP/HP shaft and speed ratio before applying a single-shaft model",
+        "confirm per-record acquisition/session/installation group membership",
+        "confirm channel/layout changes; channels1-4 are displacement, not acceleration",
+        "public source does not provide this API's complete calibration/mounting/anti-alias evidence"
+      ],
+      "role": "sealed_candidate_unassigned",
+      "waveform_members_decoded": false,
+      "used_in_fit_tuning_calibration_or_test": false
+    }
+  ],
+  "numerical_waveform_access": false,
+  "note": "Only provider metadata, annotation strings and ZIP central directories reviewed. These are candidates, not a frozen final split or validated diagnostic coverage. External source rights remain CC BY 4.0."
+}

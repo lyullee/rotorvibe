@@ -158,14 +158,21 @@ def analyze(data, config, rpm_trace=None, bearing_frequencies=None, *, native=Fa
     if any(e.get('resolvable') is False for e in markers+rotating):
         limitations.append('측정 창이 짧거나 회전수가 낮아 고조파 검색 대역이 겹칩니다. 창 길이를 늘려 재분석하세요.')
     features_names,features=channel_features(a,fs)
-    # Uniform PSD bins are retained for a time/frequency heatmap, unlike peak-preserving line charts.
+    # Average PSD over frequency bins, conserving the discrete PSD integral.
+    # Sampling/interpolating a coarse display grid can completely miss a narrow
+    # tone between grid points. Bin power / bin width keeps that tone visible.
     grid=np.linspace(0,fs/2,384)
-    heat=10*np.log10(np.maximum(np.interp(grid,f,psd),1e-20))
+    edges=np.r_[0,(grid[:-1]+grid[1:])/2,fs/2]
+    indices=np.minimum(np.searchsorted(edges[1:],f,side='right'),len(grid)-1)
+    density=np.bincount(indices,weights=psd*resolution,minlength=len(grid))/np.diff(edges)
+    heat=10*np.log10(np.maximum(density,1e-20))
     variation=float(np.ptp(rpm_trace)/rpm) if rpm_trace is not None and len(rpm_trace)==len(x) and np.isfinite(rpm_trace).all() and rpm else 0.
     result={'metrics':metrics,'rpm':rpm,'rpm_variation_ratio':variation,'frequency_resolution_hz':resolution,
             'waveform':waveform(x,fs,native=native),'spectrum':compact_spectrum(f,amp,native=native),
             'psd':compact_spectrum(f,psd,native=native),'envelope_spectrum':compact_spectrum(ef,ea,native=native),
-            'spectrogram':{'frequencies':grid if native else grid.tolist(),'db':heat if native else heat.tolist()},'order_spectrum':order,
+            'spectrogram':{'frequencies':grid if native else grid.tolist(),'db':heat if native else heat.tolist(),
+                'bin_edges_hz':edges if native else edges.tolist(),'representation':'frequency_bin_mean_psd',
+                'input_unit':config.unit,'db_floor_density':1e-20},'order_spectrum':order,
             'bearing_markers':markers,'rotation_markers':rotating,
             'diagnosis':{'candidates':candidates,'status':'candidate_only','limitations':limitations,
                          'note':'주파수 일치는 고장 확정이 아닙니다. 유사한 패턴·복합 결함·설치 영향을 확인하세요.'},

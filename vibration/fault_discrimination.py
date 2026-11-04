@@ -9,11 +9,38 @@ Separate optional API; never changes historical frozen conditioned models.
 Weights are similarities, not calibrated fault probabilities.
 """
 import copy
+import json
+from collections.abc import Mapping
 import numpy as np
 from scipy.signal import hilbert
 from .conditioned import canonical_values
 
 ALGORITHM='rotor_fault_morphology.v1'
+
+
+def _scope(value):
+    """Same scope contract at fit, load and inference; never infer asset identity."""
+    if not isinstance(value, Mapping):
+        raise ValueError('Fault scope must be a mapping.')
+    value=copy.deepcopy(dict(value))
+    if any(not isinstance(value.get(k),str) or not value[k].strip()
+           for k in ('asset_id','condition_id','unit')):
+        raise ValueError('Explicit nonempty asset_id, condition_id and unit required.')
+    if value['unit'] not in ('g','m/s^2'):
+        raise ValueError('Fault scope requires calibrated acceleration in g or m/s^2.')
+    if any(not isinstance(k,str) or not k.strip() for k in value):
+        raise ValueError('Fault scope keys must be nonempty strings.')
+    try: json.dumps(value,allow_nan=False)
+    except (TypeError,ValueError) as exc:
+        raise ValueError('Fault scope must be finite JSON-compatible metadata.') from exc
+    return value
+
+
+def _names(value):
+    if (not isinstance(value,(list,tuple)) or not value or
+        any(not isinstance(n,str) or not n.strip() for n in value) or len(set(value))!=len(value)):
+        raise ValueError('Feature names must be nonempty, unique strings in schema order.')
+    return list(value)
 
 def fault_features(values,sample_rate_hz,rpm):
     if isinstance(rpm,(bool,np.bool_)) or not np.isscalar(rpm) or not np.isfinite(rpm) or not 590<=rpm<=1620:
@@ -42,13 +69,13 @@ def fault_features(values,sample_rate_hz,rpm):
     return tuple(names),np.asarray(out)
 
 def fit_fault_discriminator(x,labels,rpms,groups,*,names,scope,mode='morphology',rpm_penalty=1.,margin=.03):
+    names=_names(names); scope=_scope(scope)
     x=np.asarray(x,dtype=float); y=np.asarray(labels); rpm=np.asarray(rpms,dtype=float); groups=np.asarray(groups)
-    if x.ndim!=2 or x.shape[1]!=len(names) or not np.isfinite(x).all() or not len(x): raise ValueError('Invalid feature matrix.')
+    if x.ndim!=2 or x.shape[1]!=len(names) or not np.isfinite(x).all() or not len(x) or np.any(np.abs(x)>1e100): raise ValueError('Invalid or out-of-range feature matrix.')
     if any(v.shape!=(len(x),) for v in (y,rpm,groups)) or not np.isfinite(rpm).all(): raise ValueError('Invalid labels/RPM/groups.')
     classes=sorted(set(y.tolist()))
     if set(classes)!={'looseness','misalignment','unbalance'}: raise ValueError('Three declared rotor fault classes required.')
-    if mode not in ('orders','morphology') or not np.isfinite([rpm_penalty,margin]).all() or min(rpm_penalty,margin)<0: raise ValueError('Invalid model settings.')
-    if not isinstance(scope,dict) or any(not isinstance(scope.get(k),str) or not scope[k] for k in ('asset_id','condition_id','unit')): raise ValueError('Explicit asset, condition and unit required.')
+    if mode not in ('orders','morphology') or not np.isfinite([rpm_penalty,margin]).all() or min(rpm_penalty,margin)<0 or max(rpm_penalty,margin)>1e100: raise ValueError('Invalid model settings.')
     if np.any((rpm<590)|(rpm>1620)) or len(set(names))!=len(names): raise ValueError('Invalid speed or feature names.')
     indices=[i for i,n in enumerate(names) if mode=='morphology' or n.startswith('order_')]
     prototypes=[]; py=[]; pr=[]; pg=[]
@@ -71,31 +98,64 @@ def fit_fault_discriminator(x,labels,rpms,groups,*,names,scope,mode='morphology'
             distance=np.mean((p[mask]-p[i])**2,axis=1)+rpm_penalty*(np.log(np.asarray(pr)[mask]/pr[i])/.2)**2
             ds.append(float(np.sqrt(distance.min())))
         limits.append(max(1.,float(np.quantile(ds,.99))*1.5))
-    return dict(algorithm=ALGORITHM,names=list(names),indices=indices,center=center.tolist(),scale=scale.tolist(),
+    profile=dict(algorithm=ALGORITHM,names=list(names),indices=indices,center=center.tolist(),scale=scale.tolist(),
         prototypes=p.tolist(),labels=py,rpms=pr,groups=pg,classes=classes,limits=limits,scope=copy.deepcopy(scope),
         mode=mode,rpm_penalty=float(rpm_penalty),margin=float(margin),operational_use=False)
+    FaultDiscriminator(profile)
+    return profile
 
 class FaultDiscriminator:
     def __init__(self,profile):
+        if not isinstance(profile,Mapping): raise ValueError('Fault profile must be a mapping.')
         self.profile=copy.deepcopy(profile); p=self.profile
+        required={'algorithm','names','indices','center','scale','prototypes','rpms','limits',
+                  'classes','labels','groups','scope','mode','rpm_penalty','margin','operational_use'}
+        if not required.issubset(p): raise ValueError('Missing fault profile fields: '+', '.join(sorted(required-set(p))))
         if p.get('algorithm')!=ALGORITHM: raise ValueError('Unsupported fault profile.')
+        self.scope=_scope(p['scope']); _names(p['names'])
+        if p['mode'] not in ('orders','morphology') or p['operational_use'] is not False:
+            raise ValueError('Unsupported fault mode or operational-use claim.')
         for key in ('center','scale','prototypes','rpms','limits'):
-            if not np.isfinite(np.asarray(p[key],dtype=float)).all(): raise ValueError('Nonfinite profile.')
+            a=np.asarray(p[key],dtype=float)
+            if not np.isfinite(a).all() or np.any(np.abs(a)>1e100): raise ValueError('Nonfinite/out-of-range profile.')
         if np.any(np.asarray(p['scale'])<=0): raise ValueError('Invalid scale.')
         indices=np.asarray(p['indices']); d=len(indices); n=len(p['labels'])
         if indices.ndim!=1 or not d or indices.dtype.kind not in 'iu' or min(indices)<0 or max(indices)>=len(p['names']) or len(set(indices))!=d: raise ValueError('Invalid feature indices.')
+        expected=[i for i,name in enumerate(p['names']) if p['mode']=='morphology' or name.startswith('order_')]
+        if indices.tolist()!=expected: raise ValueError('Selected indices differ from declared feature mode/schema.')
         if np.asarray(p['prototypes']).shape!=(n,d) or np.asarray(p['center']).shape!=(d,) or np.asarray(p['scale']).shape!=(d,) or np.asarray(p['rpms']).shape!=(n,): raise ValueError('Invalid profile dimensions.')
         if set(p['classes'])!={'looseness','misalignment','unbalance'} or set(p['labels'])!=set(p['classes']) or len(p['classes'])!=3 or len(p['limits'])!=3 or min(p['limits'])<=0: raise ValueError('Invalid fault classes/radii.')
-        if not np.isfinite([p['rpm_penalty'],p['margin']]).all() or min(p['rpm_penalty'],p['margin'])<0 or min(p['rpms'])<590 or max(p['rpms'])>1620: raise ValueError('Invalid profile speed/settings.')
+        if not np.isfinite([p['rpm_penalty'],p['margin']]).all() or min(p['rpm_penalty'],p['margin'])<0 or max(p['rpm_penalty'],p['margin'])>1e100 or min(p['rpms'])<590 or max(p['rpms'])>1620: raise ValueError('Invalid profile speed/settings.')
+        if not isinstance(p['groups'],(list,tuple)) or len(p['groups'])!=n:
+            raise ValueError('One acquisition group per prototype required.')
+        memberships={}
+        for group,label,rpm in zip(p['groups'],p['labels'],p['rpms']):
+            if isinstance(group,bool) or not isinstance(group,(str,int)) or (isinstance(group,str) and not group.strip()):
+                raise ValueError('Acquisition group must be a nonempty string or integer.')
+            key=(type(group).__name__,group)
+            if key in memberships and memberships[key]!=(label,rpm): raise ValueError('Mixed acquisition group.')
+            memberships[key]=(label,rpm)
+        if any(sum(label==v[0] for v in memberships.values())<2 for label in p['classes']):
+            raise ValueError('Multiple original acquisition groups per fault required.')
 
     def predict(self,features,rpm,*,scope):
         p=self.profile; base={'operational_use':False,'conditional_on_anomaly':True}
-        if any(scope.get(k)!=v for k,v in p['scope'].items()): return dict(base,status='hold',label=None,reason='fault_scope_mismatch')
+        # Invalid/missing caller scope is an unsupported observation, not a wildcard.
+        try: scope=_scope(scope)
+        except ValueError: return dict(base,status='hold',label=None,reason='fault_scope_missing_or_invalid')
+        if any(scope.get(k)!=v for k,v in self.scope.items()): return dict(base,status='hold',label=None,reason='fault_scope_mismatch')
         v=np.asarray(features,dtype=float)
-        if v.shape!=(len(p['names']),) or not np.isfinite(v).all(): raise ValueError('Invalid fault features.')
+        if v.shape!=(len(p['names']),) or not np.isfinite(v).all() or np.any(np.abs(v)>1e100): raise ValueError('Invalid or out-of-range fault features.')
         if rpm is None or isinstance(rpm,(bool,np.bool_)) or not np.isscalar(rpm) or not np.isfinite(rpm) or not 590<=rpm<=1620: return dict(base,status='hold',label=None,reason='outside_speed_scope')
-        z=(v[p['indices']]-p['center'])/p['scale']; distances=np.sqrt(np.mean((np.asarray(p['prototypes'])-z)**2,axis=1)+p['rpm_penalty']*(np.log(np.asarray(p['rpms'])/rpm)/.2)**2)
-        by=np.array([distances[np.asarray(p['labels'])==c].min() for c in p['classes']]); order=np.argsort(by); winner=order[0]; gap=float(by[order[1]]-by[winner])
+        try:
+            with np.errstate(over='raise',invalid='raise',divide='raise',under='ignore'):
+                z=(v[p['indices']]-p['center'])/p['scale']
+                distances=np.sqrt(np.mean((np.asarray(p['prototypes'])-z)**2,axis=1)+p['rpm_penalty']*(np.log(np.asarray(p['rpms'])/rpm)/.2)**2)
+                by=np.array([distances[np.asarray(p['labels'])==c].min() for c in p['classes']])
+                order=np.argsort(by); winner=order[0]; gap=float(by[order[1]]-by[winner])
+            if not np.isfinite(distances).all() or not np.isfinite(gap): raise FloatingPointError()
+        except FloatingPointError as exc:
+            raise ValueError('Fault distance calculation exceeds finite numeric range.') from exc
         matches=[dict(label=c,distance=float(d)) for c,d in zip(p['classes'],by)]
         if by[winner]>p['limits'][winner] or gap<=max(p['margin'],1e-12): return dict(base,status='anomaly_unknown',label=None,relative_matches=matches,margin=gap)
         return dict(base,status='fault_candidate',label=p['classes'][winner],relative_matches=matches,margin=gap)

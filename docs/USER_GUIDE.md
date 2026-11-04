@@ -5,7 +5,9 @@ standards-table implementations that are intentionally absent here.
 
 ## 1. Installation and environment ownership
 
-Use Python 3.11 or newer. Install `rotorvibe==0.1.0a1` from PyPI, or install an editable
+Use Python 3.11 or newer. This source is the 0.1.0a4 alpha release; install the published wheel with
+`python -m pip install rotorvibe==0.1.0a4`, or use `python -m pip install .` for a matching checkout.
+PyPI 0.1.0a1 remains an earlier archived version. For an editable
 checkout with `python -m pip install -e ".[verification]"`. NumPy and SciPy are numerical
 dependencies, not bundled source copies. The optional verification extra provides
 build and publication checks; no trained model or measurement dataset is downloaded
@@ -212,3 +214,27 @@ rejects everything has no demonstrated working-domain false-alarm rate.
 Follow `docs/CONTINUATION.md` before starting new data collection. Raw holdouts already
 opened in this project are now exposed. Collect a genuinely new acquisition/session
 for the next final test, and freeze the evaluation protocol before reading it.
+
+## 11. P0 migration
+
+See the README P0 input/output table for the common `DecisionStage` adapter,
+`normalize_decision` schema, `AlarmStage.expected_score_name`, stricter fault-profile
+loading and finite-distance errors. Existing raw producer outputs remain unchanged.
+Add the adapter after its producer; a missing/misordered producer returns hold.
+The adapter never invents probabilities, scores for unscored heads or new thresholds.
+Held/invalid outputs do not recover a previously raised alarm. Old malformed profiles
+with blank scope or missing original-acquisition metadata must be repaired from actual
+provenance, not filled with invented asset identities.
+
+## 12. P1 monitoring contracts
+
+See [P1_GUIDE.md](P1_GUIDE.md) for acquisition evidence, recording-disjoint normal
+references, angle-domain models, bounded processing, lifecycle and prospective
+validation access. These are additive research APIs; measured cross-rig qualification
+and a strict real-time service guarantee remain unestablished.
+
+## P2 composition and compatibility
+
+See [P2_GUIDE.md](P2_GUIDE.md) for isolated results, optional real-package bridge,
+profile envelopes, bounded spectrogram history, reviewed rule providers and explicit
+experimental life APIs. See [P2_VERIFICATION.md](P2_VERIFICATION.md) for executed checks.

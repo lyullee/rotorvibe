@@ -1,5 +1,5 @@
 # Explicit samples/units/channels/time/RPM/source identity are mathematical inputs.
-# Read-only input copies prevent host mutation races; result payloads still need care.
+# Detached result copies isolate stages, sinks and the caller.
 
 """In-process contracts. Times are seconds in the explicitly named caller clock."""
 from dataclasses import dataclass, field
@@ -88,11 +88,30 @@ class AnalysisResult:
     @property
     def features(self): return self.payload.get('_features')
 
+    def detached(self):
+        """Independent mutable snapshot, including nested mappings and arrays.
+
+        Frozen fields do not freeze contained objects. Analyzer callbacks each
+        receive a private snapshot; their mutations remain local.
+        """
+        from dataclasses import replace
+        payload=copy.deepcopy(dict(self.payload))
+        if isinstance(payload.get('_rpm_trace'),np.ndarray):
+            trace=payload['_rpm_trace']
+            payload['_rpm_trace']=np.frombuffer(trace.tobytes(),dtype=trace.dtype).reshape(trace.shape)
+        return replace(self,payload=payload,
+                       metadata=copy.deepcopy(dict(self.metadata)))
+
     @property
     def feature_names(self): return tuple(self.payload.get('_feature_names',()))
 
     @property
     def metrics(self): return self.payload.get('metrics',{})
+
+    @property
+    def rpm_trace(self):
+        """Read-only per-sample measured RPM, or None; never fabricate a trace."""
+        return self.payload.get('_rpm_trace')
 
     def to_dict(self, *, include_features=True):
         p={k:v for k,v in self.payload.items() if include_features or not k.startswith('_')}

@@ -35,5 +35,17 @@
     "terms": "No explicit raw-data license on official page; no redistribution",
     "raw_shipped": false,
     "physical_unit": "not explicit on official page"
+  },
+  {
+    "id": "b6bfd7v86d_v2",
+    "url": "https://data.mendeley.com/datasets/b6bfd7v86d/2",
+    "terms": "CC-BY-4.0",
+    "raw_shipped": false
+  },
+  {
+    "id": "z7jts4xc7p_v1",
+    "url": "https://data.mendeley.com/datasets/z7jts4xc7p/1",
+    "terms": "CC-BY-4.0",
+    "raw_shipped": false
   }
 ]

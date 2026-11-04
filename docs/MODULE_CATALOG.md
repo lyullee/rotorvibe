@@ -1,8 +1,25 @@
 # Module and API catalog
 
+P2 adds profiles.py, spectrogram.py, iso/providers.py and experimental/life.py, plus
+result snapshots and versioned adapters. README tables show purpose and inputs/outputs;
+P2_GUIDE.md covers use, compatibility and limitations.
+
+P1 adds acquisition.py, references.py, angle.py, guidance.py, evaluation.py, realtime.py
+and validation_plan.py. See README for purpose/input/output tables and P1_GUIDE.md for
+operating contracts; API_REFERENCE.md contains complete signatures.
+
 Generated from public source. An entry is an interface, not an independent physical model or a qualification certificate.
 
 Detailed method conventions are in ALGORITHMS.md; experimental model scope is mandatory.
+
+## vibration/decisions.py — added in 0.1.0a2 candidate
+
+Common finite decision adapter; original producer outputs are preserved.
+
+- `normalize_decision(output, *, source_stage, valid=True)` returns a `vibration.decision.v1` mapping with status, score, score_name, label/anomaly, reason and alarm_eligible.
+- `DecisionStage(source_stage)` adapts an earlier named payload for downstream consumers.
+- `AlarmStage(..., expected_score_name=None)` now optionally enforces the source score definition and refuses held/invalid observations even when they carry a numeric score.
+- See README for input/output units, scope and migration contracts; see P0_VERIFICATION.md for actual checks.
 
 ## vibration/__init__.py
 

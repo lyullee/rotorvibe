@@ -233,3 +233,52 @@ adaptation from truly independent final acquisitions, extending sensor/installat
 evidence and evaluating normal decisions and type rejection together. If exposed
 transfer failures influence a new model, those data become development material and
 another unopened final experiment is required. Keep failures in the next report.
+
+## P2 local candidate (2026-11-04)
+
+The feat/p2-composability branch adds detached callback results, a pinned real
+process-package bridge, canonical profile envelopes, bounded spectral history,
+reviewed rule providers and explicitly gated reference-life experiments. Native
+models/loaders remain authoritative; wrapping does not retrain or convert them.
+
+A narrow-tone display check found that interpolation onto 384 points could miss
+100 Hz entirely. Frequency-bin mean PSD now preserves the discrete PSD integral
+and keeps narrow tones visible. Fixed model features remain unchanged. The old
+sink-identity regression assertion was deliberately replaced with different-object,
+equal-content checks because isolation is the intended P2 compatibility change.
+
+Actual optional dependency installation from the queried package index failed;
+the inspected upstream Git commit was installed separately and all 28 installed
+Python files matched it. Bidirectional SignalBatch/Analyzer/Monitor wiring was
+exercised. A subsequent review added preservation of constant modes, cross-packet
+mode boundaries and live rule-context boundaries. Final installed tests total 224.
+
+The legacy reader verification initially lacked private fixtures in the sanitized
+checkout. Its missing-fixture case is now explicit not_executed. Supplying the
+existing private data workspace enabled all 58 additional engineering checks,
+including six measured-data readers and loopback HTTP/worker/storage computation.
+Those are exposed-data regressions, not new independent diagnostic validation.
+
+See P2_VERIFICATION.md and research/p2_verification.json. No P2 publication, fresh
+measured classifier score, statistical interval qualification or field RUL claim
+has occurred. All earlier failure reports and P1 sealed-waveform status are retained.
+
+## Integrated 0.1.0a4 release preparation
+
+The user authorized final P0–P2 verification and publication on GitHub, PyPI and
+Zenodo. The existing a4 candidate number is retained because it was not previously
+published. Phase reports remain historical evidence; docs/RELEASE_0_1_0a4.md is the
+combined implementation, migration, test-scope and continuation record.
+
+Version DOI 10.5281/zenodo.23941252 was reserved on a new version of the existing
+Zenodo record before packaging. README exposes the current installation command,
+module purposes/inputs/outputs, compatibility changes and retained limits.
+CITATION.cff and package archive metadata identify that version; a1 stays archived.
+
+Publication now waits on the complete OS/Python matrix, real optional-package
+verification and a strict installed-wheel suite. The public installed-test runner
+copies only tests/helpers into an owned temporary folder and checks site-packages
+imports; skipped optional tests are refused in release mode. No model retraining
+or opening of P1 sealed waveforms is part of this publication. Final remote CI,
+public anonymous download and artifact-hash receipts are appended after publishing
+in PUBLICATION_CHECK.md and research/release_0_1_0a4_publication.json on main.

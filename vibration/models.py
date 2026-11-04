@@ -127,41 +127,10 @@ class ModelRegistry:
 
 
 class LifeEstimator:
-    """Experimental reference-life matching. Held-out full lives never enter the library."""
-    def __init__(self,catalog):
-        self.references=[]
-        for id,row in catalog.lives.items():
-            if row['role']!='training_complete_life': continue
-            rms=np.asarray(row['nominal_rms_series'],dtype=float)
-            base=np.maximum(np.median(rms[:20],axis=0),1e-12)
-            hi=np.log(np.maximum(rms,1e-12)/base)
-            smooth=np.vstack([np.mean(hi[max(0,i-4):i+1],axis=0) for i in range(len(hi))])
-            self.references.append({'bearing':row['bearing'],'rpm':row['nominal_rpm'],
-                                    'hi':smooth,'seconds_left':np.arange(len(hi)-1,-1,-1)*10})
+    """Compatibility facade; explicit opt-in is required for bench experiments."""
+    def __init__(self,catalog,*,experimental_enabled=False):
+        if not isinstance(experimental_enabled,bool): raise ValueError('experimental_enabled must be bool.')
+        from .experimental.life import ReferenceLifeEstimator
+        self.estimator=ReferenceLifeEstimator(catalog,experimental_enabled=experimental_enabled)
 
-    def estimate(self, source):
-        if source.get('dataset')!='FEMTO':
-            return {'status':'outside_domain','reason':'수명 추정은 현재 PRONOSTIA 관측 이력에 한정됩니다.'}
-        prefix=source.get('rul_prefix')
-        if not prefix:
-            return {'status':'insufficient_history','reason':'첫 20개 관측 이후에 과거 구간으로 기준을 잡습니다.'}
-        baseline=np.maximum(np.asarray(prefix['baseline_rms']),1e-12)
-        recent=np.asarray(prefix['recent_rms'],dtype=float)
-        query=np.mean(np.log(np.maximum(recent,1e-12)/baseline),axis=0)
-        matches=[]
-        for r in self.references:
-            if r['bearing']==source['record_id'] or abs(r['rpm']-source['rpm'])>5: continue
-            distance=np.sqrt(np.mean((r['hi']-query)**2,axis=1))
-            # Earliest points cannot estimate life meaningfully before an observable change.
-            distance[:20]=np.inf
-            index=int(np.argmin(distance))
-            matches.append({'reference_bearing':r['bearing'],'distance':float(distance[index]),
-                            'remaining_seconds':int(r['seconds_left'][index])})
-        if len(matches)<2: return {'status':'insufficient_references','reason':'동일 RPM의 다른 학습 수명 두 개 이상이 필요합니다.'}
-        if float(np.max(query))<0.25:
-            return {'status':'no_degradation_evidence','reason':'정상 수준과 구분되는 열화 증가가 부족해 시간 예측을 보류합니다.'}
-        values=np.asarray([m['remaining_seconds'] for m in matches])
-        return {'status':'experimental','remaining_seconds':float(np.median(values)),
-                'reference_range_seconds':[float(values.min()),float(values.max())],'references':matches,
-                'method':'같은 RPM의 학습 수명에서 초기 20관측 대비 log RMS 이력 유사도',
-                'note':'범위는 참고 수명의 분산이며 검증된 신뢰구간이 아닙니다. 가속시험 종료까지의 벤치 추정입니다.'}
+    def estimate(self,source): return self.estimator.estimate(source)

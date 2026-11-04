@@ -1,0 +1,360 @@
+{
+  "started_utc": "2026-11-04T08:10:25.553903+00:00",
+  "finished_utc": "2026-11-04T08:10:29.140834+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.5.4",
+  "passed": 58,
+  "failed": 0,
+  "not_executed": 0,
+  "scope": "Engineering software verification, not field diagnostic accuracy or RUL validation. No classifier training.",
+  "checks": [
+    {
+      "category": "input",
+      "name": "zero_fs",
+      "status": "pass",
+      "elapsed_seconds": 0.00014420000661630183
+    },
+    {
+      "category": "input",
+      "name": "nan_fs",
+      "status": "pass",
+      "elapsed_seconds": 4.780000017490238e-05
+    },
+    {
+      "category": "input",
+      "name": "missing_unit",
+      "status": "pass",
+      "elapsed_seconds": 7.680000271648169e-05
+    },
+    {
+      "category": "input",
+      "name": "wrong_unit",
+      "status": "pass",
+      "elapsed_seconds": 6.990000838413835e-05
+    },
+    {
+      "category": "input",
+      "name": "nyquist_band",
+      "status": "pass",
+      "elapsed_seconds": 6.459999713115394e-05
+    },
+    {
+      "category": "input",
+      "name": "negative_rpm",
+      "status": "pass",
+      "elapsed_seconds": 7.140000525396317e-05
+    },
+    {
+      "category": "input",
+      "name": "nan_gain_numpy",
+      "status": "pass",
+      "elapsed_seconds": 3.809999907389283e-05
+    },
+    {
+      "category": "input",
+      "name": "boolean_channels",
+      "status": "pass",
+      "elapsed_seconds": 3.979999746661633e-05
+    },
+    {
+      "category": "input",
+      "name": "string_fs",
+      "status": "pass",
+      "elapsed_seconds": 3.679998917505145e-05
+    },
+    {
+      "category": "input",
+      "name": "voltage_without_calibration",
+      "status": "pass",
+      "elapsed_seconds": 6.75999908708036e-05
+    },
+    {
+      "category": "input",
+      "name": "bad_sensitivity",
+      "status": "pass",
+      "elapsed_seconds": 7.189999450929463e-05
+    },
+    {
+      "category": "input",
+      "name": "hop_longer_than_window",
+      "status": "pass",
+      "elapsed_seconds": 6.160000339150429e-05
+    },
+    {
+      "category": "input",
+      "name": "unknown_setting",
+      "status": "pass",
+      "elapsed_seconds": 2.439999661874026e-05
+    },
+    {
+      "category": "input",
+      "name": "wrong_channel_count",
+      "status": "pass",
+      "elapsed_seconds": 0.0006825000018579885
+    },
+    {
+      "category": "input",
+      "name": "mismatched_unit",
+      "status": "pass",
+      "elapsed_seconds": 0.0004533000028459355
+    },
+    {
+      "category": "input",
+      "name": "wrong_window_length",
+      "status": "pass",
+      "elapsed_seconds": 0.0002373000024817884
+    },
+    {
+      "category": "input",
+      "name": "wrong_mask_length",
+      "status": "pass",
+      "elapsed_seconds": 0.00018370000179857016
+    },
+    {
+      "category": "input",
+      "name": "wrong_rpm_trace_length",
+      "status": "pass",
+      "elapsed_seconds": 0.00016539999342057854
+    },
+    {
+      "category": "input",
+      "name": "missing_bearing_provider",
+      "status": "pass",
+      "elapsed_seconds": 0.0003525000065565109
+    },
+    {
+      "category": "input",
+      "name": "unknown_unit_no_absolute_velocity",
+      "status": "pass",
+      "elapsed_seconds": 0.006238100002519786
+    },
+    {
+      "category": "input",
+      "name": "nan_sample_not_healthy",
+      "status": "pass",
+      "elapsed_seconds": 0.0004811999970115721
+    },
+    {
+      "category": "formula",
+      "name": "sine_rms",
+      "status": "pass",
+      "elapsed_seconds": 0.00508849999459926
+    },
+    {
+      "category": "formula",
+      "name": "sine_peak",
+      "status": "pass",
+      "elapsed_seconds": 0.004937999998219311
+    },
+    {
+      "category": "formula",
+      "name": "sine_crest",
+      "status": "pass",
+      "elapsed_seconds": 0.005062800002633594
+    },
+    {
+      "category": "formula",
+      "name": "sine_kurtosis",
+      "status": "pass",
+      "elapsed_seconds": 0.005029099993407726
+    },
+    {
+      "category": "formula",
+      "name": "dc_and_ac_separation",
+      "status": "pass",
+      "elapsed_seconds": 0.005071699997643009
+    },
+    {
+      "category": "formula",
+      "name": "fft_and_psd_boxcar",
+      "status": "pass",
+      "elapsed_seconds": 0.0005991999933030456
+    },
+    {
+      "category": "formula",
+      "name": "fft_and_psd_hann",
+      "status": "pass",
+      "elapsed_seconds": 0.0007481000066036358
+    },
+    {
+      "category": "formula",
+      "name": "fft_and_psd_hamming",
+      "status": "pass",
+      "elapsed_seconds": 0.0007380999886663631
+    },
+    {
+      "category": "formula",
+      "name": "fft_even_odd_edges",
+      "status": "pass",
+      "elapsed_seconds": 0.00043069999082945287
+    },
+    {
+      "category": "formula",
+      "name": "velocity_psd_integration",
+      "status": "pass",
+      "elapsed_seconds": 0.005036699993070215
+    },
+    {
+      "category": "formula",
+      "name": "bearing_hand_calculation",
+      "status": "pass",
+      "elapsed_seconds": 0.0003951999970013276
+    },
+    {
+      "category": "formula",
+      "name": "volts_to_g",
+      "status": "pass",
+      "elapsed_seconds": 0.0051521999994292855
+    },
+    {
+      "category": "formula",
+      "name": "am_envelope_frequency",
+      "status": "pass",
+      "elapsed_seconds": 0.0051663999911397696
+    },
+    {
+      "category": "extreme",
+      "name": "scale_1e-12",
+      "status": "pass",
+      "elapsed_seconds": 0.04374199999438133
+    },
+    {
+      "category": "extreme",
+      "name": "scale_1e-06",
+      "status": "pass",
+      "elapsed_seconds": 0.04354610000154935
+    },
+    {
+      "category": "extreme",
+      "name": "scale_1000000.0",
+      "status": "pass",
+      "elapsed_seconds": 0.03745690001233015
+    },
+    {
+      "category": "extreme",
+      "name": "scale_1000000000000.0",
+      "status": "pass",
+      "elapsed_seconds": 0.03695609999704175
+    },
+    {
+      "category": "extreme",
+      "name": "zero_explicit_invalid",
+      "status": "pass",
+      "elapsed_seconds": 0.0007308999920496717
+    },
+    {
+      "category": "extreme",
+      "name": "subnormal_explicit_invalid",
+      "status": "pass",
+      "elapsed_seconds": 0.0006061000021873042
+    },
+    {
+      "category": "extreme",
+      "name": "too_large_explicit_invalid",
+      "status": "pass",
+      "elapsed_seconds": 0.0005826999986311421
+    },
+    {
+      "category": "extreme",
+      "name": "very_high_rpm",
+      "status": "pass",
+      "elapsed_seconds": 0.0002855000057024881
+    },
+    {
+      "category": "extreme",
+      "name": "minimum_fs_and_window",
+      "status": "pass",
+      "elapsed_seconds": 0.0026268000074196607
+    },
+    {
+      "category": "extreme",
+      "name": "tiny_calibration_sensitivity",
+      "status": "pass",
+      "elapsed_seconds": 0.0004067999980179593
+    },
+    {
+      "category": "connection",
+      "name": "chunked_vs_direct_and_identifiers",
+      "status": "pass",
+      "elapsed_seconds": 0.09022669999103528
+    },
+    {
+      "category": "connection",
+      "name": "boundary_time",
+      "status": "pass",
+      "elapsed_seconds": 0.0004925000102957711
+    },
+    {
+      "category": "connection",
+      "name": "boundary_episode",
+      "status": "pass",
+      "elapsed_seconds": 0.0003575000009732321
+    },
+    {
+      "category": "connection",
+      "name": "boundary_sequence",
+      "status": "pass",
+      "elapsed_seconds": 0.0003468000068096444
+    },
+    {
+      "category": "connection",
+      "name": "stages_sink_and_asset_evidence",
+      "status": "pass",
+      "elapsed_seconds": 0.00892730000487063
+    },
+    {
+      "category": "connection",
+      "name": "actual_upstream_signalbatch_contract",
+      "status": "pass",
+      "elapsed_seconds": 0.7537825999897905
+    },
+    {
+      "category": "regression",
+      "name": "baseline_profile_alarm_invalid_and_reload",
+      "status": "pass",
+      "elapsed_seconds": 0.1262060000008205
+    },
+    {
+      "category": "regression",
+      "name": "rpm_trace_order_tracking",
+      "status": "pass",
+      "elapsed_seconds": 0.006477999995695427
+    },
+    {
+      "category": "regression",
+      "name": "sqlite_documents",
+      "status": "pass",
+      "elapsed_seconds": 0.030298500001663342
+    },
+    {
+      "category": "regression",
+      "name": "old_feature_schema_rejected",
+      "status": "pass",
+      "elapsed_seconds": 0.012818400005926378
+    },
+    {
+      "category": "regression",
+      "name": "alarm_elapsed_persistence_recovery",
+      "status": "pass",
+      "elapsed_seconds": 0.0051697999879252166
+    },
+    {
+      "category": "regression",
+      "name": "variable_speed_five_order_resampling",
+      "status": "pass",
+      "elapsed_seconds": 0.006444699989515357
+    },
+    {
+      "category": "end_to_end",
+      "name": "six_real_dataset_readers_to_analysis",
+      "status": "pass",
+      "elapsed_seconds": 1.2640749999991385
+    },
+    {
+      "category": "end_to_end",
+      "name": "http_ingest_worker_dsp_sqlite_result",
+      "status": "pass",
+      "elapsed_seconds": 1.060180999993463
+    }
+  ]
+}

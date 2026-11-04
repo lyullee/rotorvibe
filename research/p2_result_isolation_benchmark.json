@@ -1,0 +1,28 @@
+{
+  "version": "0.1.0a4",
+  "python": "3.12.14",
+  "platform": "Windows",
+  "sample_rate_hz": 12000,
+  "channels": 4,
+  "window_s": 1,
+  "cases": [
+    {
+      "stage_count": 0,
+      "sink_count": 0,
+      "processing_p95_s": 0.02010718999372329,
+      "peak_python_traced_bytes": 2043797,
+      "iterations": 24,
+      "all_mutations_isolated": true
+    },
+    {
+      "stage_count": 4,
+      "sink_count": 3,
+      "processing_p95_s": 0.018116030000237513,
+      "peak_python_traced_bytes": 2022775,
+      "iterations": 24,
+      "all_mutations_isolated": true
+    }
+  ],
+  "hard_realtime_guarantee": false,
+  "memory_scope": "tracemalloc, not whole-process RSS; measured on this host"
+}

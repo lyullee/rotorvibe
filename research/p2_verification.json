@@ -1,0 +1,56 @@
+{
+  "version": "0.1.0a4",
+  "date": "2026-11-04",
+  "status": "local_candidate_not_published",
+  "installed_tests": {
+    "status": "pass",
+    "version": "0.1.0a4",
+    "tests": 224,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "isolation": "fresh venv; rotorvibe/vibration imports asserted inside installed site-packages outside source checkout",
+    "python": "3.12.14"
+  },
+  "p2_new_tests": 60,
+  "existing_regression_tests": 164,
+  "readme_examples_optional_environment": 7,
+  "readme_examples_base_environment": 7,
+  "dependency_checks": "pip check passed in both base-only and actual optional-package environments",
+  "optional_dependency": "Actual pinned process-monitoring-toolkit 0.1.0; 28 installed Python files matched checkout",
+  "additional_six_category_checks": {
+    "passed": 58,
+    "failed": 0,
+    "not_executed": 0,
+    "datasets": [
+      "CWRU",
+      "Paderborn",
+      "IMS",
+      "Brito",
+      "KAIST",
+      "FEMTO"
+    ],
+    "evidence": "previously acquired data reader/DSP regression; not new accuracy testing"
+  },
+  "numerical_physical_checks": [
+    "Narrow-tone visibility and conservative PSD bin integral",
+    "Complete-life hand-calculated error and empirical interval inclusion",
+    "Censored-only exact error remains null",
+    "Large finite life inputs stay strict JSON"
+  ],
+  "intentional_compatibility_changes": [
+    "Independent stage/sink result object identity",
+    "Reference-life estimator and stage default disabled",
+    "Actual exact-version optional dependency required",
+    "Spectrogram display is frequency-bin mean PSD; model features unchanged"
+  ],
+  "field_life_qualified": false,
+  "new_measured_classification_accuracy_claimed": false,
+  "new_waveforms_opened_or_models_trained": false,
+  "remaining_limits": [
+    "Independent scoped complete and censored lives required for RUL errors/interval calibration",
+    "48kHz four-channel burst latency budget exceeded 17 times",
+    "No remote CI executed for this candidate; locally Windows Python 3.12.14 only"
+  ],
+  "distribution_policy": "Original code/docs MIT; external raw files, standard tables and upstream package source excluded"
+}

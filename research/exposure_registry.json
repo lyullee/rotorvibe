@@ -177,5 +177,17 @@
     ],
     "status": "All selected arrays opened by publication; never fresh blind again",
     "source_manifest_sha256": "31b09810754e2c7cecf544091eb071931af69fee5b6748c042a0a7ee76ee0724"
+  },
+  {
+    "corpus": "b6bfd7v86d_v2",
+    "status": "Provider PDFs, labels and ZIP central directory inspected; numerical waveforms sealed, no fit/calibration/tuning/evaluation role assigned",
+    "receipt": "research/p1_data_receipt.json",
+    "independence_qualified": false
+  },
+  {
+    "corpus": "z7jts4xc7p_v1",
+    "status": "Provider PDFs, labels and ZIP central directory inspected; numerical waveforms sealed, no fit/calibration/tuning/evaluation role assigned",
+    "receipt": "research/p1_data_receipt.json",
+    "independence_qualified": false
   }
 ]
