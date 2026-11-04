@@ -5,8 +5,9 @@ standards-table implementations that are intentionally absent here.
 
 ## 1. Installation and environment ownership
 
-Use Python 3.11 or newer. This source is the 0.1.0a4 candidate; install it with
-`python -m pip install .`. PyPI 0.1.0a1 remains the earlier archived version. For an editable
+Use Python 3.11 or newer. This source is the 0.1.0a4 alpha release; install the published wheel with
+`python -m pip install rotorvibe==0.1.0a4`, or use `python -m pip install .` for a matching checkout.
+PyPI 0.1.0a1 remains an earlier archived version. For an editable
 checkout with `python -m pip install -e ".[verification]"`. NumPy and SciPy are numerical
 dependencies, not bundled source copies. The optional verification extra provides
 build and publication checks; no trained model or measurement dataset is downloaded

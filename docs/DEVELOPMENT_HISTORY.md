@@ -262,3 +262,23 @@ Those are exposed-data regressions, not new independent diagnostic validation.
 See P2_VERIFICATION.md and research/p2_verification.json. No P2 publication, fresh
 measured classifier score, statistical interval qualification or field RUL claim
 has occurred. All earlier failure reports and P1 sealed-waveform status are retained.
+
+## Integrated 0.1.0a4 release preparation
+
+The user authorized final P0–P2 verification and publication on GitHub, PyPI and
+Zenodo. The existing a4 candidate number is retained because it was not previously
+published. Phase reports remain historical evidence; docs/RELEASE_0_1_0a4.md is the
+combined implementation, migration, test-scope and continuation record.
+
+Version DOI 10.5281/zenodo.23941252 was reserved on a new version of the existing
+Zenodo record before packaging. README exposes the current installation command,
+module purposes/inputs/outputs, compatibility changes and retained limits.
+CITATION.cff and package archive metadata identify that version; a1 stays archived.
+
+Publication now waits on the complete OS/Python matrix, real optional-package
+verification and a strict installed-wheel suite. The public installed-test runner
+copies only tests/helpers into an owned temporary folder and checks site-packages
+imports; skipped optional tests are refused in release mode. No model retraining
+or opening of P1 sealed waveforms is part of this publication. Final remote CI,
+public anonymous download and artifact-hash receipts are appended after publishing
+in PUBLICATION_CHECK.md and research/release_0_1_0a4_publication.json on main.

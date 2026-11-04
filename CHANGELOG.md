@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.1.0a4 — P2 candidate, not published
+## 0.1.0a4 — 2026-11-04, P0–P2 alpha release
+
+- Integrate the previously unshipped P0/P1/P2 series; preserve original development commits and prior failures.
+- Gate publication on Windows/Linux Python 3.11–3.13, actual optional bridge and strict installed-wheel tests.
+- Expand README module contracts, release/continuation records and current-version citation.
 
 - Isolate each stage/sink with detached nested result copies; preserve stage output order.
 - Add exact-version optional process bridge, pinned upstream CI and actual bidirectional example.

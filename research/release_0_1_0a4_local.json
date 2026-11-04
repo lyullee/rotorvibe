@@ -1,0 +1,123 @@
+{
+  "version": "0.1.0a4",
+  "phase": "final_local_release_preparation",
+  "date": "2026-11-04",
+  "installed_suite": {
+    "status": "pass",
+    "version": "0.1.0a4",
+    "tests": 224,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "python": "3.12.14",
+    "optional_bridge": {
+      "distribution": "process-monitoring-toolkit",
+      "supported_version": "0.1.0",
+      "installed_version": "0.1.0",
+      "compatible": true,
+      "contract": "process-monitoring.SignalBatch/0.1.0"
+    },
+    "isolation": "venv site-packages outside source; only tests and helpers copied",
+    "skips_allowed": false
+  },
+  "documentation_examples": [
+    {
+      "document": "README.md",
+      "block": 1,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 2,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 3,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 4,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 5,
+      "status": "pass"
+    },
+    {
+      "document": "README.md",
+      "block": 6,
+      "status": "pass"
+    },
+    {
+      "document": "docs/USER_GUIDE.md",
+      "block": 1,
+      "status": "pass"
+    }
+  ],
+  "existing_data_engineering_checks": {
+    "passed": 58,
+    "failed": 0,
+    "fresh_independent_accuracy_test": false
+  },
+  "workflow_lint": "pass",
+  "wheel_source_metadata": "pass",
+  "markdown_and_local_links": "pass",
+  "pypi_target_preflight": "unused; 0.1.0a1 was the only earlier published version",
+  "zenodo_doi": "10.5281/zenodo.23941252",
+  "doi_status_at_preparation": "reserved, not yet registered",
+  "remote_ci_status_at_preparation": "not yet run; enforced as publication gates",
+  "new_model_training": false,
+  "sealed_p1_waveforms_opened": false,
+  "raw_data_or_normative_tables_distributed": false,
+  "runtime_base_commit": "7f107c4",
+  "canonical_runtime_sha256": {
+    "rotorvibe/__init__.py": "04b24bb2e74eb4c71ae0785794c7b9b34417c1cb015ae516edfa6591194746ea",
+    "vibration/__init__.py": "28179d0ec8b367be188ad7663533969fbbade2cd5fd7e2c0a64d4c8a2b7f3574",
+    "vibration/acquisition.py": "a0fe2696034ae55400b09bcb3268e833837f0813d2b59a26ca8af3a7fdacf052",
+    "vibration/adapters.py": "7b3f86a3b694078a6fb6c48a389e03c1f4dc9959cd6dc29eb6de332054cc703f",
+    "vibration/alarm.py": "2c8846fafdabf7fedb1f3c09684004d9ba86704b7253361f15c60d69b7ef4108",
+    "vibration/angle.py": "6fc84bd564f1d71182246cdc8f549485f50e858975f90b46cb8f93a77e5f7f00",
+    "vibration/baseline.py": "d78a90d9b65bbb11f45ca4988ceadaeec589d5ac4b0ae665ee9d181331f19bd7",
+    "vibration/bearings.py": "2ed079479afbab1c3d867902f700d134494c42568afedd2954ae84be6b6b47c7",
+    "vibration/bootstrap.py": "21cf160944d4621e8a58cbeb6d731896100deef4f8e139575f338b676f896906",
+    "vibration/classifier.py": "2c797f70e3ebcf2f0309924dfef432c0fde1907dfdb21cd7daa6fd1f8f50ada7",
+    "vibration/client.py": "c14028bca554df861b354ed88b10f00d3dd69676a8f96cf108cd1d634d84c2ed",
+    "vibration/condition_data.py": "b8cd85350d11b6c81bf0a16e9f3a5a7ec021e934eb867265a028dce9f2306e00",
+    "vibration/conditioned.py": "c6318b2374b45691390c14e91b891eb5164f54c696c733422d6e116775a5ad3d",
+    "vibration/config.py": "8f464d4d667d39b17585f15436e2b1d1fdb7cf819ba83ddce25b6d51b105b733",
+    "vibration/contracts.py": "46f3e083be53f67595e79a71efcb7910889381a50043a147074ce6ce437d15c0",
+    "vibration/core.py": "768860509ad029511e35d253e9ad4a70d4c1537e5dc89138a4815f0ade4ed755",
+    "vibration/datasets.py": "f8bf0eccd30d5f1e934f1354ebfa02752027a97ca7cfe1c3a39c2c311d729083",
+    "vibration/decisions.py": "312b225764347c9dc05e60070345b0cdcd710b2359896d9d39d9dd9800a18f28",
+    "vibration/dsp.py": "bc4e9ba4df090a60629bdd3cf26d70a17e27359e7b01994366d67a80e47eab24",
+    "vibration/engine.py": "691e9de73ad976099c5efa6efb5b270d58b95887de0962919a77dc0a676a8e35",
+    "vibration/evaluation.py": "d906e8755f9cf692529e5c83d650dfd381574191bf88cd12e85abc1fe9f53258",
+    "vibration/experimental/__init__.py": "5886942a16af68ec363708bdfc3b858af8321d7d491eb9855450af6fa2c992a0",
+    "vibration/experimental/life.py": "f7c79dc850852e0b0521a47c49ae379a0292e5102c460f2245f736c5e4242945",
+    "vibration/fault_discrimination.py": "5301dd814408f1781e9196d7c96b9798d1a2a6dce65fd6d9ae9163f53bd68b4c",
+    "vibration/geometry.py": "a7fe2a4df392bab57fa2653cbae55b7b8e3f71c399a5b8f00f0b6376b6f58e59",
+    "vibration/guidance.py": "8f602d62c6f21c014070bf4fc9ffa688270d20b7ad9f7f90087c37866ab2afe4",
+    "vibration/independent_data.py": "24a4a8d511544b1cf999dbb6a108490f54f8c459b07b7289cb223218f78fec58",
+    "vibration/iso/__init__.py": "893a27ce6abc061b8d3bd3130f28eea24890064de41055d208a8db8ebe61a457",
+    "vibration/iso/contracts.py": "9dddf7af23799af8409761e7e16850d9bcb302af18da5a5aa9a4f76c72a97abf",
+    "vibration/iso/evaluation.py": "147ff00e9ba4f3ac922de91c649bf7d6e4717cdfcbb0a450bf664e11bba5945f",
+    "vibration/iso/measurements.py": "6f7948aa50ea895e7bef874a3fcedfbe82c755c59d34daf1edfcf7df72a0ffc2",
+    "vibration/iso/providers.py": "41007c697acd7cbf15fa367232614731571f6816b96dad9eb2218e58a399bc34",
+    "vibration/iso/stage.py": "eb8f7a34a00f1ae6a03368cbb13094acec3e1f3ceb4775c588e19460bbb1555c",
+    "vibration/models.py": "08b8c79abbc52ea397f5e4dee66413827f4fa5aff56a7223e6235a4a58443199",
+    "vibration/ports.py": "07e536b59bc9e01221615aeeb5340cb20c2947a9f1c1f03a0ebbaf1633f00df8",
+    "vibration/profiles.py": "749c9c616e13a2a47655acedd11b3eab65e29d67e247fa8b9273a749e9aec985",
+    "vibration/realtime.py": "e1ee8535b0eeab4c49a210ef23b246c99348fb5b392dd5698644e5048e7befc6",
+    "vibration/references.py": "e66bfa9d5e0e4eb8d6904807002e462a4f7a3865c999547b279052f8580e0019",
+    "vibration/rotor_features.py": "16940555e1173a176e153930826c13583ecc900e1b3e41fc2e8d7c9ba69065d2",
+    "vibration/server.py": "f462df9b37d90b84e19ab441ed0a8a0d24e0fe78b5448579b1873a835f42dee8",
+    "vibration/spectrogram.py": "5df7c6ce2fe5f604af201e5c099ef85588c41505db70acdba465519f39281fda",
+    "vibration/stages.py": "45a2bb16654db94982fe14965922946c470a7dd610e954b2ce3a935fcc303ea4",
+    "vibration/storage.py": "a3c897882c5db67e7a8f2eb7d233f2aa4452d11f104915b5464ac9aea69614f0",
+    "vibration/two_stage.py": "2692d1c783a752b502b7018c60b87cb60c27ac3633a2abe2799932a40a678495",
+    "vibration/validation_plan.py": "1c8a5115ae9fb0c2068caa707cf7327e7c3eeafae309b4f20baeeb47ce59bfc5"
+  }
+}

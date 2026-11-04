@@ -6,9 +6,9 @@ from pathlib import Path
 def generate(root):
     root=Path(root).resolve()
     version=tomllib.loads((root/'pyproject.toml').read_text(encoding='utf8'))['project']['version']
-    lines=['# Complete public API reference','',f'Source-derived declarations for RotorVibe {version} candidate.',
+    lines=['# Complete public API reference','',f'Source-derived declarations for RotorVibe {version}.',
            'README and P1_GUIDE.md/P2_GUIDE.md explain purpose, units, shapes, outputs and lifecycle.',
-           'Candidate not yet published. Experimental life APIs are explicitly separate.','']
+           'Version-pinned alpha API; experimental life APIs are explicitly separate.','']
     catalog=[]
     for path in sorted((root/'vibration').rglob('*.py')):
         tree=ast.parse(path.read_text(encoding='utf8')); rel=path.relative_to(root).as_posix()

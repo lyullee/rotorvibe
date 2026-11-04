@@ -1,15 +1,15 @@
 cff-version: 1.2.0
-message: "This DOI identifies archived 0.1.0a1. For the unshipped 0.1.0a4 candidate cite the exact Git commit separately."
+message: "Cite the version DOI for RotorVibe 0.1.0a4; identify the exact version when reproducing results."
 type: software
 title: "RotorVibe: Composable Rotating-Machine Vibration Analysis"
-version: 0.1.0a1
+version: 0.1.0a4
 date-released: 2026-11-04
 authors:
   - family-names: Lee
     given-names: Ugwiyeon
 repository-code: "https://github.com/lyullee/rotorvibe"
 url: "https://github.com/lyullee/rotorvibe"
-doi: 10.5281/zenodo.23937890
+doi: 10.5281/zenodo.23941252
 license: MIT
 abstract: >-
   Python vibration analysis and composable diagnostic research APIs with explicit

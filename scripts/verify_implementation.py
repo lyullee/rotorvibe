@@ -7,7 +7,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 import os
-os.environ['VIBRATION_RUNTIME_HOME']=str(ROOT/'output/verification/runtime')
+OUT=Path(os.environ.get('VIBRATION_VERIFICATION_HOME',ROOT/'output/verification'))
+os.environ.setdefault('VIBRATION_RUNTIME_HOME',str(OUT/'runtime'))
 import vibration.bootstrap
 import json, time, traceback, warnings, importlib.util
 from datetime import datetime, timezone
@@ -19,7 +20,7 @@ from vibration import (AnalysisConfig, SignalBlock, VibrationAnalyzer, BearingGe
 from vibration.dsp import spectrum
 from vibration.adapters import from_process_batch, to_process_batch, condition_evidence
 
-OUT=ROOT/'output/verification'; OUT.mkdir(parents=True,exist_ok=True)
+OUT.mkdir(parents=True,exist_ok=True)
 CHECKS=[]
 def check(category,name,fn):
     begin=time.perf_counter()
