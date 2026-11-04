@@ -292,3 +292,20 @@ so it is not recorded as a passed Windows numerical test. The command now declar
 bash. Current package/version documentation advances to a5; no tag was force-moved
 and no a4 PyPI/Zenodo distribution was uploaded. The reserved Zenodo draft version
 is updated to a5 before publication. Full receipts preserve the failed attempt.
+
+## Completed integrated publication — 0.1.0a5
+
+Release run 41803037969 passed all 11 jobs: six base OS/Python combinations, two
+real optional-package environments, build/installed-wheel and both publishing jobs.
+Tag v0.1.0a5 identifies 68f03d000ab5b98bfedc65189bc8e4abb9d3464c. GitHub and PyPI
+received the same CI-built wheel/source pair; anonymous downloads were hash-checked
+and uploaded unchanged to Zenodo record 23941252 (DOI 10.5281/zenodo.23941252),
+open MIT. All six anonymous wheel/source downloads matched and both services'
+checksum files matched. Runtime Python files matched the canonical source (45).
+
+A new Windows Python 3.12.14 environment installed the actual PyPI version after
+a short index-propagation delay. The public installed-test runner passed 224 with
+zero skips/failures/errors, seven documentation examples passed and pip check
+passed. No data/model training or new field accuracy was introduced. The blocked
+a4 attempt and high-rate latency failure remain documented. See PUBLICATION_CHECK.md
+and research/release_0_1_0a5_publication.json for public URLs and exact checksums.

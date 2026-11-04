@@ -1,74 +1,55 @@
-# Final public distribution and clean-install check
+# RotorVibe 0.1.0a5 — final public release verification
 
-Verified on **2026-11-04 (Asia/Seoul)**. This is a software/distribution check,
-not a new independent measured-fault validation or a change to classifier qualification.
+Verified on 2026-11-04. This is the current P0–P2 distribution check, not new independent measured diagnostic or remaining-life validation.
 
-## Public access
+## Public availability
 
 | Service | Anonymous verification | Result |
-|---|---|---|
-| [GitHub](https://github.com/lyullee/rotorvibe) | Repository API says public; tag v0.1.0a1 release is published, not draft; wheel and source downloaded without credentials | Pass |
-| [PyPI](https://pypi.org/project/rotorvibe/0.1.0a1/) | Public JSON metadata, wheel/source downloads and real pip installation without credentials | Pass |
-| [Zenodo](https://zenodo.org/records/23937890) | Published record, open access, MIT license, DOI 10.5281/zenodo.23937890; both archives downloaded without credentials | Pass |
+| --- | --- | --- |
+| [GitHub release](https://github.com/lyullee/rotorvibe/releases/tag/v0.1.0a5) | Public prerelease; wheel, source, SHA256SUMS and installed-test receipt available without credentials | Pass |
+| [PyPI](https://pypi.org/project/rotorvibe/0.1.0a5/) | Public metadata, wheel/source downloads, actual fresh pip install from pypi.org | Pass |
+| [Zenodo](https://zenodo.org/records/23941252) | Version 0.1.0a5, open files, MIT, DOI 10.5281/zenodo.23941252 | Pass |
 
-All six downloaded files (wheel and source on each service) matched these SHA-256 values:
+All six anonymous wheel/source downloads matched these SHA-256 values; Zenodo also matched the GitHub SHA256SUMS file byte for byte.
 
 ```text
-011002b53c2c79635ef89d9895afac08229b0cf8cfedb5da7e9d3618ac44bccd  rotorvibe-0.1.0a1-py3-none-any.whl
-063ceafaed83778709e6c9bd7b879cecf2ab4dce22842170ecab128899bda685  rotorvibe-0.1.0a1.tar.gz
+7b800e7b21a610d6cdb1e300893350d07fdc49e4777e4ebb541e62a4d6d1ab20  rotorvibe-0.1.0a5-py3-none-any.whl
+e4b98f4d78a84b47d0bb7f344471f263931f44a1f0a917d3da38478b7b8620b3  rotorvibe-0.1.0a5.tar.gz
 ```
 
-## Clean installation and examples
+The CI-built wheel contains 45 runtime Python files; each matched the canonical source hash recorded for the tag. The actual PyPI installer downloaded that exact wheel hash. Source and distribution audits found no shipped raw datasets, original PDFs, protected standard tables, credentials or personal absolute paths.
 
-Created a new Python 3.12.14 virtual environment without system site packages and ran:
+## Remote release qualification
 
-```console
-python -m venv clean_env
-clean_env/Scripts/python -m pip install --index-url https://pypi.org/simple --no-cache-dir rotorvibe==0.1.0a1
-clean_env/Scripts/python -m pip check
-```
+[Release workflow 41803037969](https://github.com/lyullee/rotorvibe/actions/runs/41803037969) finished successfully: all 11 jobs passed.
 
-On POSIX use `clean_env/bin/python`. The environment installed NumPy 2.5.4 and
-SciPy 1.18.1. Imports resolved inside this new environment, with the working directory
-outside the source checkout. `pip check` found no broken requirements. This isolates
-Python packages, not the Windows operating system or hardware.
+| Job group | Executed environments | Result |
+| --- | --- | --- |
+| Base qualification | Windows/Linux × Python 3.11, 3.12, 3.13 | Six jobs passed; optional-package tests explicitly skipped in base-only jobs |
+| Real optional bridge | Windows and Linux, Python 3.12 | Both jobs passed against pinned process-monitoring-toolkit 0.1.0 |
+| Build and installed wheel | Linux Python 3.12.15 | 224 installed tests, zero failures/errors/skips; seven documentation examples passed |
+| PyPI / GitHub publication | Trusted Publishing / release assets | Both jobs passed after qualification |
 
-Every Python fenced block in the latest README and user guide was executed separately
-using the installed distribution. The Korean README refers to the English executable
-examples and adds no separate Python block.
+The version tag is v0.1.0a5 at commit 68f03d000ab5b98bfedc65189bc8e4abb9d3464c. Local P0/P1/P2 development commits remain in repository history. GitHub and PyPI receive one build-job artifact pair, and those same downloaded bytes were uploaded to Zenodo; a separate local rebuild was not substituted.
 
-| Example | Actual result | Verification |
-|---|---|---|
-| README complete signal calculation | valid=True; RMS 0.14142135623730953, peak 0.2 | RMS equals 0.2/sqrt(2), peak equals 0.2; finite JSON export |
-| README direct module composition | custom stage quality_accepted=True; sink receives same result object | Actual analysis, bearing-provider injection, stage execution and sink callback completed |
-| README bearing geometry | BPFI=96, BPFO=64, FTF=8, BSF=48, 2BSF=96 Hz | BPFO=64 Hz analytically checked |
-| User-guide invented caller rule | status=evaluated, zone=B, value=2.0 mm/s | Demonstration limits only; not an ISO table or compliance claim |
+## Actual public installation
 
-The portable public test suite also passed **97 checks** against the installed PyPI
-library. The outside-checkout runner initially lacked the research-only
-`scripts.external_blind_metrics` helper; that produced one discovery error. Supplying
-that helper from the public checkout resolved discovery, and the final run passed all
-97 tests. No library change was needed. The normal README test command runs from the
-repository root, where that helper already exists.
+A fresh Windows Python 3.12.14 venv installed rotorvibe==0.1.0a5 from https://pypi.org/simple using --no-cache-dir. The first lookup immediately after publishing still saw the old simple index; the subsequent lookup showed a5 and the install succeeded. No alternate index or locally built RotorVibe wheel was used for this final installation.
 
-[The six-environment CI run](https://github.com/lyullee/rotorvibe/actions/runs/41782143647)
-also passed on Windows/Linux with Python 3.11, 3.12 and 3.13 for the published source.
+The real optional package was separately installed from inspected commit 79b4cf52a0acd0d0cbd3addbe82c3d98d6385e5a because that distribution version was unavailable from the queried package index. Base RotorVibe does not require it.
 
-## Documentation improvements
+After public installation, tools/run_installed_tests.py ran outside the checkout: **224 tests passed, zero failures/errors/skips**. Imports resolved to the venv site-packages. All **seven** README/user-guide blocks passed against that installation; pip check passed. All 45 installed Python files matched canonical tag source. The installed wheel SHA matched GitHub, PyPI metadata and Zenodo.
 
-Both README files now include module-level purpose/input/output tables, exact signal
-and result contracts, configuration defaults, array shapes, physical units, explicit
-stage/sink ordering and optional-dependency ownership. The former construction-only
-integration snippet is now self-contained and executes a real stage and sink.
+Local release preparation separately reran 58 engineering checks with previously exposed reader fixtures (CWRU, Paderborn, IMS, Brito, KAIST, FEMTO), including HTTP/worker/storage/export. These are regressions, not another independent accuracy experiment.
 
-[API_REFERENCE.md](API_REFERENCE.md) contains public constructor/method declarations
-and dataclass fields extracted from the released source. This supplements the README's
-explanation rather than replacing it with a list of names.
+## Retained failed attempt and boundaries
 
-The updates apply to GitHub main. Already-published **0.1.0a1** artifacts, tag and
-PyPI's embedded README preserve the initial release snapshot. Their public README
-links point to the maintained GitHub documentation. No version, numerical code,
-training data, frozen model, threshold or original scientific result changed.
+The earlier a4 release attempt stopped before publishing because Windows PowerShell did not expand the bash-style RELEASE_TAG variable. The version-tag command now explicitly uses bash. The a4 tag was retained without force-moving it; no a4 PyPI or Zenodo distribution was published. See research/release_0_1_0a4_ci_failure.json.
 
-Machine-readable download hashes, example outputs and environment versions are in
-[the check receipt](../research/final_publication_check.json).
+New measured fault accuracy, normal operational FPR, field RUL and statistical prediction-interval calibration remain unqualified. The 48kHz/four-channel burst test still exceeded 250ms latency 17 times. P1 raw waveform candidates remain unopened/unassigned. MIT covers original software/docs, not external raw/standard content.
+
+## Evidence and continuation
+
+Current machine-readable receipt: [research/release_0_1_0a5_publication.json](../research/release_0_1_0a5_publication.json). Module purpose/input/output tables remain in both READMEs; exact signatures in API_REFERENCE.md; integrated development and migration record in RELEASE_0_1_0a5.md.
+
+This post-publication check is appended on main. Immutable PyPI and Zenodo artifacts cannot retroactively contain their own future download-check receipt. The earlier a1 check remains in the v0.1.0a4/history tree and the original a1 version artifacts; the a1 DOI is 10.5281/zenodo.23937890.
