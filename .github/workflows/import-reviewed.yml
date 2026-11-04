@@ -1,0 +1,43 @@
+name: Import reviewed P0-P2 development
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  import-reviewed:
+    if: github.actor == 'lyullee' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Import only the reviewed history and create its version tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          target=d22eb1be2a5e0ced14f54d60b175cfc843a07d3f
+          if git merge-base --is-ancestor "$target" HEAD 2>/dev/null; then
+            echo 'Reviewed development was already imported.'
+            exit 0
+          fi
+          echo '205d451512242c3e646afc0bbc38843138ad90f31eced3b128a239c3e0a056f0  release-transfer-0.1.0a4.bundle' | sha256sum -c -
+          git bundle verify release-transfer-0.1.0a4.bundle
+          git fetch ./release-transfer-0.1.0a4.bundle refs/heads/feat/p2-composability:refs/heads/reviewed-import-a4
+          test "$(git rev-parse reviewed-import-a4)" = "$target"
+          git diff --quiet "$target" -- .github/workflows/release.yml .github/workflows/verify.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git merge --no-ff --no-commit "$target"
+          git rm -- release-transfer-0.1.0a4.bundle
+          python tools/audit_release.py
+          git commit -m 'Integrate reviewed P0-P2 development for RotorVibe 0.1.0a4'
+          git diff --quiet HEAD^ HEAD -- .github/workflows
+          git push origin HEAD:main
+          git tag v0.1.0a4
+          python tools/release_contract.py --tag v0.1.0a4
+          git push origin refs/tags/v0.1.0a4
