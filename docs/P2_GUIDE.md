@@ -1,4 +1,4 @@
-# P2 composition guide — 0.1.0a4 alpha
+# P2 composition guide — 0.1.0a5 alpha
 
 P2 provides reusable Python contracts. It does not qualify a diagnostic model for
 a new rig, supply protected standard tables or establish field remaining life.

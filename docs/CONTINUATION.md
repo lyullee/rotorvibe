@@ -174,3 +174,9 @@ Use tag v0.1.0a4 and the version DOI 10.5281/zenodo.23941252 for this series.
 Read RELEASE_0_1_0a4.md and the latest PUBLICATION_CHECK.md before using historical
 candidate receipts. The a1 artifacts and earlier transfer failures remain immutable.
 Current-version installation and per-module contracts are visible in both READMEs.
+
+## Current release successor
+
+Use v0.1.0a5 and RELEASE_0_1_0a5.md for the integrated release. The a4 tag records
+a pre-publication Windows shell failure and remains unchanged, with no a4 PyPI
+distribution. The version DOI remains 10.5281/zenodo.23941252 for the final a5 draft.

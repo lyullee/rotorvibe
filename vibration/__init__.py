@@ -1,5 +1,5 @@
 """Local rotating-machinery vibration analysis workbench."""
-__version__ = "0.1.0a4"
+__version__ = "0.1.0a5"
 
 __all__=['AnalysisConfig','SignalBlock','AnalysisResult','VibrationAnalyzer',
          'analyze_signal','BearingGeometry','BearingMap','BaselineStage','AlarmStage','GaussianClassifier',

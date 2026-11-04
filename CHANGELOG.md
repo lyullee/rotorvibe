@@ -1,6 +1,13 @@
 # Changelog
 
-## 0.1.0a4 — 2026-11-04, P0–P2 alpha release
+## 0.1.0a5 — 2026-11-04, P0–P2 integrated alpha
+
+- Fix Windows qualification tag lookup by declaring bash for the environment-variable command.
+- Keep the failed pre-publication a4 tag unchanged; no a4 wheel/source was published.
+- Retain the P0–P2 implementation, 224-test suite and physical qualification limits.
+
+
+## 0.1.0a4 — release attempt blocked by Windows preflight; not distributed
 
 - Integrate the previously unshipped P0/P1/P2 series; preserve original development commits and prior failures.
 - Gate publication on Windows/Linux Python 3.11–3.13, actual optional bridge and strict installed-wheel tests.
