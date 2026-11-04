@@ -1,0 +1,235 @@
+{
+  "model_sha256": "16fe41cdbbffdea9a77a3352ab7b703386aacc3892dc84c7a2b19146b8ab8329",
+  "data_overlap": "no records or physical trials overlap",
+  "split_trials": {
+    "train": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      11,
+      12,
+      15
+    ],
+    "validation": [
+      9,
+      13,
+      14,
+      18
+    ],
+    "test": [
+      16,
+      17,
+      19,
+      20
+    ]
+  },
+  "old_parameters_formula_only_counterfactual_no_refitting": {
+    "without_logdet_forced_accuracy": 0.25,
+    "with_logdet_forced_accuracy": 0.6375,
+    "note": "No unknown rejection here; read-only causal formula ablation, not a second tuned test."
+  },
+  "old_class_mean_log_variance": {
+    "looseness": 0.39798429104348926,
+    "misalignment": -0.9234069461737421,
+    "normal": -0.6273155130338258,
+    "unbalance": -1.0218356430750701
+  },
+  "normal_trial_distribution": [
+    {
+      "trial": 1,
+      "role": "train",
+      "mean_AC_RMS_raw_units": [
+        0.08809043519197342,
+        0.0907960130312131,
+        0.0510213732264239,
+        0.04581829646330345
+      ],
+      "mean_cost_by_class": {
+        "looseness": 1.6716168345934033,
+        "misalignment": 2.1557714429579775,
+        "normal": 0.31496656440473086,
+        "unbalance": 2.197021502340825
+      },
+      "largest_mean_shifts_from_normal_training_center": [
+        {
+          "feature": "ch2_kurtosis",
+          "global_standard_deviations": 1.4840120358144213
+        },
+        {
+          "feature": "ch1_log_fraction_500_2000",
+          "global_standard_deviations": -1.4498798919476106
+        },
+        {
+          "feature": "ch2_log_rms",
+          "global_standard_deviations": 1.4274623520212573
+        },
+        {
+          "feature": "ch1_log_rms",
+          "global_standard_deviations": 1.402509829118568
+        },
+        {
+          "feature": "ch1_log_fraction_100_500",
+          "global_standard_deviations": -1.3406179716439814
+        }
+      ]
+    },
+    {
+      "trial": 3,
+      "role": "train",
+      "mean_AC_RMS_raw_units": [
+        0.042083883133643495,
+        0.046028106160798256,
+        0.05272058743712322,
+        0.05334154222452289
+      ],
+      "mean_cost_by_class": {
+        "looseness": 0.7281627754333688,
+        "misalignment": 0.02883942545083338,
+        "normal": 0.022470013652319827,
+        "unbalance": 0.4815285112776522
+      },
+      "largest_mean_shifts_from_normal_training_center": [
+        {
+          "feature": "ch3_log_fraction_100_500",
+          "global_standard_deviations": -0.850442027417826
+        },
+        {
+          "feature": "ch2_kurtosis",
+          "global_standard_deviations": -0.6918547306080609
+        },
+        {
+          "feature": "ch2_log_rms",
+          "global_standard_deviations": -0.626736573756605
+        },
+        {
+          "feature": "ch1_log_fraction_500_2000",
+          "global_standard_deviations": 0.6041234709711123
+        },
+        {
+          "feature": "ch1_log_rms",
+          "global_standard_deviations": -0.5974052589482548
+        }
+      ]
+    },
+    {
+      "trial": 6,
+      "role": "train",
+      "mean_AC_RMS_raw_units": [
+        0.039027190458245244,
+        0.043519903327732215,
+        0.04999213838857586,
+        0.049339962958337105
+      ],
+      "mean_cost_by_class": {
+        "looseness": 0.7130749615574044,
+        "misalignment": -0.08167501403298144,
+        "normal": -0.057655660501610445,
+        "unbalance": 0.5267282747501286
+      },
+      "largest_mean_shifts_from_normal_training_center": [
+        {
+          "feature": "ch1_log_fraction_100_500",
+          "global_standard_deviations": 0.9530849900381746
+        },
+        {
+          "feature": "ch1_log_fraction_2000_10000",
+          "global_standard_deviations": -0.9163867488681954
+        },
+        {
+          "feature": "ch1_log_fraction_500_2000",
+          "global_standard_deviations": 0.8457564209765012
+        },
+        {
+          "feature": "ch1_log_rms",
+          "global_standard_deviations": -0.8051045701703018
+        },
+        {
+          "feature": "ch2_log_rms",
+          "global_standard_deviations": -0.8007257782646499
+        }
+      ]
+    },
+    {
+      "trial": 9,
+      "role": "validation",
+      "mean_AC_RMS_raw_units": [
+        0.05170018329186134,
+        0.05458672845589894,
+        0.05893838931050275,
+        0.058060782102488655
+      ],
+      "mean_cost_by_class": {
+        "looseness": 1.8254440318374536,
+        "misalignment": 1.6264734600006883,
+        "normal": 0.5239890568311466,
+        "unbalance": 1.9372805117162686
+      },
+      "largest_mean_shifts_from_normal_training_center": [
+        {
+          "feature": "ch1_log_fraction_100_500",
+          "global_standard_deviations": -1.893399678512099
+        },
+        {
+          "feature": "ch3_log_fraction_100_500",
+          "global_standard_deviations": -1.6553728435176218
+        },
+        {
+          "feature": "ch4_log_fraction_100_500",
+          "global_standard_deviations": -1.182124546636348
+        },
+        {
+          "feature": "ch1_log_crest",
+          "global_standard_deviations": 1.1169794359300096
+        },
+        {
+          "feature": "ch2_log_fraction_100_500",
+          "global_standard_deviations": -1.112078580811739
+        }
+      ]
+    },
+    {
+      "trial": 17,
+      "role": "test",
+      "mean_AC_RMS_raw_units": [
+        0.03408350192316348,
+        0.0400151866848257,
+        0.036419929577279166,
+        0.038225670575079036
+      ],
+      "mean_cost_by_class": {
+        "looseness": 0.636077094807899,
+        "misalignment": 0.01213196122227862,
+        "normal": 0.3793311923574287,
+        "unbalance": 0.49382453459413295
+      },
+      "largest_mean_shifts_from_normal_training_center": [
+        {
+          "feature": "ch3_log_rms",
+          "global_standard_deviations": -1.9966991578639788
+        },
+        {
+          "feature": "ch4_log_rms",
+          "global_standard_deviations": -1.3133813598821715
+        },
+        {
+          "feature": "ch2_log_crest",
+          "global_standard_deviations": -1.2443489127512617
+        },
+        {
+          "feature": "ch1_log_rms",
+          "global_standard_deviations": -1.1811927910999547
+        },
+        {
+          "feature": "ch1_log_crest",
+          "global_standard_deviations": -1.1758043111637284
+        }
+      ]
+    }
+  ]
+}

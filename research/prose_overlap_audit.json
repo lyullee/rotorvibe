@@ -1,0 +1,8 @@
+{
+  "status": "no_long_span_findings",
+  "reference_text_items": 382,
+  "public_files_scanned": 48,
+  "normalized_exact_span_characters": 160,
+  "findings": [],
+  "limitation": "Limited to available local reference text and exact normalized long spans; not legal clearance or a universal originality guarantee. Mandatory license/citation identifiers retained."
+}

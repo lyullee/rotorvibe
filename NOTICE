@@ -1,0 +1,12 @@
+RotorVibe original software and original documentation: Copyright 2026 Ugwiyeon Lee, MIT.
+
+MIT does not relicense any external data, standards, papers, catalogs or code.
+Third-party raw measurements, trained dataset-specific profiles, source PDFs,
+standards-derived lookup tables and external repository snapshots are not shipped.
+Dataset authors, identifiers, separate terms and acquisition requirements are
+listed in docs/SOURCES_AND_RIGHTS.md and research/data_sources.json.
+
+The vocabulary of signal processing, standard identifiers and citation metadata
+is retained to identify methods accurately. License text and mandatory notices
+are preserved verbatim; substantive external explanatory prose is not reproduced.
+No ISO, KS, instrument-vendor or dataset-owner endorsement is asserted.

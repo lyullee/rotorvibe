@@ -1,0 +1,27 @@
+{
+  "reason": "Third-party standards tables/text and upstream source snapshots excluded; private originals preserved in research workspace.",
+  "excluded_private_files": [
+    "vibration\\iso\\compressor.py",
+    "vibration\\iso\\evaluation.py",
+    "vibration\\iso\\gas_turbine.py",
+    "vibration\\iso\\general.py",
+    "vibration\\iso\\hydro.py",
+    "vibration\\iso\\industrial.py",
+    "vibration\\iso\\provenance.py",
+    "vibration\\iso\\pump.py",
+    "vibration\\iso\\reciprocating.py",
+    "vibration\\iso\\shaft.py",
+    "vibration\\iso\\sources.json",
+    "vibration\\iso\\stage.py",
+    "vibration\\iso\\turbine.py",
+    "vibration\\iso\\wind.py",
+    "vibration\\iso\\__init__.py",
+    "scripts\\prepare_github_bundle.py",
+    "scripts\\verify_iso.py",
+    "scripts\\verify_iso_package.py",
+    "examples\\iso_composition.py",
+    "docs\\ISO_API.txt"
+  ],
+  "private_snapshot_root": "Original project workspace, not the public checkout",
+  "historical_counts_do_not_describe_public_release_tests": true
+}

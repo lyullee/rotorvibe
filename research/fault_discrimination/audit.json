@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "frozen_model_code_plan_unchanged": true,
+  "original_recordings": 7,
+  "windows": 560,
+  "access_rows": 7,
+  "metrics_recount_match": true,
+  "no_exact_or_screened_noise_duplicates": true,
+  "no_test_reopening": true,
+  "no_post_test_tuning": true,
+  "operational_use": false
+}

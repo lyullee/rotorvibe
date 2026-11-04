@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rotorvibe"
+version = "0.1.0a1"
+description = "Composable rotating-machine vibration analysis with explicit evidence and applicability limits"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Ugwiyeon Lee"}]
+keywords = ["vibration", "rotating machinery", "signal processing", "bearing", "condition monitoring"]
+classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Topic :: Scientific/Engineering", "Operating System :: OS Independent"]
+dependencies = ["numpy>=2,<3", "scipy>=1.13,<2"]
+
+[project.urls]
+Homepage = "https://github.com/lyullee/rotorvibe"
+Repository = "https://github.com/lyullee/rotorvibe"
+Documentation = "https://github.com/lyullee/rotorvibe/blob/main/docs/USER_GUIDE.md"
+Issues = "https://github.com/lyullee/rotorvibe/issues"
+Archive = "https://doi.org/10.5281/zenodo.23937890"
+
+[project.optional-dependencies]
+verification = ["build>=1.2,<2", "setuptools>=77", "wheel", "twine>=6,<7"]
+
+[project.scripts]
+rotorvibe-monitor = "vibration.server:main"
+vibration-monitor = "vibration.server:main"
+
+[tool.setuptools.packages.find]
+include = ["vibration*", "rotorvibe*"]
+
+[tool.setuptools.package-data]
+vibration = ["ui/*.html", "ui/*.css", "ui/*.js"]

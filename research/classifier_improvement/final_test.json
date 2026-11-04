@@ -1,0 +1,70 @@
+{
+  "windows": 1680,
+  "independent_trials": 4,
+  "window_accuracy": 0.6369047619047619,
+  "macro_f1": 0.5641533883499408,
+  "confusion": {
+    "looseness": {
+      "looseness": 418,
+      "misalignment": 1,
+      "unbalance": 0,
+      "미확인 이상": 1
+    },
+    "misalignment": {
+      "looseness": 153,
+      "misalignment": 267,
+      "unbalance": 0,
+      "미확인 이상": 0
+    },
+    "normal": {
+      "looseness": 1,
+      "misalignment": 419,
+      "unbalance": 0,
+      "미확인 이상": 0
+    },
+    "unbalance": {
+      "looseness": 25,
+      "misalignment": 10,
+      "unbalance": 385,
+      "미확인 이상": 0
+    }
+  },
+  "per_trial": {
+    "16": {
+      "truth": "misalignment",
+      "windows": 420,
+      "correct": 267,
+      "majority_prediction": "misalignment"
+    },
+    "17": {
+      "truth": "normal",
+      "windows": 420,
+      "correct": 0,
+      "majority_prediction": "misalignment"
+    },
+    "19": {
+      "truth": "looseness",
+      "windows": 420,
+      "correct": 418,
+      "majority_prediction": "looseness"
+    },
+    "20": {
+      "truth": "unbalance",
+      "windows": 420,
+      "correct": 385,
+      "majority_prediction": "unbalance"
+    }
+  },
+  "trial_majority_accuracy": 0.75,
+  "model_sha256": "16fe41cdbbffdea9a77a3352ab7b703386aacc3892dc84c7a2b19146b8ab8329",
+  "test_trials": [
+    16,
+    17,
+    19,
+    20
+  ],
+  "training_overlap": false,
+  "validation_overlap": false,
+  "operational_use": false,
+  "limitation": "Previously published old test score is known; this is not a fresh blind test. Consecutive windows correlated."
+}

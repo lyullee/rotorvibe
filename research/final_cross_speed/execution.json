@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-11-04T00:48:47.662305+00:00",
+  "model_sha256": "364a14e7f6e32a5b8cfaf6b7e3b1cfcb93785688f6a8963dabf81c805fa03696",
+  "protocol_sha256": "c86d70fb55856bab6caaebb8f0dcc53f9d597d613f08eface32ec8cbecee0f0f",
+  "status": "complete",
+  "target_was_untouched_before_this_run": true,
+  "finished_utc": "2026-11-04T00:49:15.560513+00:00",
+  "target_arrays_opened": 1178,
+  "results_sha256": "d8f76f0f37f3c9ce7d5c46593d1684df2dcd25b0f6049307a52fd3d00ca763ea",
+  "target_predictions_sha256": "2b7830b05fc294710123d12c87742424f48968c1187631f0f0f9068b947bfb72"
+}

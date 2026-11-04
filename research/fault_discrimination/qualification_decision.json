@@ -1,0 +1,9 @@
+{
+  "decision": "Strong improvement on same-apparatus new fault recordings; experimental candidate only",
+  "model_sha256": "456b3388bbb2c6d73b6a1e443620aa7a761939419db0c5ab4fa3e28abfb3047b",
+  "no_post_test_tuning": true,
+  "new_normal_false_alarm_qualification": false,
+  "new_machine_generalization_qualification": false,
+  "operational_use": false,
+  "default_activation": false
+}

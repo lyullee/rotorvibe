@@ -1,0 +1,25 @@
+{
+  "audit_status": "pass",
+  "frozen_model_code_and_record_plan_unchanged": true,
+  "whole_recording_split_verified": true,
+  "new_original_test_recordings": 8,
+  "new_nonoverlap_2second_windows": 320,
+  "source_recordings": 46,
+  "no_exact_raw_source_test_duplicates": true,
+  "alternate_rate_noise_overlap": {
+    "exact_raw_Data_duplicate": false,
+    "maximum_normalized_noise_overlap": 0.12895900053568646,
+    "passes_nonduplicate_screen": true,
+    "limit": 0.98,
+    "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+  },
+  "independent_recount_matches": true,
+  "accuracy_holds_wrong": 0.51875,
+  "normal_false_alarm_rate": 0.025,
+  "normal_acquisitions": 1,
+  "normal_acquisitions_with_any_false_alarm": 1,
+  "no_post_test_tuning": true,
+  "operational_use": false,
+  "decision": "Normal-reference handling improved; fault-type accuracy48.21% remains insufficient for automatic operational diagnosis.",
+  "independence_limit": "Original-file/sample-rate acquisition holdout. A low noise-overlap score is not proof of separate installations or independent fault repetitions."
+}

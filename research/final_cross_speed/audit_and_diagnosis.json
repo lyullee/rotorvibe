@@ -1,0 +1,73 @@
+{
+  "audit_status": "pass",
+  "predictive_qualification": "failed",
+  "all_1178_predictions_accounted_for": true,
+  "independent_recount_matches": true,
+  "source_target_record_and_acquisition_overlap": false,
+  "frozen_model_code_manifest_checksums_unchanged": true,
+  "original_per_speed_profiles_unchanged": true,
+  "DSP_matches_verified_pretest_package": true,
+  "pretest_package_sha256": "272a94ccc4051f804d460dac959d40bcb005491f6068f17c3991fa20e5ed033d",
+  "target_records_read_once": true,
+  "normal_accept_limit": 2.130194996023138,
+  "anomaly_limit": 2.3862492638516133,
+  "source_validation_normal_scores": {
+    "min": 0.597279092273652,
+    "median": 1.212638916936085,
+    "p95": 1.8384084397242804,
+    "max": 2.016013772149897
+  },
+  "target_1200_normal_scores": {
+    "min": 3.4931723148269485,
+    "median": 4.360056372679061,
+    "p95": 5.539714984749539,
+    "max": 6.148963604889223
+  },
+  "unknown_diagnosis_rejections": {
+    "distance_limit": 1048,
+    "small_margin": 127,
+    "both": 127,
+    "total": 1048
+  },
+  "normal_top5_deviation_feature_occurrences": [
+    [
+      "ch1_to_ch3_log_order_fraction_ratio_1X",
+      399
+    ],
+    [
+      "ch1_to_ch4_log_order_fraction_ratio_1X",
+      399
+    ],
+    [
+      "ch1_to_ch2_log_order_fraction_ratio_1X",
+      399
+    ],
+    [
+      "ch1_log_order_power_1X",
+      379
+    ],
+    [
+      "ch1_log_order_ratio_4X_to_1X",
+      256
+    ],
+    [
+      "ch1_log_order_ratio_5X_to_1X",
+      112
+    ],
+    [
+      "ch4_log_order_power_1X",
+      41
+    ],
+    [
+      "ch1_to_ch3_log_order_fraction_ratio_6X",
+      6
+    ],
+    [
+      "ch1_to_ch4_log_order_fraction_ratio_6X",
+      4
+    ]
+  ],
+  "interpretation": "All target normal scores exceed the fixed normal anomaly limit. Relative/order features did not remove speed-domain shift. This does not identify a unique physical cause.",
+  "policy": "Do not deploy pooled cross-speed candidate or tune/retest on this opened target. Per-speed models remain scoped to 600/900RPM; new acquisition normal references and a fresh final split are needed.",
+  "operational_use": false
+}

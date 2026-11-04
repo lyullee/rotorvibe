@@ -1,0 +1,254 @@
+[
+  {
+    "path": "research/classifier_improvement/development.json",
+    "original_private_sha256": "a058bc67ee138d1720fa582af8a93911d8e2edaea293bb9dac1516c195bd98c9",
+    "public_sha256": "472301843be134388ee79f96fdc142733a8823511602322588946cc990bcfe91",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/classifier_improvement/diagnosis.json",
+    "original_private_sha256": "26cc77514a5b8d8d0f3de80af90596db10a58b75fd978ef0bf8a893bc458f701",
+    "public_sha256": "23c4802fcf504394410a102a7016fd01e25f9ae2b808c499d9588c3c20c0a577",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/classifier_improvement/final_test.json",
+    "original_private_sha256": "15c44efa9cc3a58e37698ebcf0cf67c0392a6ce8f5a4a27f87aa66cd561a15d5",
+    "public_sha256": "9926a703f3d2388022a287e66712164521e4a676c54c0433144d1cbd84c22026",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/classifier_improvement/integration.json",
+    "original_private_sha256": "0886c9f071a1d75caea0592963540604f632cd5ea56d5def44920206c5359da8",
+    "public_sha256": "c76de48cb617df1f591bda62c9b782002c47eec6f657272001a3d714102b7044",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/final_cross_speed/protocol.json",
+    "original_private_sha256": "c86d70fb55856bab6caaebb8f0dcc53f9d597d613f08eface32ec8cbecee0f0f",
+    "public_sha256": "ab8b27ec6179891fc0b9ab2171305b0df2c8500fff1f841e1737fc22c157e06f",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/final_cross_speed/execution.json",
+    "original_private_sha256": "7bdc9f445ef61b78cfe80fb60f894f4dc6be5d04bd7bf08d0e6844fb3f792487",
+    "public_sha256": "0ec26e2fae2b5ab765839d75e09c8e688a82069239d2ffd4e07936ad080d4fd7",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/final_cross_speed/final_test.json",
+    "original_private_sha256": "d8f76f0f37f3c9ce7d5c46593d1684df2dcd25b0f6049307a52fd3d00ca763ea",
+    "public_sha256": "2d76b3575af49fe293b38accbe5de6d579e87611dab6491a928e34789dd3f016",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/final_cross_speed/audit_and_diagnosis.json",
+    "original_private_sha256": "c33133b589a66a729071a41731c030f41da6696e6571ce9e7e158a6a6232da9f",
+    "public_sha256": "97ccca968c918802ae556d4a41a3783f5d1d04c84850101f8acfe8fecd5031b4",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/final_cross_speed/qualification_decision.json",
+    "original_private_sha256": "3fef1129259da061cf0a9ce4feceeaadf71a8b3f52d1d51ac2d660b2fe285bce",
+    "public_sha256": "98c98a23b899cb364606fea07ca33d9450addd285ceb8ba245a914235f1de695",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/final_cross_speed/target_predictions.jsonl",
+    "original_private_sha256": "2b7830b05fc294710123d12c87742424f48968c1187631f0f0f9068b947bfb72",
+    "public_sha256": "865d0c0064c80a9d9541311ec88620c0d74f1a6c159b208ab2f392e033fc0db0",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/matched_development.json",
+    "original_private_sha256": "fde0f2da8182c8213bf575b757b2d78d0a88927ca220cf34eeeff18450f2d76a",
+    "public_sha256": "688f4833200effc6ca909ddd503822dfbeeb3c6cffaf23d8a26e2e4ec9f07f88",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/new_final_protocol.json",
+    "original_private_sha256": "39dde924fdfb229af8ca2d16eeae46cedf612be3ab00dba67fb14f44a22217bc",
+    "public_sha256": "d836f913b3ea5c6722e50445db99069e8934ac9e64a1f53b44ddc5f329febfd4",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/new_final_execution.json",
+    "original_private_sha256": "d83e87a1c5670164b016fcec19409e2ba805b880ee91f315d531cae910bd3864",
+    "public_sha256": "a31c18d5d1a2821781061a8ededc0deaad68c7ce4913ab08a87ded5e66bbeece",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/new_final_results.json",
+    "original_private_sha256": "86f32bb7ca33e0583755901d4ae346cf0101aec31d064b7c2f38a44880589bca",
+    "public_sha256": "3eb342617cfeac4e7ee714e463cb0f4926887605b08020fcb2f7a873ddfd4620",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/new_final_audit.json",
+    "original_private_sha256": "72294aa1eaea578a7e6b837e37e91e46013b812814ab086e0a26bb9b7d0a1196",
+    "public_sha256": "45300fb5c3194efe43fe4074aa4e41e5402d723f00579672c00606be40289e34",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/api_integration.json",
+    "original_private_sha256": "f48dc2769f822274de65872fb11843c34ece18cdf148791a6ff0c2e56068d604",
+    "public_sha256": "6ec87832080fb6da7f293b8006c811b27d0f3adddd9671b01ec5e88f9b6e2456",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/qualification_decision.json",
+    "original_private_sha256": "121a04d13dcb0c09581389e5e9c6470f225c34196d668cb4947640d2cc562456",
+    "public_sha256": "4f364837ad75f7f79dfad3644843be5cca3855895f4f3bef92a586e3e85129b8",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/condition_improvement/new_final_predictions.jsonl",
+    "original_private_sha256": "83a7d3458ea0812de17f461d2ff739482dcd8131e72176454aa33326cf70932c",
+    "public_sha256": "18ede58a44d9c8e41f59e63002e3c4773cdfa788ada6a982f3a43c51586ab2e6",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/development.json",
+    "original_private_sha256": "0455db0ea39ecd25a1dfa41520b632e8eb46c4aff3b5af7171ad5271e5197fe9",
+    "public_sha256": "b560afec3211b929b04d7b38f266802d54271a1d4d351101fdc33f94ae1fc97a",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/previous_failure_diagnosis.json",
+    "original_private_sha256": "bf71b1d091f35a329134f86c6524ba3ccd6bbe97285d08a3421b9856f706a620",
+    "public_sha256": "d7354e78685eda26559b5d715ac5740ba4f9a12077f89155b02ded593ce42a6f",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/final_protocol.json",
+    "original_private_sha256": "333e84e163cc8c5807a67cf6a42a0e479e56dc354801d89167e37cab460e7582",
+    "public_sha256": "35676da122ebaea76272d27dae859e8937a8818a395121321d637e45aedbe6f5",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/execution.json",
+    "original_private_sha256": "fe4413be63ca45f14793f8f17f2e6a17bbd10907e6b35606c4318e60037fc487",
+    "public_sha256": "8aee588a4e139c629885e3d3950c0d3351edb7202145fa06530fa64ce14ac468",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/final_results.json",
+    "original_private_sha256": "f881d0129e86b2b92eb68a8ad88d443481609c136fbc0de78653530c2ce2dd81",
+    "public_sha256": "9b9d1c5fd188219aa5c50292135580e0d72ac5da043522dd42d1ac7ac6aecf4d",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/audit.json",
+    "original_private_sha256": "6dce5008ff533d60ab6b6e2230e46c97ffbd49e1e4b35843d8c1cc00aadcd21a",
+    "public_sha256": "d7b448086df4e96cd72165edb512986c6c740c2b0f0982c688157140db97c4f4",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/api_integration.json",
+    "original_private_sha256": "87a92191b3751dee0916996177d8e6692a77f04730286bcf407e329cf4f9cf23",
+    "public_sha256": "027cba3ecb1e8cc3fad958e6f16d6f4112193cd9c587956ffae5328344429030",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/qualification_decision.json",
+    "original_private_sha256": "f1d741c76f32dd5af154eb3f0ce574a1dcdbacaaf579cf648271ca9b66266cef",
+    "public_sha256": "ec1189739ecd702aec8b556d914d68bb43dfa88c255c2f83b82db7aea4a6c641",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/final_access.jsonl",
+    "original_private_sha256": "06b51541957b79829a79f627e68199f36f6745902acc38c6c3b6380673d90bfb",
+    "public_sha256": "0bc7a82d2f70ca1104fd378c88ef7cd08611224fc883cc6f623a0d9c7be721c0",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/fault_discrimination/final_predictions.jsonl",
+    "original_private_sha256": "c85d2920db373a8257dd52b6959bdb91cfb7c2779c87761e898f6bb80b4baa69",
+    "public_sha256": "18cabfce6026290ad5c0cb5342439d2c15e009ff1ba8606cb4084c02353ef7d6",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/protocol.json",
+    "original_private_sha256": "6a900dc7f1f17265d07b74519313d3fadf8de05fe1dd29d49b539a4841814328",
+    "public_sha256": "d88ca081b492e131f0949cfcf34f033c7f500cdc4aa5d6fb8a82b5e746e67684",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/evaluation_freeze.json",
+    "original_private_sha256": "d478531a1395b621a2825558d32237ceefc09c41a00cda4f30742e4f1c285380",
+    "public_sha256": "c62f871dfab4b0f20b309166cf2c3a2b031af2ba0ed18fce9b6eeea1ed6682dc",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/execution.json",
+    "original_private_sha256": "680060e8c2ea58724fe65c4fbdd02a38e0febedb165a83399de181904bd36f49",
+    "public_sha256": "f135b89649636f633977e5afb0252e760d8517deb8cf7fc27fae2ba40fbbce0c",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/results.json",
+    "original_private_sha256": "2179feb5e24b0087a88a6dc5502de2f4112b1ae695b64d9123f68f994192520c",
+    "public_sha256": "5424bf47a21c1fa529d4f562ee89bbd9101b8fa303ec9e04f5da6ae2ec12553a",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/audit.json",
+    "original_private_sha256": "019a8640eb58a352c67695479c12ac22f6a518f7225dbfc1f5f7382caec6c169",
+    "public_sha256": "39ad1fe7a2d9087fc437c4bba872ff3f28b2f8e5ee8bb755d94222a1dd5766ee",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/qualification_decision.json",
+    "original_private_sha256": "9ebbbdf96699a0be4d73a0394e33c7742400f4169448b3e36be7e037f3de0b85",
+    "public_sha256": "7ef38e86a8e6370afe246d664979dfaa33741988112b6c07127568604b331925",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/access.jsonl",
+    "original_private_sha256": "d5bad995cec50b3292f8af32242d91743bba7710a085acfc4a9aabc4a1cde4c2",
+    "public_sha256": "fb93afebf6b159c5f27a7c5a87a49f8ae7bd214ed94a94dfd42ca22e217734f4",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  },
+  {
+    "path": "research/external_blind/predictions.jsonl",
+    "original_private_sha256": "6e57e82a2ca8f1ec0fe9407a4d5c1acdbb4df120762853c68e894c3936ab5112",
+    "public_sha256": "4449949b8f192e6e9a23ae288fdeb0e9ead23c5290906c2329bf941d73d78f50",
+    "personal_root_redacted": false,
+    "text_representation": "public LF normalized; original private byte digest retained"
+  }
+]

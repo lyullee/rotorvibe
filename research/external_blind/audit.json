@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "frozen_models_and_inference_code_unchanged": true,
+  "test_only_original_recordings": 43,
+  "windows": 580,
+  "access_rows": 43,
+  "no_exact_prior_or_target_duplicates": true,
+  "metrics_recount_match": true,
+  "no_new_fit_tune_calibration": true,
+  "no_test_reopening": true,
+  "operational_use": false
+}

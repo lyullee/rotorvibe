@@ -1,0 +1,167 @@
+진동분석 Python 코드 API — 0.1.0
+
+주 인터페이스는 HTTP가 아니라 vibration 패키지의 동기 Python API다.
+코어 import/생성은 파일 생성, DB 접속, 서버 실행, 스레드 시작, 학습을 하지 않는다.
+NumPy 배열을 받아 NumPy 배열을 반환한다. JSON 변환은 result.to_dict()에서 명시적으로 한다.
+
+설치: 프로젝트 경로에서 python -m pip install -e .
+공개 API:
+  from vibration import AnalysisConfig, SignalBlock, VibrationAnalyzer
+  cfg = AnalysisConfig(sample_rate_hz=12000, channels=1, unit='m/s^2')
+  analyzer = VibrationAnalyzer(cfg)
+  block = SignalBlock(actual_samples, 12000, unit='m/s^2', start_time_s=daq_time,
+                      clock_id='daq_elapsed', episode_id='machine-run-1')
+  results = analyzer.push(block)
+  for result in results:
+      if result.valid:
+          consume(result.metrics, result.features, result.payload['spectrum'])
+
+actual_samples/daq_time/consume는 호스트가 제공한다. 예시는 합성 신호를 만들지 않는다.
+analyze(block): 정확히 한 창의 배열 분석. cfg 기본값은 1초/0.25초 hop.
+push(block): 임의 길이 입력, 창이 완성되면 결과 목록 반환. reset(): 스트림 버퍼 초기화.
+동일 인스턴스는 단일 스트림용이며 호스트가 스레드 동기화를 책임진다.
+설정은 생성 시 복사한다. 변경하려면 새 인스턴스를 구성한다.
+
+입력 계약:
+- values: samples × channels, 1D는 1채널로 승격. 입력을 복사하므로 소유권 충돌 방지.
+- start_time_s: 첫 샘플의 초 단위 시각. clock_id는 단조/장비/UTC 등 호스트 명시.
+- episode_id: 독립 운전 구간. 시간/패킷 순서/에피소드 불연속이면 이전 창 폐기.
+- valid: 샘플별 bool. NaN/Inf는 자동 invalid. invalid 포함 창은 수치 진단 제외.
+- unit: unknown/g/m/s^2. 전압 교정 입력은 V 및 input_representation='volts'.
+- rpm: 양수 상수 또는 샘플별 배열. 배열이 있으면 각도 재표본화 order 분석.
+- sequence: 선택적인 연속 패킷 번호. 재시작하려면 reset 또는 새 episode 사용.
+- metadata: 출처, 센서 설치, 장비 ID 등. 정답/미래 수명을 진단 입력에 넣지 않는다.
+
+출력 계약:
+AnalysisResult.valid / metrics / features / feature_names / payload / metadata.
+시간 범위 [start_time_s, end_time_s), 끝 시각은 exclusive.
+payload: waveform, spectrum, psd, envelope_spectrum, order_spectrum,
+spectrogram(현재 창의 PSD 열), bearing_markers, diagnosis, quality.
+FFT 진폭은 single-sided peak, PSD는 진폭²/Hz. 시간/주파수 축은 초/Hz.
+연속 스펙트로그램 이력은 호스트가 창별 PSD 열을 누적한다.
+result는 frozen 외피이지만 payload의 배열/딕셔너리는 불변 계약이 아니다.
+결과를 여러 소비자가 변경하려면 각자 복사한다.
+
+조립:
+BearingGeometry/BearingMap 또는 ports.BearingProvider로 베어링 제공자를 주입.
+stages={'baseline': BaselineStage(cfg), 'alarm': AlarmStage(), ...}
+stage(result) -> dict. 삽입 순서대로 실행하므로 다음 단계가 앞 단계 결과를 읽는다.
+sinks=(callback, ...): 완성 결과를 호스트 이벤트 버스/저장소/제어계에 전달.
+예외는 호출자로 전달하며 외부 모듈 오류를 정상으로 숨기지 않는다.
+유효하지 않은 결과에도 단계/싱크가 호출되므로 사용자 단계는 result.valid를 확인한다.
+단계/싱크 실패 시 스트림 push의 일부 입력은 소비되었을 수 있다.
+호스트는 오류 기록 후 새 episode/reset으로 재개할 정책을 정한다.
+
+BaselineStage.begin(name, windows): 사용자가 정상이라고 지정한 구간을 수집.
+export_profile(): JSON 가능한 기준값, 저장 책임은 호스트에 있다.
+BaselineStage(cfg, profile=...): 저장 기준 로딩. 설정/조건/RPM 호환성 확인.
+AlarmStage: 정상 점수 경보의 지속/회복 시간을 데이터 시각으로 계산.
+invalid/미수집은 unavailable이며 기존 경보를 정상 해제로 간주하지 않는다.
+수명/지도분류: 기존 models.ModelRegistry와 LifeEstimator는 데이터/저장소를
+명시적으로 받는 선택 모듈. 자동 학습하거나 현장 고장을 확정하지 않는다.
+호스트는 결과 stage 안에서 자체 분류기/물리모델/수명모델을 호출할 수 있다.
+
+lyullee 저장소 결합:
+process-monitoring-toolkit의 SignalBatch 구조를 확인해 adapters를 구현했다.
+to_process_batch(results): 진동 특징을 창당 한 행으로 변환, invalid mask 보존.
+로그 RMS 기준 단위는 metadata.measurement에 저장한다. 운전조건별 학습 필요.
+from_process_batch(...): 균등 샘플 원시 파형만 허용. episode/mode 혼합은 사전 분할.
+선택 import이므로 process_monitoring 미설치여도 진동 코어 사용 가능.
+condition_evidence(): asset_id와 연결 가능한 일반 상태 관측. PRISM 전용 스키마나
+사고 확률/고장률로 자동 변환한 것이 아니다. h2physics도 사용자 stage에서 호출 가능.
+실제 통합 실행/상호운용 검증은 이번 작업에서 수행하지 않았다.
+
+확인한 upstream 계약:
+https://github.com/lyullee/process-monitoring-toolkit
+commit 79b4cf52a0acd0d0cbd3addbe82c3d98d6385e5a
+src/process_monitoring/contracts.py, events.py, examples/python_api.py
+당시 원문 스냅샷은 docs/integration/upstream에 보관. 패키지 배포 대상에서 제외.
+
+HTTP/UI는 선택 실행 어댑터:
+start.cmd 또는 vibration-monitor. 외부 데이터 경로 VIBRATION_PROJECT_HOME,
+쓰기 경로 VIBRATION_RUNTIME_HOME 환경변수로 지정 가능.
+설치 패키지에 원본 PDF/공개 데이터/학습 모델은 포함하지 않는다.
+
+검증 상태 갱신 (2026-11-03): 후속 요청에 따라 6종 시험 58항목을 실행하여 모두 통과.
+상세: output/verification/검증결과.txt 및 results.json.
+입력 검사·작은 진폭 모멘트 계산을 수정했으며 특징 스키마는 vibration.features.v2.
+수정 전 정상 기준/분류 모델은 혼용하지 않고 incompatible로 거부한다.
+RPM 지원 범위는 1e-6~1e9. 모델 학습·현장 진단 정확도·RUL 오차 평가는 미실시.
+
+물리 검증 갱신 (2026-11-03): 해석해/독립 ODE/운동학 시험 32항목 통과,
+수정 후 기존 58항목도 통과. output/physics_verification/물리검증결과.txt 참조.
+단일 열 베어링은 전동체 정수 개수>=2 및 비겹침 조건을 검사한다.
+고조파 검색 대역이 겹치면 marker.resolvable=false, detected=false와
+diagnosis.limitations를 제공한다. 창 길이를 늘려 재분석할 수 있다.
+공개 실험 3기록 관측에서 내륜/외륜 주파수는 일치했지만 전동체 2BSF 기준은
+미충족. 실제 하드웨어 교정이나 현장 진단 성능을 검증한 것은 아니다.
+
+ISO 확장 (2026-11-04)
+vibration.iso에 제공된 10종 판본용 독립 평가 모듈을 추가했다.
+MachineContext/Measurement/evaluate 및 IsoStage를 기존 파이프라인에 연결할 수 있다.
+풍력용 IsoAveragingStage, 수력/축 진동/펌프 조건 및 판정 보류 계약도 제공한다.
+상세 사용법: docs/ISO_API.txt, examples/iso_composition.py.
+검증: 신규 363개 + 기존 90개 통과. package wheel 격리 import/계산도 통과.
+이 결과는 제공 판본의 수치 절차에 대한 검증이며 전체 설비 ISO 인증이 아니다.
+
+분류기 개선 (2026-11-04 후속)
+GaussianClassifier(profile) / predict(features) / predict_many(feature_matrix)는
+저장소·DB·서버 없이 호출하는 순수 NumPy API다. 특징은 기존 channel_features의
+vibration.features.v2(4채널 28개)를 유지한다. 모델 알고리즘은
+standardized_diagonal_gaussian_log_density_v3이며 이전 점수 모델은 재학습해야 한다.
+ModelRegistry의 학습/추론과 ClassifierStage에도 같은 계산식을 연결했다.
+최종 학습 독립 시험: 63.69%, 실험 다수결 3/4. 정상 시험은 0/420 정답이라
+운영 사용 불가. 상세 원인·분할·코드 예: docs/CLASSIFIER_IMPROVEMENT.rst.
+
+정상 우선 진단/물리 특징/새 데이터 (2026-11-04 후속)
+extract_rotor_features, RotorFeatures, fit_two_stage, TwoStageDiagnostic, TwoStageStage,
+IndependentRotorCatalog를 루트 API에 추가했다. 서버나 DB 없이 사용할 수 있다.
+VibrationAnalyzer의 stage.analyze_window(result, readonly_values)는 감도 변환 후
+원시 다채널 창을 받는다. 기존 특징 전용 ClassifierStage 연결도 유지한다.
+ModelRegistry.use_two_stage(profile), classify_window도 같은 진단기를 사용한다.
+normal / hold / fault_candidate / anomaly_unknown을 구분한다.
+relative_features는 전체 정상 기준 변화 벡터를 읽기 전용 NumPy 배열로 반환한다.
+새 특징 스키마 vibration.rotor_features.v1; 기존 features.v2/정상 추세 기준은 유지한다.
+추가 자료/재현/검증: docs/TWO_STAGE_AND_DATA.rst, examples/two_stage_composition.py.
+신규 정상 우선 프로파일은 선택적으로 활성화해야 하며 기존 4종 분류와 별도이다.
+
+1200 RPM 후속 최종 검증 (2026-11-04)
+기존 600/900 RPM 프로파일은 범위를 유지했다. 별도 source-only 통합 후보를
+시험 전 고정하고 처음 개봉한 1178창/59개 취득에서 평가한 정답률은 11.04%,
+정상 오경보율은 100%로 운영 사용 불가다. 추론 코드/모델 파일은 시험 중 바꾸지 않았다.
+최종 시험 이후 재학습·임계값 조정은 하지 않았다.
+상세: docs/FINAL_CROSS_SPEED_VALIDATION.rst. 회귀시험 520개 재통과와 예측 실패는 별개다.
+
+조건별 정상 기준 API (2026-11-04 추가 개선)
+fit_conditioned, ConditionedDiagnostic, ConditionedStage, UosRotorCatalog를 제공한다.
+ModelRegistry.use_conditioned(profile)로 같은 원시 창 추론을 연결한다.
+장비/조건/채널/단위/샘플링률/창 길이/RPM 범위를 검사하고 정상 기준이 없는
+속도는 기본 보류한다. 공통 분석 대역 변환은 이 프로파일의 진단 경로에 적용된다.
+정상 기준·정상 보정·고장 학습 원본 그룹은 분리한다.
+직접 호출/분석 단계/레지스트리/DB/재생 작업자 결과 일치와 회귀 534개를 확인했다.
+새 원본 8개/320창 정답률 51.88%, 고장 종류 48.21%로 운영 사용은 비활성이다.
+새 정상 기준에는 1200 RPM의 별도 8 kHz 정상 기록을 사용했다.
+새 장비 무학습 적용 시험이 아니며 최종 시험 이후 모델을 조정하지 않았다.
+정확한 범위와 코드 예: docs/CONDITIONED_IMPROVEMENT.rst.
+
+헐거움/불평형 구분 추가 API
+from vibration.fault_discrimination import (
+    fault_features, fit_fault_discriminator, FaultDiscriminator, FaultDiscriminationStage)
+단일 채널 2초 원시 배열과 독립 제공 RPM, 장비/조건/단위 scope를 사용한다.
+61개 특징과 원본별 4구간 대표값으로 종류 후보를 계산한다. 이 API 자체는
+정상 판정기가 아니므로 먼저 정상 기준에서 이상이 확인된 입력에만 적용한다.
+FaultDiscriminationStage(model, gate_key='conditioned')는 앞 단계 anomaly=True일 때만 동작한다.
+VibrationAnalyzer.stages에 정상 단계, 고장 종류 단계 순서로 연결한다.
+구체적 조립: examples/fault_discrimination_composition.py.
+기존 모델 레지스트리를 자동 교체하지 않으며 서버/DB 없이 직접 호출할 수 있다.
+새 동일 시험대 고장 원본 7개/560창에서 559개 정답. 정상 신규 시험/현장 확진 성능은 아니다.
+학습·튜닝 미사용 최종 원본/한계/검증: docs/FAULT_DISCRIMINATION_IMPROVEMENT.rst.
+
+새 정상/다른 시험대 검증 (추론 API 변경 없음)
+현재 정상 기준/고장 종류 프로파일은 UOS6204 장비에 묶여 있다.
+실제 장비·단위·채널 정보를 전달하면 새 시험대/베어링 자료는 보류한다.
+새 정상 기준을 학습하지 않은 상태에서 보류를 정상으로 취급해서는 안 된다.
+새 정상 21개/고장 22개 원본의 전체 580창에서 정식 API 판정률은 0%였다.
+별도 오프라인 수치 스트레스 시험도 일반화에 실패했다.
+scripts/external_blind_metrics.py의 offline_scope_bypass는 평가 전용이며 제품 API가 아니다.
+상세: docs/EXTERNAL_BLIND_VALIDATION.rst. 새 자료로 학습/튜닝/보정하지 않았다.

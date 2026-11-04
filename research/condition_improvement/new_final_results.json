@@ -1,0 +1,169 @@
+{
+  "model_sha256": "4ebdd4393b4267eae4013b3ef649384624617defcb827e4d93f0652f8dc33ecd",
+  "protocol_sha256": "39dde924fdfb229af8ca2d16eeae46cedf612be3ab00dba67fb14f44a22217bc",
+  "new_recordings": 8,
+  "new_windows": 320,
+  "normal_windows": 40,
+  "fault_windows": 280,
+  "normal_correct": 31,
+  "normal_false_alarms": 1,
+  "normal_false_alarm_rate": 0.025,
+  "normal_hold": 8,
+  "fault_detected": 280,
+  "fault_detection_rate": 1.0,
+  "fault_missed_as_normal": 0,
+  "fault_hold": 0,
+  "fault_type_correct": 135,
+  "fault_type_accuracy_all_fault_windows": 0.48214285714285715,
+  "correct_windows": 166,
+  "accuracy_holds_wrong": 0.51875,
+  "decision_coverage": 0.709375,
+  "conditional_accuracy": 0.7312775330396476,
+  "macro_f1": 0.552275062392286,
+  "recording_majority_correct": 5,
+  "per_recording": {
+    "uos:H_H_16_6204_1200.mat": {
+      "truth": "normal",
+      "windows": 40,
+      "correct": 31,
+      "predictions": {
+        "normal": 31,
+        "hold": 8,
+        "unbalance": 1
+      },
+      "anomaly_windows": 1,
+      "majority_label": "normal"
+    },
+    "uos:L_H_16_6204_1200.mat": {
+      "truth": "looseness",
+      "windows": 40,
+      "correct": 3,
+      "predictions": {
+        "anomaly_unknown": 37,
+        "looseness": 3
+      },
+      "anomaly_windows": 40,
+      "majority_label": null
+    },
+    "uos:M1_H_16_6204_1200.mat": {
+      "truth": "misalignment",
+      "windows": 40,
+      "correct": 16,
+      "predictions": {
+        "anomaly_unknown": 8,
+        "misalignment": 16,
+        "unbalance": 15,
+        "looseness": 1
+      },
+      "anomaly_windows": 40,
+      "majority_label": "misalignment"
+    },
+    "uos:M2_H_16_6204_1200.mat": {
+      "truth": "misalignment",
+      "windows": 40,
+      "correct": 33,
+      "predictions": {
+        "misalignment": 33,
+        "unbalance": 2,
+        "looseness": 5
+      },
+      "anomaly_windows": 40,
+      "majority_label": "misalignment"
+    },
+    "uos:M3_H_16_6204_1200.mat": {
+      "truth": "misalignment",
+      "windows": 40,
+      "correct": 40,
+      "predictions": {
+        "misalignment": 40
+      },
+      "anomaly_windows": 40,
+      "majority_label": "misalignment"
+    },
+    "uos:U1_H_16_6204_1200.mat": {
+      "truth": "unbalance",
+      "windows": 40,
+      "correct": 15,
+      "predictions": {
+        "misalignment": 24,
+        "unbalance": 15,
+        "looseness": 1
+      },
+      "anomaly_windows": 40,
+      "majority_label": "misalignment"
+    },
+    "uos:U2_H_16_6204_1200.mat": {
+      "truth": "unbalance",
+      "windows": 40,
+      "correct": 28,
+      "predictions": {
+        "unbalance": 28,
+        "looseness": 12
+      },
+      "anomaly_windows": 40,
+      "majority_label": "unbalance"
+    },
+    "uos:U3_H_16_6204_1200.mat": {
+      "truth": "unbalance",
+      "windows": 40,
+      "correct": 0,
+      "predictions": {
+        "anomaly_unknown": 40
+      },
+      "anomaly_windows": 40,
+      "majority_label": null
+    }
+  },
+  "confusion": {
+    "looseness": {
+      "anomaly_unknown": 37,
+      "looseness": 3
+    },
+    "misalignment": {
+      "anomaly_unknown": 8,
+      "misalignment": 89,
+      "unbalance": 17,
+      "looseness": 6
+    },
+    "normal": {
+      "normal": 31,
+      "hold": 8,
+      "unbalance": 1
+    },
+    "unbalance": {
+      "misalignment": 24,
+      "unbalance": 43,
+      "looseness": 13,
+      "anomaly_unknown": 40
+    }
+  },
+  "healthy_alternate_rate_overlap": {
+    "exact_raw_Data_duplicate": false,
+    "maximum_normalized_noise_overlap": 0.12895900053568646,
+    "passes_nonduplicate_screen": true,
+    "limit": 0.98,
+    "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+  },
+  "nonduplicate_screen_pass": true,
+  "raw_test_signal_sha256": {
+    "uos:H_H_16_6204_1200.mat": "11e00f5accd8ede4c7890165b506612d7508ad65c0da53723af5d411ce5a491f",
+    "uos:L_H_16_6204_1200.mat": "ccb3e07a417f235f3754523737e99ec50ebe58dc9012a60162a9186533ad80fc",
+    "uos:M1_H_16_6204_1200.mat": "bbc34f9b5a12c8e1f4d386fb3fb5f69bff072d5174d94b4e4dc60d04fe8544d3",
+    "uos:M2_H_16_6204_1200.mat": "0f774fff1706cefc8e650092893e03be12acb6b34f39498140fa50544ac9030d",
+    "uos:M3_H_16_6204_1200.mat": "217ede72256b5efaf1e8890eea3ce71e57daf90fb59549b4a6fe9ee321d077d0",
+    "uos:U1_H_16_6204_1200.mat": "bee229d76ab8d1d2be844f9580340606012950e607ed1af2fe1c6a8643e34442",
+    "uos:U2_H_16_6204_1200.mat": "02192bd83ce22b541a6fb4fd0eb6789604202cafe1463321fffecca6dcc5732e",
+    "uos:U3_H_16_6204_1200.mat": "38cb1aab6f9e2d5b74a2b31c5fa7f8b1fbd6999002324c49ed38d06aeb7f7c17"
+  },
+  "target_normal_used_for_fitting": false,
+  "target_used_for_model_selection": false,
+  "no_post_test_tuning": true,
+  "qualification_scope": "New original-recording/sample-rate holdout at matched nominalRPM, not an unobserved-speed or uncalibrated-machine claim.",
+  "limitations": [
+    "Only eight original test recordings, including ONE healthy acquisition.",
+    "Provider says collected at two rates; noise-overlap screen is not proof of independent reassembly.",
+    "Same apparatus with own normal reference; not field-machine transfer."
+  ],
+  "operational_use": false,
+  "elapsed_seconds": 1.9349963999993633
+}

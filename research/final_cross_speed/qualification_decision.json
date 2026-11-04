@@ -1,0 +1,11 @@
+{
+  "model_sha256": "364a14e7f6e32a5b8cfaf6b7e3b1cfcb93785688f6a8963dabf81c805fa03696",
+  "decision": "reject_for_operational_cross_speed_use",
+  "target_accuracy": 0.11035653650254669,
+  "normal_false_alarm_rate": 1.0,
+  "model_or_threshold_tuned_after_test": false,
+  "production_activation_performed": false,
+  "original_per_speed_profiles_unchanged": true,
+  "target_status": "opened; not a new blind test for future tuning",
+  "operational_use": false
+}

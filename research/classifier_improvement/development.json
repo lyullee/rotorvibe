@@ -1,0 +1,405 @@
+{
+  "protocol": "Original trial groups fixed. Train-only 3-fold grouped CV, validation selection; test features not accessed.",
+  "validation_old_centroid": {
+    "windows": 240,
+    "independent_trials": 4,
+    "window_accuracy": 0.5291666666666667,
+    "macro_f1": 0.4354780538824972,
+    "confusion": {
+      "looseness": {
+        "looseness": 60,
+        "misalignment": 0,
+        "normal": 0
+      },
+      "misalignment": {
+        "looseness": 52,
+        "misalignment": 8,
+        "normal": 0
+      },
+      "normal": {
+        "looseness": 1,
+        "misalignment": 0,
+        "normal": 59
+      },
+      "unbalance": {
+        "looseness": 60,
+        "misalignment": 0,
+        "normal": 0
+      }
+    },
+    "per_trial": {
+      "9": {
+        "truth": "normal",
+        "windows": 60,
+        "correct": 59,
+        "majority_prediction": "normal"
+      },
+      "13": {
+        "truth": "misalignment",
+        "windows": 60,
+        "correct": 8,
+        "majority_prediction": "looseness"
+      },
+      "14": {
+        "truth": "looseness",
+        "windows": 60,
+        "correct": 60,
+        "majority_prediction": "looseness"
+      },
+      "18": {
+        "truth": "unbalance",
+        "windows": 60,
+        "correct": 0,
+        "majority_prediction": "looseness"
+      }
+    },
+    "trial_majority_accuracy": 0.5
+  },
+  "validation_logdet_corrected": {
+    "windows": 240,
+    "independent_trials": 4,
+    "window_accuracy": 0.9916666666666667,
+    "macro_f1": 0.9916999586719935,
+    "confusion": {
+      "looseness": {
+        "looseness": 60,
+        "misalignment": 0,
+        "normal": 0,
+        "unbalance": 0
+      },
+      "misalignment": {
+        "looseness": 0,
+        "misalignment": 60,
+        "normal": 0,
+        "unbalance": 0
+      },
+      "normal": {
+        "looseness": 1,
+        "misalignment": 0,
+        "normal": 59,
+        "unbalance": 0
+      },
+      "unbalance": {
+        "looseness": 1,
+        "misalignment": 0,
+        "normal": 0,
+        "unbalance": 59
+      }
+    },
+    "per_trial": {
+      "9": {
+        "truth": "normal",
+        "windows": 60,
+        "correct": 59,
+        "majority_prediction": "normal"
+      },
+      "13": {
+        "truth": "misalignment",
+        "windows": 60,
+        "correct": 60,
+        "majority_prediction": "misalignment"
+      },
+      "14": {
+        "truth": "looseness",
+        "windows": 60,
+        "correct": 60,
+        "majority_prediction": "looseness"
+      },
+      "18": {
+        "truth": "unbalance",
+        "windows": 60,
+        "correct": 59,
+        "majority_prediction": "unbalance"
+      }
+    },
+    "trial_majority_accuracy": 1.0
+  },
+  "candidates": [
+    {
+      "variance_floor": 0.05,
+      "group_cv_accuracy": 0.3680555555555556,
+      "validation": {
+        "windows": 240,
+        "independent_trials": 4,
+        "window_accuracy": 0.9833333333333333,
+        "macro_f1": 0.9834965150631056,
+        "confusion": {
+          "looseness": {
+            "looseness": 60,
+            "misalignment": 0,
+            "normal": 0,
+            "unbalance": 0
+          },
+          "misalignment": {
+            "looseness": 2,
+            "misalignment": 58,
+            "normal": 0,
+            "unbalance": 0
+          },
+          "normal": {
+            "looseness": 1,
+            "misalignment": 0,
+            "normal": 59,
+            "unbalance": 0
+          },
+          "unbalance": {
+            "looseness": 1,
+            "misalignment": 0,
+            "normal": 0,
+            "unbalance": 59
+          }
+        },
+        "per_trial": {
+          "9": {
+            "truth": "normal",
+            "windows": 60,
+            "correct": 59,
+            "majority_prediction": "normal"
+          },
+          "13": {
+            "truth": "misalignment",
+            "windows": 60,
+            "correct": 58,
+            "majority_prediction": "misalignment"
+          },
+          "14": {
+            "truth": "looseness",
+            "windows": 60,
+            "correct": 60,
+            "majority_prediction": "looseness"
+          },
+          "18": {
+            "truth": "unbalance",
+            "windows": 60,
+            "correct": 59,
+            "majority_prediction": "unbalance"
+          }
+        },
+        "trial_majority_accuracy": 1.0
+      }
+    },
+    {
+      "variance_floor": 0.25,
+      "group_cv_accuracy": 0.4638888888888889,
+      "validation": {
+        "windows": 240,
+        "independent_trials": 4,
+        "window_accuracy": 0.9916666666666667,
+        "macro_f1": 0.9937322036252518,
+        "confusion": {
+          "looseness": {
+            "looseness": 60,
+            "misalignment": 0,
+            "normal": 0,
+            "unbalance": 0,
+            "미확인 이상": 0
+          },
+          "misalignment": {
+            "looseness": 0,
+            "misalignment": 60,
+            "normal": 0,
+            "unbalance": 0,
+            "미확인 이상": 0
+          },
+          "normal": {
+            "looseness": 0,
+            "misalignment": 0,
+            "normal": 59,
+            "unbalance": 0,
+            "미확인 이상": 1
+          },
+          "unbalance": {
+            "looseness": 1,
+            "misalignment": 0,
+            "normal": 0,
+            "unbalance": 59,
+            "미확인 이상": 0
+          }
+        },
+        "per_trial": {
+          "9": {
+            "truth": "normal",
+            "windows": 60,
+            "correct": 59,
+            "majority_prediction": "normal"
+          },
+          "13": {
+            "truth": "misalignment",
+            "windows": 60,
+            "correct": 60,
+            "majority_prediction": "misalignment"
+          },
+          "14": {
+            "truth": "looseness",
+            "windows": 60,
+            "correct": 60,
+            "majority_prediction": "looseness"
+          },
+          "18": {
+            "truth": "unbalance",
+            "windows": 60,
+            "correct": 59,
+            "majority_prediction": "unbalance"
+          }
+        },
+        "trial_majority_accuracy": 1.0
+      }
+    },
+    {
+      "variance_floor": 1.0,
+      "group_cv_accuracy": 0.49583333333333335,
+      "validation": {
+        "windows": 240,
+        "independent_trials": 4,
+        "window_accuracy": 0.9041666666666667,
+        "macro_f1": 0.9036134453781514,
+        "confusion": {
+          "looseness": {
+            "looseness": 39,
+            "misalignment": 0,
+            "normal": 0,
+            "unbalance": 21,
+            "미확인 이상": 0
+          },
+          "misalignment": {
+            "looseness": 0,
+            "misalignment": 60,
+            "normal": 0,
+            "unbalance": 0,
+            "미확인 이상": 0
+          },
+          "normal": {
+            "looseness": 0,
+            "misalignment": 0,
+            "normal": 59,
+            "unbalance": 0,
+            "미확인 이상": 1
+          },
+          "unbalance": {
+            "looseness": 1,
+            "misalignment": 0,
+            "normal": 0,
+            "unbalance": 59,
+            "미확인 이상": 0
+          }
+        },
+        "per_trial": {
+          "9": {
+            "truth": "normal",
+            "windows": 60,
+            "correct": 59,
+            "majority_prediction": "normal"
+          },
+          "13": {
+            "truth": "misalignment",
+            "windows": 60,
+            "correct": 60,
+            "majority_prediction": "misalignment"
+          },
+          "14": {
+            "truth": "looseness",
+            "windows": 60,
+            "correct": 39,
+            "majority_prediction": "looseness"
+          },
+          "18": {
+            "truth": "unbalance",
+            "windows": 60,
+            "correct": 59,
+            "majority_prediction": "unbalance"
+          }
+        },
+        "trial_majority_accuracy": 1.0
+      }
+    }
+  ],
+  "selected": {
+    "variance_floor": 0.25,
+    "group_cv_accuracy": 0.4638888888888889
+  },
+  "selected_full_validation": {
+    "windows": 1680,
+    "independent_trials": 4,
+    "window_accuracy": 0.9892857142857143,
+    "macro_f1": 0.9931058393782546,
+    "confusion": {
+      "looseness": {
+        "looseness": 408,
+        "misalignment": 0,
+        "normal": 0,
+        "unbalance": 0,
+        "미확인 이상": 12
+      },
+      "misalignment": {
+        "looseness": 1,
+        "misalignment": 419,
+        "normal": 0,
+        "unbalance": 0,
+        "미확인 이상": 0
+      },
+      "normal": {
+        "looseness": 0,
+        "misalignment": 0,
+        "normal": 419,
+        "unbalance": 0,
+        "미확인 이상": 1
+      },
+      "unbalance": {
+        "looseness": 4,
+        "misalignment": 0,
+        "normal": 0,
+        "unbalance": 416,
+        "미확인 이상": 0
+      }
+    },
+    "per_trial": {
+      "9": {
+        "truth": "normal",
+        "windows": 420,
+        "correct": 419,
+        "majority_prediction": "normal"
+      },
+      "13": {
+        "truth": "misalignment",
+        "windows": 420,
+        "correct": 419,
+        "majority_prediction": "misalignment"
+      },
+      "14": {
+        "truth": "looseness",
+        "windows": 420,
+        "correct": 408,
+        "majority_prediction": "looseness"
+      },
+      "18": {
+        "truth": "unbalance",
+        "windows": 420,
+        "correct": 416,
+        "majority_prediction": "unbalance"
+      }
+    },
+    "trial_majority_accuracy": 1.0
+  },
+  "frozen_sha256": "16fe41cdbbffdea9a77a3352ab7b703386aacc3892dc84c7a2b19146b8ab8329",
+  "training_trials": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    12,
+    15
+  ],
+  "validation_trials": [
+    9,
+    13,
+    14,
+    18
+  ],
+  "limitations": "Previously published old test score is known; this is not a fresh blind test. Consecutive windows correlated."
+}

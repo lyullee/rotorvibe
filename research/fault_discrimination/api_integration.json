@@ -1,0 +1,26 @@
+{
+  "status": "pass",
+  "actual_source_cases": [
+    {
+      "recording": "H_H_16_6204_1000.mat",
+      "gate": "normal",
+      "type_status": "hold",
+      "label": null
+    },
+    {
+      "recording": "L_H_16_6204_1000.mat",
+      "gate": "fault_candidate",
+      "type_status": "fault_candidate",
+      "label": "looseness"
+    },
+    {
+      "recording": "U3_H_16_6204_1000.mat",
+      "gate": "fault_candidate",
+      "type_status": "fault_candidate",
+      "label": "unbalance"
+    }
+  ],
+  "core_and_direct_agree": true,
+  "new_final_files_reopened": 0,
+  "operational_use": false
+}

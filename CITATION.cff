@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "Please cite the software version and the relevant experiment protocol separately."
+type: software
+title: "RotorVibe: Composable Rotating-Machine Vibration Analysis"
+version: 0.1.0a1
+date-released: 2026-11-04
+authors:
+  - family-names: Lee
+    given-names: Ugwiyeon
+repository-code: "https://github.com/lyullee/rotorvibe"
+url: "https://github.com/lyullee/rotorvibe"
+doi: 10.5281/zenodo.23937890
+license: MIT
+abstract: >-
+  Python vibration analysis and composable diagnostic research APIs with explicit
+  signal contracts, normal-reference scope, original-file evaluation evidence and
+  documented transfer failures. The public release omits standards lookup tables,
+  external raw data and trained rig-specific profiles. It is not field-certified
+  fault diagnosis or an automatic protection system.
+keywords:
+  - vibration analysis
+  - rotating machinery
+  - bearing kinematics
+  - condition monitoring
+  - reproducible research

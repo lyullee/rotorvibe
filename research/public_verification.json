@@ -1,0 +1,26 @@
+{
+  "status": "pass",
+  "release": "0.1.0a1",
+  "public_portable_tests": 97,
+  "test_failures": 0,
+  "test_fixture_scope": "Synthetic and application contracts; no private standards table fixtures or raw datasets",
+  "environment": "Windows Python3.12.14, fresh virtual environment, NumPy2.5.4, SciPy1.18.1",
+  "dependency_check": "pip check passed",
+  "wheel_and_sdist_build": "pass",
+  "pypi_metadata_check": "twine check passed",
+  "isolated_wheel_import_and_calculation": "pass",
+  "isolated_smoke": [
+    "public facade",
+    "compatibility namespace",
+    "FFT",
+    "bearing kinematics",
+    "caller rule",
+    "no normative tables",
+    "synthetic fault head"
+  ],
+  "source_and_distribution_content_audit": "pass",
+  "historical_private_checks": 547,
+  "historical_private_checks_not_public_release_total": true,
+  "remote_ci": "configured; see repository Actions for live execution",
+  "no_predictive_operational_qualification": true
+}

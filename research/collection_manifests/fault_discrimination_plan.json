@@ -1,0 +1,425 @@
+{
+  "notice": "Source file identity facts and original project roles; all selected arrays now exposed. Not a new blind-test allocation. Raw files excluded; primary terms in data_sources.json.",
+  "rows": [
+    {
+      "filename": "L_H_8_6204_1000.mat",
+      "rpm": 1000,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "looseness",
+      "role": "development",
+      "sha256": "b4e7b1702c6ddb14a309a41ca88639bc020f54897490e93f3c5c57ba62146e2d",
+      "bytes": 19484457
+    },
+    {
+      "filename": "M1_H_8_6204_1000.mat",
+      "rpm": 1000,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "6f59525473e13fc65ab0906f2edfc3504e0ed17322b21288570d866bbbc5e273",
+      "bytes": 19295168
+    },
+    {
+      "filename": "M2_H_8_6204_1000.mat",
+      "rpm": 1000,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "aaf7303f4a4f7f352f194e3c4368f4fde0adde1e1c27260f93c19188038edb7a",
+      "bytes": 19375250
+    },
+    {
+      "filename": "M3_H_8_6204_1000.mat",
+      "rpm": 1000,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "b76aee53b9806f58c3c31408e7e59bca1579ce003f1e1265a960d651ba7e5da6",
+      "bytes": 19403513
+    },
+    {
+      "filename": "U1_H_8_6204_1000.mat",
+      "rpm": 1000,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "310127abdaac9b0e8fc82fc7f7f19938f4d5fbfea6caaaaf2f1eecffb083681a",
+      "bytes": 19264866
+    },
+    {
+      "filename": "U2_H_8_6204_1000.mat",
+      "rpm": 1000,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "162cd9fe4e9cc74fd5ba6547ebe264dbf414741f73c86c35e5f679cb497ca24c",
+      "bytes": 19370138
+    },
+    {
+      "filename": "U3_H_8_6204_1000.mat",
+      "rpm": 1000,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "f724a2600cc56fa0ab4b48b4474446f008179c3606f17ea76387db963281b939",
+      "bytes": 19345592
+    },
+    {
+      "filename": "L_H_8_6204_1200.mat",
+      "rpm": 1200,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "looseness",
+      "role": "final_test",
+      "sha256": "18400c791e07f19c62c814517621ee7ece4c38213a411f0fcf697481e5b9bd28",
+      "bytes": 19615503
+    },
+    {
+      "filename": "M1_H_8_6204_1200.mat",
+      "rpm": 1200,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "final_test",
+      "sha256": "2cca41985771b892ec53ae6933d26c200fe8be65612c3bfe1e5f10d2ad5f049d",
+      "bytes": 19334359
+    },
+    {
+      "filename": "M2_H_8_6204_1200.mat",
+      "rpm": 1200,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "final_test",
+      "sha256": "adf4837c3e16c5f87c0ea1940a41d5c16c510b1d22b894b99b890ca714dc3d5a",
+      "bytes": 19406515
+    },
+    {
+      "filename": "M3_H_8_6204_1200.mat",
+      "rpm": 1200,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "final_test",
+      "sha256": "14b833bf4e3f081dac1d7f39a732d8cb99a4376e2e168e0af892a200de2ad5eb",
+      "bytes": 19426789
+    },
+    {
+      "filename": "U1_H_8_6204_1200.mat",
+      "rpm": 1200,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "final_test",
+      "sha256": "3185c0e0618f29bba557098a66a5226a2f2ce017ddf75980327bab7c6d0d13bb",
+      "bytes": 19383436
+    },
+    {
+      "filename": "U2_H_8_6204_1200.mat",
+      "rpm": 1200,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "final_test",
+      "sha256": "914bd42dc31a4052136a7c3c1ceff43b3c97863bf9de014a8ccf170cccda86e0",
+      "bytes": 19422924
+    },
+    {
+      "filename": "U3_H_8_6204_1200.mat",
+      "rpm": 1200,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "final_test",
+      "sha256": "616dca69f4dfecd004027183e057d3405f41ed6fb5e3eef86ba2dfb337c819df",
+      "bytes": 19471399
+    },
+    {
+      "filename": "L_H_8_6204_1400.mat",
+      "rpm": 1400,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "looseness",
+      "role": "development",
+      "sha256": "25bebf48c2f52029d34fd7f104b975d0a8aa9391f8c283b9c2012c4d90f54275",
+      "bytes": 19620183
+    },
+    {
+      "filename": "M1_H_8_6204_1400.mat",
+      "rpm": 1400,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "48f540248c625cbb2ca7875274e2cfbb7208fbfde912c534699aa15cc1ba9ca8",
+      "bytes": 19431008
+    },
+    {
+      "filename": "M2_H_8_6204_1400.mat",
+      "rpm": 1400,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "c20109b9465923de547bbc43e0d5399c32c3d47de64490a8513740c0e0ced369",
+      "bytes": 19441282
+    },
+    {
+      "filename": "M3_H_8_6204_1400.mat",
+      "rpm": 1400,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "975611f679038f1b54d197dc86119c60df50eb6ba8b9cb59f618664d6076badb",
+      "bytes": 19494322
+    },
+    {
+      "filename": "U1_H_8_6204_1400.mat",
+      "rpm": 1400,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "86da710bf5f0c8df716cb1179396cc41cafa34df016da87a2106d31aed48adc7",
+      "bytes": 19362074
+    },
+    {
+      "filename": "U2_H_8_6204_1400.mat",
+      "rpm": 1400,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "80581f15bbc7b191fb6c9f34c4aee5cf870994f9b5ce2be09038f7812c6b67be",
+      "bytes": 19435445
+    },
+    {
+      "filename": "U3_H_8_6204_1400.mat",
+      "rpm": 1400,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "e3b5c6b61c4f057849ca09f7f0ed7f2d782e16cab266451026af36a2f0ca631f",
+      "bytes": 19548650
+    },
+    {
+      "filename": "L_H_8_6204_1600.mat",
+      "rpm": 1600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "looseness",
+      "role": "development",
+      "sha256": "0a8bcfe29d79987289948c4d914f601a6edbf085837ccf8671b50b5df16518ad",
+      "bytes": 19563563
+    },
+    {
+      "filename": "M1_H_8_6204_1600.mat",
+      "rpm": 1600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "ea0f31ce4704e58303406f72edda2f43bdaeb424691d99dfb8c3f351670fc18f",
+      "bytes": 19433358
+    },
+    {
+      "filename": "M2_H_8_6204_1600.mat",
+      "rpm": 1600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "777b8674b820f7b6e6e8d826739d5825a964aa256be731688d7d06116aa6736b",
+      "bytes": 19474929
+    },
+    {
+      "filename": "M3_H_8_6204_1600.mat",
+      "rpm": 1600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "cd714affe405b0249ff21249fb497cb22fc7f3606cbabe217b3c2f7ca7698850",
+      "bytes": 19483911
+    },
+    {
+      "filename": "U1_H_8_6204_1600.mat",
+      "rpm": 1600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "ebbc4e2c74b3b54c7b935c9075ca8f63136a9017bfb8954c682497ef63e783b7",
+      "bytes": 19502557
+    },
+    {
+      "filename": "U2_H_8_6204_1600.mat",
+      "rpm": 1600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "65f125e7950169563b3da70f70cc4a4f6e6d0096bbff867be348496b0d5e3161",
+      "bytes": 19437137
+    },
+    {
+      "filename": "U3_H_8_6204_1600.mat",
+      "rpm": 1600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "9d177a75c9b4c178b8a67ff6d93502b01cec94e1b2ffac3ecc05b9c1039b79b4",
+      "bytes": 19540450
+    },
+    {
+      "filename": "L_H_8_6204_600.mat",
+      "rpm": 600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "looseness",
+      "role": "development",
+      "sha256": "abcaf04ea068f9c63074dfcd2d5c4a8974c5ae86690b3ab54b25c84f414bc3f4",
+      "bytes": 18916285
+    },
+    {
+      "filename": "M1_H_8_6204_600.mat",
+      "rpm": 600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "75d0565e0823f7ffbdb8893a77f0c2fbc052d505c35f0e007ae261ce4c219f8c",
+      "bytes": 18889234
+    },
+    {
+      "filename": "M2_H_8_6204_600.mat",
+      "rpm": 600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "23c0a366bae905d3a54e234e9ed123008a057e6e6150598b34421b0c90146eab",
+      "bytes": 19100204
+    },
+    {
+      "filename": "M3_H_8_6204_600.mat",
+      "rpm": 600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "7e894215758a7f87aeb4f954ef86a40058ca054501a4604fe43e8ef00d69f0c5",
+      "bytes": 19198786
+    },
+    {
+      "filename": "U1_H_8_6204_600.mat",
+      "rpm": 600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "bcbac25a76bc289aa7ea98d9abea98724dcffc8d3f99539644f6485ef8c98097",
+      "bytes": 18825301
+    },
+    {
+      "filename": "U2_H_8_6204_600.mat",
+      "rpm": 600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "abcaa2e5cd35d02c5b78a784745bd4d5a3c0ccb3d88a0d929e33dc0abb164839",
+      "bytes": 18780393
+    },
+    {
+      "filename": "U3_H_8_6204_600.mat",
+      "rpm": 600,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "6a7bfbc5b4c34d1474d27fb2923bfab07ae7c9812be9fd5cd97fc45d6d36a0d0",
+      "bytes": 18872717
+    },
+    {
+      "filename": "L_H_8_6204_800.mat",
+      "rpm": 800,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "looseness",
+      "role": "development",
+      "sha256": "53d0f81887d7ba7eae520dc9d0f64c6ef39b375aa7fb8577b66f5081b96cfca9",
+      "bytes": 19198469
+    },
+    {
+      "filename": "M1_H_8_6204_800.mat",
+      "rpm": 800,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "d1131f5cb038b42c216254b7d3eba4c3bbb72870bb724c092a99e9ec6a8824c3",
+      "bytes": 19095227
+    },
+    {
+      "filename": "M2_H_8_6204_800.mat",
+      "rpm": 800,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "95684b85c02de7d3409ce0151e9e05d8cae3f9b46e9e5925550b13206eb25afe",
+      "bytes": 19232287
+    },
+    {
+      "filename": "M3_H_8_6204_800.mat",
+      "rpm": 800,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "misalignment",
+      "role": "development",
+      "sha256": "586c7d34f71c2f859105e3471164428e7eb3c7a428d849341b274cad937fe929",
+      "bytes": 19310368
+    },
+    {
+      "filename": "U1_H_8_6204_800.mat",
+      "rpm": 800,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "29fbb9108d254ac608fc44ef8ce91f993c151c39efdbae7c8060398634500f6a",
+      "bytes": 18995033
+    },
+    {
+      "filename": "U2_H_8_6204_800.mat",
+      "rpm": 800,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "165e12de778f18c3c6a7df226d84e7e36cc2f822f03f964564715ac312962b96",
+      "bytes": 19030348
+    },
+    {
+      "filename": "U3_H_8_6204_800.mat",
+      "rpm": 800,
+      "sample_rate_hz": 8000,
+      "unit": "g",
+      "label": "unbalance",
+      "role": "development",
+      "sha256": "4c6e3e5a172215ab58a799410e2882d05deba490550ce736703d14aeeda780d9",
+      "bytes": 19078000
+    }
+  ]
+}

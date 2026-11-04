@@ -1,0 +1,266 @@
+[
+  {
+    "module": "vibration/__init__.py",
+    "role": "Local rotating-machinery vibration analysis workbench.",
+    "interfaces": []
+  },
+  {
+    "module": "vibration/adapters.py",
+    "role": "host object interoperability",
+    "interfaces": [
+      "from_process_batch(batch, *, sample_rate_hz, clock_id, rpm=None)",
+      "to_process_batch(results)",
+      "condition_evidence(result, *, asset_id)"
+    ]
+  },
+  {
+    "module": "vibration/alarm.py",
+    "role": "observation-time state machine",
+    "interfaces": [
+      "class AlarmStage — reset"
+    ]
+  },
+  {
+    "module": "vibration/baseline.py",
+    "role": "robust normal references",
+    "interfaces": [
+      "utcnow()",
+      "class Baseline — begin, observe",
+      "class BaselineStage — begin, export_profile"
+    ]
+  },
+  {
+    "module": "vibration/bearings.py",
+    "role": "Supporting implementation",
+    "interfaces": [
+      "class Bearings — frequencies, custom"
+    ]
+  },
+  {
+    "module": "vibration/bootstrap.py",
+    "role": "Supporting implementation",
+    "interfaces": []
+  },
+  {
+    "module": "vibration/classifier.py",
+    "role": "experimental Gaussian baseline",
+    "interfaces": [
+      "fit_gaussian(x, y, groups, *, variance_floor=0.25, feature_schema=FEATURE_SCHEMA)",
+      "class GaussianClassifier — scores, predict_many, predict"
+    ]
+  },
+  {
+    "module": "vibration/client.py",
+    "role": "Device-neutral HTTP/UDP writer. Use measured arrays; no generated signals.",
+    "interfaces": [
+      "class VibrationClient — request, start, packet, push, push_udp, stop"
+    ]
+  },
+  {
+    "module": "vibration/condition_data.py",
+    "role": "Versioned new recording holdout and explicitly exposed development data readers.",
+    "interfaces": [
+      "file_sha(path)",
+      "class UosRotorCatalog — rows, load",
+      "class ExposedCrossSpeedDevelopment — rows, load"
+    ]
+  },
+  {
+    "module": "vibration/conditioned.py",
+    "role": "RPM-scoped normal bank",
+    "interfaces": [
+      "canonical_values(values, source_rate, target_rate=4000)",
+      "selected_features(names, mode)",
+      "matrix(values)",
+      "reference_at(references, rpm, *, interpolate, max_gap, uncertainty)",
+      "fit_conditioned(normal, normal_rpm, normal_groups, calibration, calibration_rpm, calibration_groups, faults, fault_rpm, fault_labels, fault_groups, *, feature_names, scope, mode='levels_orders', interpolate=False, max_rpm_gap=800.0, interpolation_uncertainty=1.0, min_margin=0.1)",
+      "class ConditionedDiagnostic — predict, analyze",
+      "class ConditionedStage — analyze_window"
+    ]
+  },
+  {
+    "module": "vibration/config.py",
+    "role": "analysis settings and validation",
+    "interfaces": [
+      "class AnalysisConfig — validate, create, to_dict, signature, for_source"
+    ]
+  },
+  {
+    "module": "vibration/contracts.py",
+    "role": "typed array/result contracts",
+    "interfaces": [
+      "class SignalBlock",
+      "json_value(value)",
+      "class AnalysisResult — features, feature_names, metrics, to_dict"
+    ]
+  },
+  {
+    "module": "vibration/core.py",
+    "role": "stream and synchronous analysis",
+    "interfaces": [
+      "class VibrationAnalyzer — config, reset, analyze, push",
+      "analyze_signal(values, config=None, **block_options)"
+    ]
+  },
+  {
+    "module": "vibration/datasets.py",
+    "role": "Supporting implementation",
+    "interfaces": [
+      "local_path(root, relative)",
+      "matrix(a)",
+      "class DatasetCatalog — search, details, trial_ids, load, imported"
+    ]
+  },
+  {
+    "module": "vibration/dsp.py",
+    "role": "spectral and physical numerical features",
+    "interfaces": [
+      "spectrum(x, fs, window='hann')",
+      "compact_spectrum(f, a, maximum=1800, *, native=False)",
+      "waveform(x, fs, maximum=1600, *, native=False)",
+      "channel_features(data, fs)",
+      "peak_evidence(f, amplitude, target, tolerance_ratio, resolution, *, spacing_hz=None)",
+      "analyze(data, config, rpm_trace=None, bearing_frequencies=None, *, native=False)"
+    ]
+  },
+  {
+    "module": "vibration/engine.py",
+    "role": "optional acquisition/replay worker",
+    "interfaces": [
+      "class EventHub — subscribe, unsubscribe, publish",
+      "class Ring — append, snapshot",
+      "class Engine — state, configure, live, stop, replay, ingest, close, save_window, baseline_start, baseline_load"
+    ]
+  },
+  {
+    "module": "vibration/fault_discrimination.py",
+    "role": "conditional morphology head",
+    "interfaces": [
+      "fault_features(values, sample_rate_hz, rpm)",
+      "fit_fault_discriminator(x, labels, rpms, groups, *, names, scope, mode='morphology', rpm_penalty=1.0, margin=0.03)",
+      "class FaultDiscriminator — predict, analyze",
+      "class FaultDiscriminationStage — analyze_window"
+    ]
+  },
+  {
+    "module": "vibration/geometry.py",
+    "role": "ideal bearing frequency providers",
+    "interfaces": [
+      "class BearingGeometry — validate, frequencies",
+      "class BearingMap — frequencies"
+    ]
+  },
+  {
+    "module": "vibration/independent_data.py",
+    "role": "Explicitly grouped public rotor data reader. Reserved target arrays stay closed.",
+    "interfaces": [
+      "class IndependentRotorCatalog — rows, load, marra_members, load_marra"
+    ]
+  },
+  {
+    "module": "vibration/iso/__init__.py",
+    "role": "User-supplied assessment rules; the public package ships no standards tables.",
+    "interfaces": []
+  },
+  {
+    "module": "vibration/iso/contracts.py",
+    "role": "typed array/result contracts",
+    "interfaces": [
+      "class MachineContext — validate",
+      "class Measurement — validate, canonical_value",
+      "class Rule — validate, to_dict",
+      "class NotApplicable",
+      "class MissingInformation",
+      "require(context, *names)",
+      "check(condition, message)",
+      "structural_axis(context, measurement)"
+    ]
+  },
+  {
+    "module": "vibration/iso/evaluation.py",
+    "role": "Original generic interval assessment, with all limits supplied by the caller.",
+    "interfaces": [
+      "available_standards()",
+      "select_rule(standard, context, measurement)",
+      "evaluate(standard, context, measurement, *, custom_rule=None)",
+      "aggregate(results)"
+    ]
+  },
+  {
+    "module": "vibration/iso/measurements.py",
+    "role": "Phase-preserving ideal DFT band extraction; does not certify an instrument.",
+    "interfaces": [
+      "measure_waveform(values, *, sample_rate_hz, input_unit, quantity, statistic, frame, band_hz, point_id, axes, calibrated=False, acquisition_verified=False, start_s=0, clock_id='measurement_clock', order=None, filter_bandwidth_hz=None)",
+      "energy_equivalent_average(measurements)",
+      "class EnergyEquivalentAccumulator — reset, push"
+    ]
+  },
+  {
+    "module": "vibration/iso/stage.py",
+    "role": "Raw-window integration of independently supplied engineering rules.",
+    "interfaces": [
+      "class IsoStage — analyze_window"
+    ]
+  },
+  {
+    "module": "vibration/models.py",
+    "role": "Supporting implementation",
+    "interfaces": [
+      "class ModelRegistry — load, use_two_stage, use_conditioned, classify_window, classify, train, close",
+      "class LifeEstimator — estimate"
+    ]
+  },
+  {
+    "module": "vibration/ports.py",
+    "role": "structural Python interfaces",
+    "interfaces": [
+      "class BearingProvider — frequencies",
+      "class ResultStage",
+      "class WindowStage — analyze_window",
+      "class ResultSink"
+    ]
+  },
+  {
+    "module": "vibration/rotor_features.py",
+    "role": "Measured-speed rotor features: harmonic power, directional ratios, absolute levels.",
+    "interfaces": [
+      "class RotorFeatures",
+      "rotor_features(values, sample_rate_hz, rpm, *, channel_names=None)",
+      "feature_indices(names, mode='combined')"
+    ]
+  },
+  {
+    "module": "vibration/server.py",
+    "role": "optional local HTTP/SSE application",
+    "interfaces": [
+      "class Application — start_udp, close",
+      "class Handler — app, handle, log_message, do_GET, do_POST",
+      "main()"
+    ]
+  },
+  {
+    "module": "vibration/stages.py",
+    "role": "Bridges to the optional local supervised and reference-life modules.",
+    "interfaces": [
+      "class ClassifierStage — analyze_window",
+      "class LifeStage"
+    ]
+  },
+  {
+    "module": "vibration/storage.py",
+    "role": "optional local SQLite persistence",
+    "interfaces": [
+      "utcnow()",
+      "class Storage — close, start_session, frame, event, save, get, documents, history"
+    ]
+  },
+  {
+    "module": "vibration/two_stage.py",
+    "role": "normal-first prototype hypotheses",
+    "interfaces": [
+      "fit_two_stage(normal_fit, normal_fit_groups, normal_calibration, calibration_groups, faults, fault_labels, fault_groups, *, feature_names, scope, mode='relative', normal_quantile=0.8, anomaly_quantile=0.99, min_margin=0.1)",
+      "class TwoStageDiagnostic — relative_features, predict, analyze",
+      "class TwoStageStage — analyze_window"
+    ]
+  }
+]

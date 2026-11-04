@@ -1,0 +1,57 @@
+{
+  "frozen_utc": "2026-11-04T00:47:53.081071+00:00",
+  "model_sha256": "364a14e7f6e32a5b8cfaf6b7e3b1cfcb93785688f6a8963dabf81c805fa03696",
+  "code_sha256": {
+    "vibration/rotor_features.py": "16940555e1173a176e153930826c13583ecc900e1b3e41fc2e8d7c9ba69065d2",
+    "vibration/two_stage.py": "2692d1c783a752b502b7018c60b87cb60c27ac3633a2abe2799932a40a678495",
+    "vibration/classifier.py": "cc03ba838b972dd148850b628727e800930a241c5b24af4b278f15b2f15006e0",
+    "vibration/independent_data.py": "24a4a8d511544b1cf999dbb6a108490f54f8c459b07b7289cb223218f78fec58",
+    "scripts/verify_final_cross_speed.py": "52e99c10aad60be80adc017be5cec67d8fe845f79e0c3841a0a1edb21b8475b0"
+  },
+  "candidate": "new pooled cross-speed qualification profile; existing per-speed models unchanged",
+  "existing_profile_sha256": {
+    "600": "4bc60da2f9613f47d6f5df392915dc69a057cb14c99202a710e5fef2e55acd3a",
+    "900": "a58e127f49f653ba16a46734f5535fd59ebf53aba4ed4e7b87b2df3fb297f499"
+  },
+  "source_train_windows": 1888,
+  "normal_fit_windows": 531,
+  "normal_calibration_windows": 80,
+  "normal_calibration_groups": [
+    "normal|healthy_none_speed600_run7_20260412_231106",
+    "normal|healthy_none_speed600_run9_20260412_231335",
+    "normal|healthy_none_speed900_run8_20260412_234901",
+    "normal|healthy_none_speed900_run9_20260412_235020"
+  ],
+  "fault_fit_windows": 1277,
+  "observed_training_speeds_rpm": [
+    600,
+    900
+  ],
+  "test_speed_rpm": 1200,
+  "target_windows": 1178,
+  "target_acquisitions": 59,
+  "target_sample_ids_sha256": "1be3816f77e139635f0018fca9eb565dfda08e62bc7e7dc664237b779f408b72",
+  "source_manifest_sha256": "262e04e060aeede11df7b7fda897f0ec8e122adead1d20140a08b4d1177aa709",
+  "source_partition_sha256": "848477be4159264b8cc7a25602ab14ff4f87e5fdf89c9ff3dea918af6612f235",
+  "physical_context_rule": "All records retain actual asset/unit/layout/fs/RPM; condition_id maps to declared steady cross-speed family without reading fault labels.",
+  "recipe": {
+    "mode": "relative",
+    "normal_quantile": 0.8,
+    "anomaly_quantile": 0.99,
+    "min_margin": 0.1,
+    "variance_floor": 0.25
+  },
+  "acceptance": "Exploratory qualification; no user-specified operational acceptance thresholds. Report all holds/errors as non-correct.",
+  "metrics": [
+    "normal false alarms + normal holds",
+    "fault detection + missed-as-normal + fault holds",
+    "fault type accuracy",
+    "overall accuracy with abstentions wrong",
+    "decision coverage + conditional accuracy",
+    "macro F1",
+    "acquisition majority and any-false-alarm rates"
+  ],
+  "no_target_normal_adaptation": true,
+  "operational_use": false,
+  "status": "frozen_before_target_numeric_access"
+}

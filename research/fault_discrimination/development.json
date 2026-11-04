@@ -1,0 +1,790 @@
+{
+  "candidates": [
+    {
+      "mode": "orders",
+      "rpm_penalty": 0.0,
+      "margin": 0.0,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6083333333333333,
+          "macro_f1": 0.5204561694551652,
+          "confusion": {
+            "looseness": {
+              "looseness": 31,
+              "misalignment": 63,
+              "unbalance": 26,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 14,
+              "misalignment": 331,
+              "unbalance": 15,
+              "unknown": 0
+            },
+            "unbalance": {
+              "looseness": 38,
+              "misalignment": 173,
+              "unbalance": 149,
+              "unknown": 0
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6190476190476191,
+          "macro_f1": 0.5339149899585611,
+          "confusion": {
+            "looseness": {
+              "looseness": 25,
+              "misalignment": 91,
+              "unbalance": 4,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 43,
+              "misalignment": 281,
+              "unbalance": 36,
+              "unknown": 0
+            },
+            "unbalance": {
+              "looseness": 122,
+              "misalignment": 24,
+              "unbalance": 214,
+              "unknown": 0
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.5271855797068632
+    },
+    {
+      "mode": "orders",
+      "rpm_penalty": 0.0,
+      "margin": 0.05,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.4630952380952381,
+          "macro_f1": 0.43558253147507675,
+          "confusion": {
+            "looseness": {
+              "looseness": 15,
+              "misalignment": 40,
+              "unbalance": 7,
+              "unknown": 58
+            },
+            "misalignment": {
+              "looseness": 3,
+              "misalignment": 289,
+              "unbalance": 4,
+              "unknown": 64
+            },
+            "unbalance": {
+              "looseness": 7,
+              "misalignment": 106,
+              "unbalance": 85,
+              "unknown": 162
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.5345238095238095,
+          "macro_f1": 0.5000218920643595,
+          "confusion": {
+            "looseness": {
+              "looseness": 15,
+              "misalignment": 77,
+              "unbalance": 0,
+              "unknown": 28
+            },
+            "misalignment": {
+              "looseness": 13,
+              "misalignment": 239,
+              "unbalance": 20,
+              "unknown": 88
+            },
+            "unbalance": {
+              "looseness": 98,
+              "misalignment": 7,
+              "unbalance": 195,
+              "unknown": 60
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.46780221176971815
+    },
+    {
+      "mode": "orders",
+      "rpm_penalty": 1.0,
+      "margin": 0.0,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.7226190476190476,
+          "macro_f1": 0.5961327937324433,
+          "confusion": {
+            "looseness": {
+              "looseness": 8,
+              "misalignment": 25,
+              "unbalance": 70,
+              "unknown": 17
+            },
+            "misalignment": {
+              "looseness": 2,
+              "misalignment": 272,
+              "unbalance": 4,
+              "unknown": 82
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 18,
+              "unbalance": 327,
+              "unknown": 15
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6833333333333333,
+          "macro_f1": 0.5502081097887662,
+          "confusion": {
+            "looseness": {
+              "looseness": 14,
+              "misalignment": 106,
+              "unbalance": 0,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 2,
+              "misalignment": 327,
+              "unbalance": 31,
+              "unknown": 0
+            },
+            "unbalance": {
+              "looseness": 33,
+              "misalignment": 93,
+              "unbalance": 233,
+              "unknown": 1
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.5731704517606048
+    },
+    {
+      "mode": "orders",
+      "rpm_penalty": 1.0,
+      "margin": 0.05,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6238095238095238,
+          "macro_f1": 0.5513454234636691,
+          "confusion": {
+            "looseness": {
+              "looseness": 2,
+              "misalignment": 14,
+              "unbalance": 30,
+              "unknown": 74
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 267,
+              "unbalance": 1,
+              "unknown": 92
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 1,
+              "unbalance": 255,
+              "unknown": 104
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.5892857142857143,
+          "macro_f1": 0.4957520055238523,
+          "confusion": {
+            "looseness": {
+              "looseness": 5,
+              "misalignment": 105,
+              "unbalance": 0,
+              "unknown": 10
+            },
+            "misalignment": {
+              "looseness": 1,
+              "misalignment": 276,
+              "unbalance": 11,
+              "unknown": 72
+            },
+            "unbalance": {
+              "looseness": 12,
+              "misalignment": 67,
+              "unbalance": 214,
+              "unknown": 67
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.5235487144937607
+    },
+    {
+      "mode": "orders",
+      "rpm_penalty": 4.0,
+      "margin": 0.0,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.4083333333333333,
+          "macro_f1": 0.29581716257007334,
+          "confusion": {
+            "looseness": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 66,
+              "unknown": 54
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 4,
+              "unknown": 356
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 343,
+              "unknown": 17
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.30238095238095236,
+          "macro_f1": 0.2804968027545499,
+          "confusion": {
+            "looseness": {
+              "looseness": 5,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 115
+            },
+            "misalignment": {
+              "looseness": 11,
+              "misalignment": 0,
+              "unbalance": 33,
+              "unknown": 316
+            },
+            "unbalance": {
+              "looseness": 16,
+              "misalignment": 0,
+              "unbalance": 249,
+              "unknown": 95
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.2881569826623116
+    },
+    {
+      "mode": "orders",
+      "rpm_penalty": 4.0,
+      "margin": 0.05,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.2892857142857143,
+          "macro_f1": 0.2583732057416268,
+          "confusion": {
+            "looseness": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 24,
+              "unknown": 96
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 360
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 243,
+              "unknown": 117
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.28214285714285714,
+          "macro_f1": 0.2594417077175698,
+          "confusion": {
+            "looseness": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 120
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 12,
+              "unknown": 348
+            },
+            "unbalance": {
+              "looseness": 1,
+              "misalignment": 0,
+              "unbalance": 237,
+              "unknown": 122
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.2589074567295983
+    },
+    {
+      "mode": "morphology",
+      "rpm_penalty": 0.0,
+      "margin": 0.0,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.9071428571428571,
+          "macro_f1": 0.924166227128573,
+          "confusion": {
+            "looseness": {
+              "looseness": 116,
+              "misalignment": 2,
+              "unbalance": 2,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 319,
+              "unbalance": 41,
+              "unknown": 0
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 33,
+              "unbalance": 327,
+              "unknown": 0
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.7892857142857143,
+          "macro_f1": 0.8041010734235563,
+          "confusion": {
+            "looseness": {
+              "looseness": 120,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 14,
+              "misalignment": 278,
+              "unbalance": 68,
+              "unknown": 0
+            },
+            "unbalance": {
+              "looseness": 24,
+              "misalignment": 71,
+              "unbalance": 265,
+              "unknown": 0
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.8641336502760646
+    },
+    {
+      "mode": "morphology",
+      "rpm_penalty": 0.0,
+      "margin": 0.05,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.7869047619047619,
+          "macro_f1": 0.8857541622398241,
+          "confusion": {
+            "looseness": {
+              "looseness": 108,
+              "misalignment": 1,
+              "unbalance": 1,
+              "unknown": 10
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 264,
+              "unbalance": 9,
+              "unknown": 87
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 9,
+              "unbalance": 289,
+              "unknown": 62
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6857142857142857,
+          "macro_f1": 0.8047935376672269,
+          "confusion": {
+            "looseness": {
+              "looseness": 120,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 6,
+              "misalignment": 217,
+              "unbalance": 28,
+              "unknown": 109
+            },
+            "unbalance": {
+              "looseness": 7,
+              "misalignment": 40,
+              "unbalance": 239,
+              "unknown": 74
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.8452738499535255
+    },
+    {
+      "mode": "morphology",
+      "rpm_penalty": 1.0,
+      "margin": 0.0,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6916666666666667,
+          "macro_f1": 0.6907029769230736,
+          "confusion": {
+            "looseness": {
+              "looseness": 25,
+              "misalignment": 1,
+              "unbalance": 1,
+              "unknown": 93
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 248,
+              "unbalance": 0,
+              "unknown": 112
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 6,
+              "unbalance": 308,
+              "unknown": 46
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.763095238095238,
+          "macro_f1": 0.7976013347613798,
+          "confusion": {
+            "looseness": {
+              "looseness": 120,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 16,
+              "misalignment": 258,
+              "unbalance": 84,
+              "unknown": 2
+            },
+            "unbalance": {
+              "looseness": 4,
+              "misalignment": 93,
+              "unbalance": 263,
+              "unknown": 0
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.7441521558422267
+    },
+    {
+      "mode": "morphology",
+      "rpm_penalty": 1.0,
+      "margin": 0.05,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6154761904761905,
+          "macro_f1": 0.5872717833499045,
+          "confusion": {
+            "looseness": {
+              "looseness": 7,
+              "misalignment": 1,
+              "unbalance": 0,
+              "unknown": 112
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 248,
+              "unbalance": 0,
+              "unknown": 112
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 4,
+              "unbalance": 262,
+              "unknown": 94
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.6583333333333333,
+          "macro_f1": 0.7843005649717515,
+          "confusion": {
+            "looseness": {
+              "looseness": 114,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 6
+            },
+            "misalignment": {
+              "looseness": 2,
+              "misalignment": 199,
+              "unbalance": 40,
+              "unknown": 119
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 66,
+              "unbalance": 240,
+              "unknown": 54
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.685786174160828
+    },
+    {
+      "mode": "morphology",
+      "rpm_penalty": 4.0,
+      "margin": 0.0,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.3416666666666667,
+          "macro_f1": 0.32399772181363445,
+          "confusion": {
+            "looseness": {
+              "looseness": 6,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 114
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 360
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 281,
+              "unknown": 79
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.44761904761904764,
+          "macro_f1": 0.5411274665537081,
+          "confusion": {
+            "looseness": {
+              "looseness": 120,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 0
+            },
+            "misalignment": {
+              "looseness": 26,
+              "misalignment": 0,
+              "unbalance": 94,
+              "unknown": 240
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 256,
+              "unknown": 104
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.43256259418367127
+    },
+    {
+      "mode": "morphology",
+      "rpm_penalty": 4.0,
+      "margin": 0.05,
+      "folds": [
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.2845238095238095,
+          "macro_f1": 0.2755855781640443,
+          "confusion": {
+            "looseness": {
+              "looseness": 2,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 118
+            },
+            "misalignment": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 360
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 237,
+              "unknown": 123
+            }
+          }
+        },
+        {
+          "windows": 840,
+          "recordings": 14,
+          "accuracy": 0.4166666666666667,
+          "macro_f1": 0.558897124993548,
+          "confusion": {
+            "looseness": {
+              "looseness": 106,
+              "misalignment": 0,
+              "unbalance": 0,
+              "unknown": 14
+            },
+            "misalignment": {
+              "looseness": 5,
+              "misalignment": 0,
+              "unbalance": 39,
+              "unknown": 316
+            },
+            "unbalance": {
+              "looseness": 0,
+              "misalignment": 0,
+              "unbalance": 244,
+              "unknown": 116
+            }
+          }
+        }
+      ],
+      "macro_f1": 0.41724135157879616
+    }
+  ],
+  "selected": {
+    "mode": "morphology",
+    "rpm_penalty": 0.0,
+    "margin": 0.0,
+    "folds": [
+      {
+        "windows": 840,
+        "recordings": 14,
+        "accuracy": 0.9071428571428571,
+        "macro_f1": 0.924166227128573,
+        "confusion": {
+          "looseness": {
+            "looseness": 116,
+            "misalignment": 2,
+            "unbalance": 2,
+            "unknown": 0
+          },
+          "misalignment": {
+            "looseness": 0,
+            "misalignment": 319,
+            "unbalance": 41,
+            "unknown": 0
+          },
+          "unbalance": {
+            "looseness": 0,
+            "misalignment": 33,
+            "unbalance": 327,
+            "unknown": 0
+          }
+        }
+      },
+      {
+        "windows": 840,
+        "recordings": 14,
+        "accuracy": 0.7892857142857143,
+        "macro_f1": 0.8041010734235563,
+        "confusion": {
+          "looseness": {
+            "looseness": 120,
+            "misalignment": 0,
+            "unbalance": 0,
+            "unknown": 0
+          },
+          "misalignment": {
+            "looseness": 14,
+            "misalignment": 278,
+            "unbalance": 68,
+            "unknown": 0
+          },
+          "unbalance": {
+            "looseness": 24,
+            "misalignment": 71,
+            "unbalance": 265,
+            "unknown": 0
+          }
+        }
+      }
+    ],
+    "macro_f1": 0.8641336502760646
+  },
+  "source_recordings": 89,
+  "fault_recordings": 77,
+  "new_final_used": false,
+  "old_final_now_development": true,
+  "model_sha256": "456b3388bbb2c6d73b6a1e443620aa7a761939419db0c5ab4fa3e28abfb3047b",
+  "scope": "Fault subtype conditional on anomaly; no healthy inference by this model."
+}

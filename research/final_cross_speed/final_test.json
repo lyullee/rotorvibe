@@ -1,0 +1,981 @@
+{
+  "model_sha256": "364a14e7f6e32a5b8cfaf6b7e3b1cfcb93785688f6a8963dabf81c805fa03696",
+  "protocol_sha256": "c86d70fb55856bab6caaebb8f0dcc53f9d597d613f08eface32ec8cbecee0f0f",
+  "model_kind": "new pooled cross-speed qualification profile; existing per-speed models unchanged",
+  "source_validation": {
+    "windows": 479,
+    "acquisitions": 24,
+    "normal_windows": 159,
+    "fault_windows": 320,
+    "normal_false_alarm_windows": 0,
+    "normal_false_alarm_rate": 0.0,
+    "normal_correct_windows": 159,
+    "normal_hold_windows": 0,
+    "normal_acceptance_rate": 1.0,
+    "normal_hold_rate": 0.0,
+    "fault_detection_windows": 204,
+    "fault_detection_rate": 0.6375,
+    "fault_missed_as_normal_windows": 66,
+    "fault_hold_windows": 50,
+    "correct_fault_type_windows": 204,
+    "correct_fault_type_rate_all_faults": 0.6375,
+    "correct_windows": 363,
+    "overall_accuracy_holds_wrong": 0.7578288100208769,
+    "decision_coverage": 0.8956158663883089,
+    "conditional_decision_accuracy": 0.8461538461538461,
+    "macro_f1": 0.7531658496732027,
+    "status_counts": {
+      "fault_candidate": 204,
+      "hold": 50,
+      "normal": 225
+    },
+    "confusion": {
+      "unbalance": {
+        "unbalance": 160
+      },
+      "misalignment": {
+        "misalignment": 44,
+        "hold": 50,
+        "normal": 66
+      },
+      "normal": {
+        "normal": 159
+      }
+    },
+    "acquisition_majority_correct": 18,
+    "normal_acquisitions": 8,
+    "normal_acquisitions_any_false_alarm": 0,
+    "fault_acquisitions": 16,
+    "fault_acquisitions_no_detections": 4,
+    "per_acquisition": {
+      "imbalance|imbalance_outer_speed600_run11_20260413_010847": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "imbalance|imbalance_outer_speed600_run18_20260413_011435": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "imbalance|imbalance_outer_speed600_run20_20260413_011613": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "imbalance|imbalance_outer_speed600_run4_20260413_010256": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "imbalance|imbalance_outer_speed900_run10_20260413_013542": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "imbalance|imbalance_outer_speed900_run15_20260413_013958": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "imbalance|imbalance_outer_speed900_run20_20260413_014441": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "imbalance|imbalance_outer_speed900_run6_20260413_013159": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "unbalance": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": "unbalance"
+      },
+      "misalignment|misalignment_none_speed600_run12_20260420_235853": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 16,
+        "predictions": {
+          "misalignment": 16,
+          "hold": 4
+        },
+        "anomaly_windows": 16,
+        "majority_label": "misalignment"
+      },
+      "misalignment|misalignment_none_speed600_run18_20260421_000356": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 5,
+        "predictions": {
+          "hold": 15,
+          "misalignment": 5
+        },
+        "anomaly_windows": 5,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed600_run4_20260420_234621": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "hold": 13,
+          "normal": 7
+        },
+        "anomaly_windows": 0,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed600_run7_20260420_235451": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 19,
+        "predictions": {
+          "misalignment": 19,
+          "hold": 1
+        },
+        "anomaly_windows": 19,
+        "majority_label": "misalignment"
+      },
+      "misalignment|misalignment_none_speed900_run11_20260421_001704": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 4,
+        "predictions": {
+          "hold": 16,
+          "misalignment": 4
+        },
+        "anomaly_windows": 4,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed900_run16_20260421_002159": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "misalignment|misalignment_none_speed900_run2_20260421_000902": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "misalignment|misalignment_none_speed900_run7_20260421_001327": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "normal": 19,
+          "hold": 1
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed600_run12_20260412_231629": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed600_run18_20260412_232200": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed600_run4_20260412_230656": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed600_run8_20260412_231214": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed900_run13_20260412_235418": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed900_run19_20260413_000249": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed900_run2_20260412_234034": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 20,
+        "predictions": {
+          "normal": 20
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      },
+      "normal|healthy_none_speed900_run7_20260412_234753": {
+        "truth": "normal",
+        "windows": 19,
+        "correct": 19,
+        "predictions": {
+          "normal": 19
+        },
+        "anomaly_windows": 0,
+        "majority_label": "normal"
+      }
+    },
+    "error_windows": 0
+  },
+  "target_1200rpm": {
+    "windows": 1178,
+    "acquisitions": 59,
+    "normal_windows": 399,
+    "fault_windows": 779,
+    "normal_false_alarm_windows": 399,
+    "normal_false_alarm_rate": 1.0,
+    "normal_correct_windows": 0,
+    "normal_hold_windows": 0,
+    "normal_acceptance_rate": 0.0,
+    "normal_hold_rate": 0.0,
+    "fault_detection_windows": 779,
+    "fault_detection_rate": 1.0,
+    "fault_missed_as_normal_windows": 0,
+    "fault_hold_windows": 0,
+    "correct_fault_type_windows": 130,
+    "correct_fault_type_rate_all_faults": 0.1668806161745828,
+    "correct_windows": 130,
+    "overall_accuracy_holds_wrong": 0.11035653650254669,
+    "decision_coverage": 0.11035653650254669,
+    "conditional_decision_accuracy": 1.0,
+    "macro_f1": 0.18696418465518636,
+    "status_counts": {
+      "anomaly_unknown": 1048,
+      "fault_candidate": 130
+    },
+    "confusion": {
+      "unbalance": {
+        "anomaly_unknown": 366,
+        "unbalance": 34
+      },
+      "misalignment": {
+        "misalignment": 96,
+        "anomaly_unknown": 283
+      },
+      "normal": {
+        "anomaly_unknown": 399
+      }
+    },
+    "acquisition_majority_correct": 2,
+    "normal_acquisitions": 20,
+    "normal_acquisitions_any_false_alarm": 20,
+    "fault_acquisitions": 39,
+    "fault_acquisitions_no_detections": 0,
+    "per_acquisition": {
+      "imbalance|imbalance_outer_speed1200_run10_20260413_015524": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run11_20260413_015641": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "unbalance": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run12_20260413_015750": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run13_20260413_015848": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "unbalance": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run14_20260413_015940": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run15_20260413_020047": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run16_20260413_020132": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run17_20260413_020215": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "unbalance": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run18_20260413_020301": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "unbalance": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run19_20260413_020354": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run1_20260413_014635": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run20_20260413_020454": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 4,
+        "predictions": {
+          "anomaly_unknown": 16,
+          "unbalance": 4
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run2_20260413_014729": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run3_20260413_014853": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run4_20260413_015008": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "unbalance": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run5_20260413_015057": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run6_20260413_015201": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "unbalance": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run7_20260413_015244": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "unbalance": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run8_20260413_015339": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 3,
+        "predictions": {
+          "anomaly_unknown": 17,
+          "unbalance": 3
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "imbalance|imbalance_outer_speed1200_run9_20260413_015423": {
+        "truth": "unbalance",
+        "windows": 20,
+        "correct": 3,
+        "predictions": {
+          "anomaly_unknown": 17,
+          "unbalance": 3
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run10_20260421_003447": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 8,
+        "predictions": {
+          "misalignment": 8,
+          "anomaly_unknown": 12
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run11_20260421_003542": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "anomaly_unknown": 18,
+          "misalignment": 2
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run12_20260421_003631": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "misalignment": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run13_20260421_003717": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "misalignment": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run14_20260421_003804": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 3,
+        "predictions": {
+          "anomaly_unknown": 17,
+          "misalignment": 3
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run15_20260421_003844": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 2,
+        "predictions": {
+          "misalignment": 2,
+          "anomaly_unknown": 18
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run16_20260421_003925": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 9,
+        "predictions": {
+          "anomaly_unknown": 11,
+          "misalignment": 9
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run17_20260421_004007": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 11,
+        "predictions": {
+          "misalignment": 11,
+          "anomaly_unknown": 9
+        },
+        "anomaly_windows": 20,
+        "majority_label": "misalignment"
+      },
+      "misalignment|misalignment_none_speed1200_run18_20260421_004048": {
+        "truth": "misalignment",
+        "windows": 19,
+        "correct": 6,
+        "predictions": {
+          "misalignment": 6,
+          "anomaly_unknown": 13
+        },
+        "anomaly_windows": 19,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run19_20260421_004142": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 4,
+        "predictions": {
+          "misalignment": 4,
+          "anomaly_unknown": 16
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run1_20260421_002724": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 3,
+        "predictions": {
+          "anomaly_unknown": 17,
+          "misalignment": 3
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run20_20260421_004225": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 4,
+        "predictions": {
+          "anomaly_unknown": 16,
+          "misalignment": 4
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run2_20260421_002813": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 10,
+        "predictions": {
+          "anomaly_unknown": 10,
+          "misalignment": 10
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run4_20260421_002947": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 6,
+        "predictions": {
+          "misalignment": 6,
+          "anomaly_unknown": 14
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run5_20260421_003025": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 6,
+        "predictions": {
+          "anomaly_unknown": 14,
+          "misalignment": 6
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run6_20260421_003111": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 3,
+        "predictions": {
+          "anomaly_unknown": 17,
+          "misalignment": 3
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run7_20260421_003208": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 12,
+        "predictions": {
+          "misalignment": 12,
+          "anomaly_unknown": 8
+        },
+        "anomaly_windows": 20,
+        "majority_label": "misalignment"
+      },
+      "misalignment|misalignment_none_speed1200_run8_20260421_003308": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 4,
+        "predictions": {
+          "anomaly_unknown": 16,
+          "misalignment": 4
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "misalignment|misalignment_none_speed1200_run9_20260421_003358": {
+        "truth": "misalignment",
+        "windows": 20,
+        "correct": 1,
+        "predictions": {
+          "anomaly_unknown": 19,
+          "misalignment": 1
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run10_20260413_004439": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run11_20260413_004533": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run12_20260413_004644": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run13_20260413_004745": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run14_20260413_004830": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run15_20260413_004923": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run16_20260413_005008": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run17_20260413_005105": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run18_20260413_005155": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run19_20260413_005259": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run1_20260413_000637": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run20_20260413_005348": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run2_20260413_000727": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run3_20260413_000824": {
+        "truth": "normal",
+        "windows": 19,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 19
+        },
+        "anomaly_windows": 19,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run4_20260413_000937": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run5_20260413_001052": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run6_20260413_001141": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run7_20260413_001242": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run8_20260413_001334": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      },
+      "normal|healthy_none_speed1200_run9_20260413_004349": {
+        "truth": "normal",
+        "windows": 20,
+        "correct": 0,
+        "predictions": {
+          "anomaly_unknown": 20
+        },
+        "anomaly_windows": 20,
+        "majority_label": null
+      }
+    },
+    "error_windows": 0
+  },
+  "strict_existing_profile_1200_coverage": "Neither prior per-speed scope supports 1200RPM; both would hold. They were not widened.",
+  "no_target_training_or_calibration": true,
+  "no_target_tuning": true,
+  "operational_use": false,
+  "elapsed_seconds": 27.896656999997504,
+  "scope": "First numerical opening of 1200RPM after prospective source-only freeze. Different speed on the same CrossSpeed apparatus, not unseen field machinery."
+}

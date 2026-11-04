@@ -1,0 +1,566 @@
+{
+  "protocol": "Matched-speed normal8kHz original records + declared source16kHz records; source1000 recording validation; final16k1200 closed.",
+  "new_test_arrays_used": false,
+  "candidate_count": 6,
+  "candidates": [
+    {
+      "mode": "relative",
+      "margin": 0.1,
+      "validation": {
+        "windows": 320,
+        "recordings": 8,
+        "normal_windows": 40,
+        "fault_windows": 280,
+        "normal_false_alarm_rate": 0.0,
+        "normal_acceptance_rate": 0.875,
+        "normal_hold_rate": 0.125,
+        "fault_detection_rate": 1.0,
+        "fault_miss_as_normal_rate": 0.0,
+        "fault_hold_rate": 0.0,
+        "correct_fault_type_rate": 0.6714285714285714,
+        "accuracy_holds_wrong": 0.696875,
+        "macro_f1": 0.7301572137302226,
+        "decision_coverage": 0.709375,
+        "per_recording": {
+          "H_H_16_6204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "correct": 35,
+            "status": {
+              "normal": 35,
+              "hold": 5
+            }
+          },
+          "L_H_16_6204_1000.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "correct": 7,
+            "status": {
+              "anomaly_unknown": 33,
+              "fault_candidate": 7
+            }
+          },
+          "M1_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "M2_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 28,
+            "status": {
+              "fault_candidate": 32,
+              "anomaly_unknown": 8
+            }
+          },
+          "M3_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 38,
+            "status": {
+              "fault_candidate": 38,
+              "anomaly_unknown": 2
+            }
+          },
+          "U1_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 5,
+            "status": {
+              "anomaly_unknown": 35,
+              "fault_candidate": 5
+            }
+          },
+          "U2_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 39,
+            "status": {
+              "fault_candidate": 39,
+              "anomaly_unknown": 1
+            }
+          },
+          "U3_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 31,
+            "status": {
+              "fault_candidate": 31,
+              "anomaly_unknown": 9
+            }
+          }
+        }
+      }
+    },
+    {
+      "mode": "relative",
+      "margin": 0.0,
+      "validation": {
+        "windows": 320,
+        "recordings": 8,
+        "normal_windows": 40,
+        "fault_windows": 280,
+        "normal_false_alarm_rate": 0.0,
+        "normal_acceptance_rate": 0.875,
+        "normal_hold_rate": 0.125,
+        "fault_detection_rate": 1.0,
+        "fault_miss_as_normal_rate": 0.0,
+        "fault_hold_rate": 0.0,
+        "correct_fault_type_rate": 0.8857142857142857,
+        "accuracy_holds_wrong": 0.884375,
+        "macro_f1": 0.8561180506685433,
+        "decision_coverage": 0.93125,
+        "per_recording": {
+          "H_H_16_6204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "correct": 35,
+            "status": {
+              "normal": 35,
+              "hold": 5
+            }
+          },
+          "L_H_16_6204_1000.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "correct": 17,
+            "status": {
+              "anomaly_unknown": 15,
+              "fault_candidate": 25
+            }
+          },
+          "M1_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "M2_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 35,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "M3_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 38,
+            "status": {
+              "fault_candidate": 38,
+              "anomaly_unknown": 2
+            }
+          },
+          "U1_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 38,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U2_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U3_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          }
+        }
+      }
+    },
+    {
+      "mode": "orders",
+      "margin": 0.1,
+      "validation": {
+        "windows": 320,
+        "recordings": 8,
+        "normal_windows": 40,
+        "fault_windows": 280,
+        "normal_false_alarm_rate": 0.025,
+        "normal_acceptance_rate": 0.775,
+        "normal_hold_rate": 0.2,
+        "fault_detection_rate": 1.0,
+        "fault_miss_as_normal_rate": 0.0,
+        "fault_hold_rate": 0.0,
+        "correct_fault_type_rate": 0.8571428571428571,
+        "accuracy_holds_wrong": 0.846875,
+        "macro_f1": 0.8427862135449834,
+        "decision_coverage": 0.85625,
+        "per_recording": {
+          "H_H_16_6204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "correct": 31,
+            "status": {
+              "hold": 8,
+              "normal": 31,
+              "fault_candidate": 1
+            }
+          },
+          "L_H_16_6204_1000.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "correct": 17,
+            "status": {
+              "anomaly_unknown": 22,
+              "fault_candidate": 18
+            }
+          },
+          "M1_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "M2_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 31,
+            "status": {
+              "fault_candidate": 32,
+              "anomaly_unknown": 8
+            }
+          },
+          "M3_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 36,
+            "status": {
+              "fault_candidate": 36,
+              "anomaly_unknown": 4
+            }
+          },
+          "U1_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U2_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 36,
+            "status": {
+              "anomaly_unknown": 4,
+              "fault_candidate": 36
+            }
+          },
+          "U3_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          }
+        }
+      }
+    },
+    {
+      "mode": "orders",
+      "margin": 0.0,
+      "validation": {
+        "windows": 320,
+        "recordings": 8,
+        "normal_windows": 40,
+        "fault_windows": 280,
+        "normal_false_alarm_rate": 0.025,
+        "normal_acceptance_rate": 0.775,
+        "normal_hold_rate": 0.2,
+        "fault_detection_rate": 1.0,
+        "fault_miss_as_normal_rate": 0.0,
+        "fault_hold_rate": 0.0,
+        "correct_fault_type_rate": 0.9,
+        "accuracy_holds_wrong": 0.884375,
+        "macro_f1": 0.8633172874135895,
+        "decision_coverage": 0.909375,
+        "per_recording": {
+          "H_H_16_6204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "correct": 31,
+            "status": {
+              "hold": 8,
+              "normal": 31,
+              "fault_candidate": 1
+            }
+          },
+          "L_H_16_6204_1000.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "correct": 20,
+            "status": {
+              "anomaly_unknown": 17,
+              "fault_candidate": 23
+            }
+          },
+          "M1_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "M2_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 35,
+            "status": {
+              "fault_candidate": 39,
+              "anomaly_unknown": 1
+            }
+          },
+          "M3_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 37,
+            "status": {
+              "fault_candidate": 37,
+              "anomaly_unknown": 3
+            }
+          },
+          "U1_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U2_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U3_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          }
+        }
+      }
+    },
+    {
+      "mode": "levels_orders",
+      "margin": 0.1,
+      "validation": {
+        "windows": 320,
+        "recordings": 8,
+        "normal_windows": 40,
+        "fault_windows": 280,
+        "normal_false_alarm_rate": 0.025,
+        "normal_acceptance_rate": 0.775,
+        "normal_hold_rate": 0.2,
+        "fault_detection_rate": 1.0,
+        "fault_miss_as_normal_rate": 0.0,
+        "fault_hold_rate": 0.0,
+        "correct_fault_type_rate": 0.8535714285714285,
+        "accuracy_holds_wrong": 0.84375,
+        "macro_f1": 0.8759860634085914,
+        "decision_coverage": 0.85,
+        "per_recording": {
+          "H_H_16_6204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "correct": 31,
+            "status": {
+              "hold": 8,
+              "normal": 31,
+              "anomaly_unknown": 1
+            }
+          },
+          "L_H_16_6204_1000.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "correct": 25,
+            "status": {
+              "anomaly_unknown": 15,
+              "fault_candidate": 25
+            }
+          },
+          "M1_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 36,
+            "status": {
+              "fault_candidate": 36,
+              "anomaly_unknown": 4
+            }
+          },
+          "M2_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 28,
+            "status": {
+              "fault_candidate": 30,
+              "anomaly_unknown": 10
+            }
+          },
+          "M3_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 38,
+            "status": {
+              "fault_candidate": 38,
+              "anomaly_unknown": 2
+            }
+          },
+          "U1_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U2_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 32,
+            "status": {
+              "anomaly_unknown": 8,
+              "fault_candidate": 32
+            }
+          },
+          "U3_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          }
+        }
+      }
+    },
+    {
+      "mode": "levels_orders",
+      "margin": 0.0,
+      "validation": {
+        "windows": 320,
+        "recordings": 8,
+        "normal_windows": 40,
+        "fault_windows": 280,
+        "normal_false_alarm_rate": 0.025,
+        "normal_acceptance_rate": 0.775,
+        "normal_hold_rate": 0.2,
+        "fault_detection_rate": 1.0,
+        "fault_miss_as_normal_rate": 0.0,
+        "fault_hold_rate": 0.0,
+        "correct_fault_type_rate": 0.9285714285714286,
+        "accuracy_holds_wrong": 0.909375,
+        "macro_f1": 0.8972189800930359,
+        "decision_coverage": 0.928125,
+        "per_recording": {
+          "H_H_16_6204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "correct": 31,
+            "status": {
+              "hold": 8,
+              "normal": 31,
+              "fault_candidate": 1
+            }
+          },
+          "L_H_16_6204_1000.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "correct": 26,
+            "status": {
+              "anomaly_unknown": 14,
+              "fault_candidate": 26
+            }
+          },
+          "M1_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "M2_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 35,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "M3_H_16_6204_1000.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "correct": 39,
+            "status": {
+              "fault_candidate": 39,
+              "anomaly_unknown": 1
+            }
+          },
+          "U1_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U2_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          },
+          "U3_H_16_6204_1000.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "correct": 40,
+            "status": {
+              "fault_candidate": 40
+            }
+          }
+        }
+      }
+    }
+  ],
+  "source_normal_recordings": 11,
+  "common_analysis_rate_hz": 4000,
+  "new_test_recordings": 8,
+  "independence_audit_required": true,
+  "source_sanity_gate": "normal FPR <=5%, normal acceptance >=50%, fault detection >=50%, decision coverage >=50%; not a field acceptance standard",
+  "source_sanity_gate_pass": true,
+  "selected": {
+    "mode": "levels_orders",
+    "margin": 0.0
+  },
+  "candidate_sha256": "4ebdd4393b4267eae4013b3ef649384624617defcb827e4d93f0652f8dc33ecd"
+}

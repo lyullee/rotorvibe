@@ -1,0 +1,39 @@
+[
+  {
+    "id": "brito_v3",
+    "url": "https://data.mendeley.com/datasets/zx8pfhdtnb/3",
+    "terms": "CC-BY-4.0",
+    "raw_shipped": false
+  },
+  {
+    "id": "crossspeed_v1",
+    "url": "https://data.mendeley.com/datasets/y8mv28hjwb/1",
+    "terms": "See original source record and collection manifest",
+    "raw_shipped": false
+  },
+  {
+    "id": "marra",
+    "url": "https://zenodo.org/records/14388093",
+    "terms": "See versioned Zenodo record",
+    "raw_shipped": false
+  },
+  {
+    "id": "uos6204_v1",
+    "url": "https://data.mendeley.com/datasets/53vtnjy6c6/1",
+    "terms": "CC-BY-4.0",
+    "raw_shipped": false
+  },
+  {
+    "id": "uos30204_v1",
+    "url": "https://data.mendeley.com/datasets/2cygy6y4rk/1",
+    "terms": "CC-BY-4.0",
+    "raw_shipped": false
+  },
+  {
+    "id": "mafaulda",
+    "url": "https://www02.smt.ufrj.br/~offshore/mfs/page_01.html",
+    "terms": "No explicit raw-data license on official page; no redistribution",
+    "raw_shipped": false,
+    "physical_unit": "not explicit on official page"
+  }
+]

@@ -1,0 +1,14 @@
+Public engineering-rule API
+
+This release intentionally contains no normative machine-limit database.
+Import MachineContext, Measurement, Rule, evaluate, IsoStage or measure_waveform
+from vibration.iso. available_standards() is empty. select_rule() requests a
+lawful external rule provider rather than recreating a standard's table.
+
+Pass custom_rule=your_rule to evaluate. The caller owns applicability review,
+rights, edition selection, threshold sourcing and machine/measurement coverage.
+The software checks units, statistic, frame, band, duration and declared
+qualification; no result is whole-machine compliance or an automatic trip.
+
+See docs/USER_GUIDE.md for invented-number examples. Historical private ISO
+test counts in old reports are not tests of this public replacement route.

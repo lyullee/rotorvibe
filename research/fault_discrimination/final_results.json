@@ -1,0 +1,388 @@
+{
+  "model_sha256": "456b3388bbb2c6d73b6a1e443620aa7a761939419db0c5ab4fa3e28abfb3047b",
+  "baseline": {
+    "windows": 560,
+    "recordings": 7,
+    "correct": 275,
+    "accuracy": 0.49107142857142855,
+    "macro_f1": 0.4692440010169634,
+    "confusion": {
+      "looseness": {
+        "looseness": 8,
+        "misalignment": 0,
+        "unbalance": 0,
+        "unknown": 72,
+        "normal": 0,
+        "hold": 0
+      },
+      "misalignment": {
+        "looseness": 5,
+        "misalignment": 179,
+        "unbalance": 19,
+        "unknown": 37,
+        "normal": 0,
+        "hold": 0
+      },
+      "unbalance": {
+        "looseness": 2,
+        "misalignment": 70,
+        "unbalance": 88,
+        "unknown": 80,
+        "normal": 0,
+        "hold": 0
+      }
+    },
+    "per_recording": {
+      "L_H_8_6204_1200.mat": {
+        "truth": "looseness",
+        "windows": 80,
+        "correct": 8,
+        "predictions": {
+          "unknown": 72,
+          "looseness": 8
+        },
+        "plurality_correct": false
+      },
+      "M1_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 27,
+        "predictions": {
+          "unknown": 37,
+          "misalignment": 27,
+          "unbalance": 15,
+          "looseness": 1
+        },
+        "plurality_correct": false
+      },
+      "M2_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 73,
+        "predictions": {
+          "misalignment": 73,
+          "looseness": 4,
+          "unbalance": 3
+        },
+        "plurality_correct": true
+      },
+      "M3_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 79,
+        "predictions": {
+          "misalignment": 79,
+          "unbalance": 1
+        },
+        "plurality_correct": true
+      },
+      "U1_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 9,
+        "predictions": {
+          "misalignment": 69,
+          "unbalance": 9,
+          "looseness": 2
+        },
+        "plurality_correct": false
+      },
+      "U2_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 79,
+        "predictions": {
+          "unbalance": 79,
+          "misalignment": 1
+        },
+        "plurality_correct": true
+      },
+      "U3_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 0,
+        "predictions": {
+          "unknown": 80
+        },
+        "plurality_correct": false
+      }
+    },
+    "recording_plurality_correct": 3,
+    "abstentions": 189
+  },
+  "new_type_given_fault": {
+    "windows": 560,
+    "recordings": 7,
+    "correct": 559,
+    "accuracy": 0.9982142857142857,
+    "macro_f1": 0.9986111050829214,
+    "confusion": {
+      "looseness": {
+        "looseness": 80,
+        "misalignment": 0,
+        "unbalance": 0,
+        "unknown": 0,
+        "normal": 0,
+        "hold": 0
+      },
+      "misalignment": {
+        "looseness": 0,
+        "misalignment": 239,
+        "unbalance": 1,
+        "unknown": 0,
+        "normal": 0,
+        "hold": 0
+      },
+      "unbalance": {
+        "looseness": 0,
+        "misalignment": 0,
+        "unbalance": 240,
+        "unknown": 0,
+        "normal": 0,
+        "hold": 0
+      }
+    },
+    "per_recording": {
+      "L_H_8_6204_1200.mat": {
+        "truth": "looseness",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "looseness": 80
+        },
+        "plurality_correct": true
+      },
+      "M1_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "misalignment": 80
+        },
+        "plurality_correct": true
+      },
+      "M2_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 79,
+        "predictions": {
+          "misalignment": 79,
+          "unbalance": 1
+        },
+        "plurality_correct": true
+      },
+      "M3_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "misalignment": 80
+        },
+        "plurality_correct": true
+      },
+      "U1_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "unbalance": 80
+        },
+        "plurality_correct": true
+      },
+      "U2_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "unbalance": 80
+        },
+        "plurality_correct": true
+      },
+      "U3_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "unbalance": 80
+        },
+        "plurality_correct": true
+      }
+    },
+    "recording_plurality_correct": 7,
+    "abstentions": 0
+  },
+  "new_gated": {
+    "windows": 560,
+    "recordings": 7,
+    "correct": 559,
+    "accuracy": 0.9982142857142857,
+    "macro_f1": 0.9986111050829214,
+    "confusion": {
+      "looseness": {
+        "looseness": 80,
+        "misalignment": 0,
+        "unbalance": 0,
+        "unknown": 0,
+        "normal": 0,
+        "hold": 0
+      },
+      "misalignment": {
+        "looseness": 0,
+        "misalignment": 239,
+        "unbalance": 1,
+        "unknown": 0,
+        "normal": 0,
+        "hold": 0
+      },
+      "unbalance": {
+        "looseness": 0,
+        "misalignment": 0,
+        "unbalance": 240,
+        "unknown": 0,
+        "normal": 0,
+        "hold": 0
+      }
+    },
+    "per_recording": {
+      "L_H_8_6204_1200.mat": {
+        "truth": "looseness",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "looseness": 80
+        },
+        "plurality_correct": true
+      },
+      "M1_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "misalignment": 80
+        },
+        "plurality_correct": true
+      },
+      "M2_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 79,
+        "predictions": {
+          "misalignment": 79,
+          "unbalance": 1
+        },
+        "plurality_correct": true
+      },
+      "M3_H_8_6204_1200.mat": {
+        "truth": "misalignment",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "misalignment": 80
+        },
+        "plurality_correct": true
+      },
+      "U1_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "unbalance": 80
+        },
+        "plurality_correct": true
+      },
+      "U2_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "unbalance": 80
+        },
+        "plurality_correct": true
+      },
+      "U3_H_8_6204_1200.mat": {
+        "truth": "unbalance",
+        "windows": 80,
+        "correct": 80,
+        "predictions": {
+          "unbalance": 80
+        },
+        "plurality_correct": true
+      }
+    },
+    "recording_plurality_correct": 7,
+    "abstentions": 0
+  },
+  "paired_correctness": {
+    "both_correct": 274,
+    "corrected": 285,
+    "regressed": 1
+  },
+  "raw_signal_sha256": {
+    "L_H_8_6204_1200.mat": "1e8a67d37418e24ac75cf33624b7383d8c15d7610696960d71306187dcb9dc04",
+    "M1_H_8_6204_1200.mat": "2fceb3711931e9b012c6605bf098c85b5056c8369c4faf61c764a55ac8f9a171",
+    "M2_H_8_6204_1200.mat": "5a55eba0ee1faeae8a4ce889f886ae2c6c3e6d9903c2425abec05d46a61bbc2c",
+    "M3_H_8_6204_1200.mat": "d652d791136f271741d0058312fce5b63da28f0ad50105d80db95ee0de5192a6",
+    "U1_H_8_6204_1200.mat": "7bb4b229e4f8b2da51ae6e70fa70cf843bc4ffbc7987d02604a93586c5e4aaf7",
+    "U2_H_8_6204_1200.mat": "a2f6249736ebcd93b86ba6c68b4c07fdcc14479867ab5c128f886e8324a1c91d",
+    "U3_H_8_6204_1200.mat": "ff42875d64d29175fa79baf12f9f241b55484c803bbfb2ec523b96b4fe744735"
+  },
+  "alternate_rate_noise_overlap": {
+    "L_H_8_6204_1200.mat": {
+      "exact_raw_Data_duplicate": false,
+      "maximum_normalized_noise_overlap": 0.1419552124730985,
+      "passes_nonduplicate_screen": true,
+      "limit": 0.98,
+      "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+    },
+    "M1_H_8_6204_1200.mat": {
+      "exact_raw_Data_duplicate": false,
+      "maximum_normalized_noise_overlap": 0.13163216090390908,
+      "passes_nonduplicate_screen": true,
+      "limit": 0.98,
+      "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+    },
+    "M2_H_8_6204_1200.mat": {
+      "exact_raw_Data_duplicate": false,
+      "maximum_normalized_noise_overlap": 0.07535499363048964,
+      "passes_nonduplicate_screen": true,
+      "limit": 0.98,
+      "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+    },
+    "M3_H_8_6204_1200.mat": {
+      "exact_raw_Data_duplicate": false,
+      "maximum_normalized_noise_overlap": 0.07610109954968121,
+      "passes_nonduplicate_screen": true,
+      "limit": 0.98,
+      "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+    },
+    "U1_H_8_6204_1200.mat": {
+      "exact_raw_Data_duplicate": false,
+      "maximum_normalized_noise_overlap": 0.1831871832383753,
+      "passes_nonduplicate_screen": true,
+      "limit": 0.98,
+      "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+    },
+    "U2_H_8_6204_1200.mat": {
+      "exact_raw_Data_duplicate": false,
+      "maximum_normalized_noise_overlap": 0.09156266313349938,
+      "passes_nonduplicate_screen": true,
+      "limit": 0.98,
+      "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+    },
+    "U3_H_8_6204_1200.mat": {
+      "exact_raw_Data_duplicate": false,
+      "maximum_normalized_noise_overlap": 0.14688979246742065,
+      "passes_nonduplicate_screen": true,
+      "limit": 0.98,
+      "caution": "Screen for duplicated/resampled noise only; independent reassembly is not established."
+    }
+  },
+  "normal_test_recordings": 0,
+  "no_post_test_tuning": true,
+  "operational_use": false,
+  "limits": [
+    "Seven fault acquisitions only, one looseness and three severity acquisitions per other class; windows correlated.",
+    "Same apparatus, original-file/sample-rate holdout with matched source severities; independent reassembly not established.",
+    "No fresh normal test: cannot claim a new overall four-class accuracy or normal false-alarm rate."
+  ]
+}

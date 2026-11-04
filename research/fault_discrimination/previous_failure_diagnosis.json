@@ -1,0 +1,75 @@
+{
+  "previous_opened_test_is_now_development": true,
+  "selected_features": 10,
+  "selected_names": [
+    "ch1_log_rms",
+    "ch1_log_order_power_0.5X",
+    "ch1_log_order_power_1X",
+    "ch1_log_order_power_2X",
+    "ch1_log_order_power_3X",
+    "ch1_log_order_power_4X",
+    "ch1_log_order_power_5X",
+    "ch1_log_order_power_6X",
+    "ch1_log_order_power_8X",
+    "ch1_log_order_power_10X"
+  ],
+  "per_recording": {
+    "uos:L_H_16_6204_1200.mat": {
+      "truth": "looseness",
+      "windows": 40,
+      "rejected": 37,
+      "nearest_class_correct_without_rejection": 20,
+      "median_nearest_distance": 2.0968555631661414,
+      "median_nearest_class_limit": 1.7127097406110636
+    },
+    "uos:M1_H_16_6204_1200.mat": {
+      "truth": "misalignment",
+      "windows": 40,
+      "rejected": 8,
+      "nearest_class_correct_without_rejection": 24,
+      "median_nearest_distance": 1.439406584734639,
+      "median_nearest_class_limit": 1.595257104073503
+    },
+    "uos:M2_H_16_6204_1200.mat": {
+      "truth": "misalignment",
+      "windows": 40,
+      "rejected": 0,
+      "nearest_class_correct_without_rejection": 33,
+      "median_nearest_distance": 0.7169262628590171,
+      "median_nearest_class_limit": 1.595257104073503
+    },
+    "uos:M3_H_16_6204_1200.mat": {
+      "truth": "misalignment",
+      "windows": 40,
+      "rejected": 0,
+      "nearest_class_correct_without_rejection": 40,
+      "median_nearest_distance": 0.7056184802451118,
+      "median_nearest_class_limit": 1.595257104073503
+    },
+    "uos:U1_H_16_6204_1200.mat": {
+      "truth": "unbalance",
+      "windows": 40,
+      "rejected": 0,
+      "nearest_class_correct_without_rejection": 15,
+      "median_nearest_distance": 0.535347034824624,
+      "median_nearest_class_limit": 1.595257104073503
+    },
+    "uos:U2_H_16_6204_1200.mat": {
+      "truth": "unbalance",
+      "windows": 40,
+      "rejected": 0,
+      "nearest_class_correct_without_rejection": 28,
+      "median_nearest_distance": 0.7508473066822339,
+      "median_nearest_class_limit": 1.6733742564950207
+    },
+    "uos:U3_H_16_6204_1200.mat": {
+      "truth": "unbalance",
+      "windows": 40,
+      "rejected": 40,
+      "nearest_class_correct_without_rejection": 40,
+      "median_nearest_distance": 1.9272830086409007,
+      "median_nearest_class_limit": 1.6733742564950207
+    }
+  },
+  "limitations": "Distance and margin identify model failure mechanisms, not a uniquely identified physical root cause. No shaft phase/axial channels available."
+}

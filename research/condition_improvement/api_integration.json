@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "raw_rates_to_common_band_core_registry_storage_replay_parity": [
+    {
+      "recording_id": "uos:H_H_16_6204_1000.mat",
+      "status": "normal",
+      "label": "normal"
+    },
+    {
+      "recording_id": "uos:U2_H_16_6204_1000.mat",
+      "status": "fault_candidate",
+      "label": "unbalance"
+    }
+  ],
+  "new_test_recordings_reopened": 0,
+  "operational_use": false
+}

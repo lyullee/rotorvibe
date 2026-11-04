@@ -1,0 +1,2487 @@
+{
+  "status": "complete",
+  "test_only": true,
+  "model_sha256": {
+    "fault_frozen.json": "456b3388bbb2c6d73b6a1e443620aa7a761939419db0c5ab4fa3e28abfb3047b",
+    "normal_gate_frozen.json": "4ebdd4393b4267eae4013b3ef649384624617defcb827e4d93f0652f8dc33ecd"
+  },
+  "new_original_recordings": 43,
+  "new_windows": 580,
+  "raw_signal_sha256": {
+    "uos30204:H_H_16_30204_1000.mat": "c9e1739e4f4b3f4f92f8708656b47cac43eaadf1b1171c0193d47a0510142bd3",
+    "uos30204:H_H_16_30204_1200.mat": "0fdf8910189846e91fe28cdc348c7e838661de522479ed04776e235c6194bf3f",
+    "uos30204:L_H_16_30204_1200.mat": "f7dbf1ada637570f3ad535fbf426655107c15137bf08b908311b05297346aca0",
+    "uos30204:M1_H_16_30204_1200.mat": "5ca0053924c8a56117bbcf1963d4e219e3dbefedcb3dce3218de9e2bfbe9fd16",
+    "uos30204:M2_H_16_30204_1200.mat": "64b7823f3cbfce501c4005fd6e3804870d4a8484590a88f90b97dca319ce5059",
+    "uos30204:M3_H_16_30204_1200.mat": "52905f633436299c30e41385f4cf20f3b3f2421ba9fe9c751f1fc0b386680d14",
+    "uos30204:U1_H_16_30204_1200.mat": "244993b212a31afb7262a2b1374d43ac790b44f1696ff954220c0b2868b66f72",
+    "uos30204:U2_H_16_30204_1200.mat": "01ad27d783e3da3a36524edc64ee6c0530d29a4892f96d55fdb87247720bcbc4",
+    "uos30204:U3_H_16_30204_1200.mat": "0d5590cff4a22551934cf4e019c27b201cd9255054315e06c71bec9feb8e2863",
+    "uos30204:H_H_16_30204_1400.mat": "47b6ee3b1d34a8107a04523c4d5705eec5e7a0d6eeaddf90e33b1f0ce04f9c84",
+    "uos30204:H_H_16_30204_1600.mat": "fa4ed28665a06ca844bd893b5a49a96921146f7afd54f90e1a1ad55355de3f8f",
+    "uos30204:H_H_16_30204_600.mat": "320711cf32f049691218b50aee463206bfbabeab6d524775da7c9898884103d6",
+    "uos30204:H_H_16_30204_800.mat": "95534143e2e0c796521807b0d17ca65218063d1e3205283b3d4bdd437cde4eff",
+    "mafaulda:normal/12.288.csv": "8307799e567e3a149a5feb8504fb9f52f3ede254a126a3150431214e5c4ff734",
+    "mafaulda:normal/13.1072.csv": "981ac8e4993e7d17edc76baaebb5302b3b94a8541be7276217abfef28a5dd933",
+    "mafaulda:normal/14.336.csv": "4b5ac131bb272b02c6340d1c40d32457d8ae5a0272e6c2cd9f349ab57637711a",
+    "mafaulda:normal/15.1552.csv": "53bcb3594646e520f73ef718d08df3569ff32b08b6a0e0a6bddedaa9ec299df2",
+    "mafaulda:normal/16.1792.csv": "e212f527ea97578ac521ca37053380b637bdf3c6ec71831a1b38e90a32e501fd",
+    "mafaulda:normal/17.2032.csv": "b1d15444f5587abe4655b39097e6e18fd42d4d24eb4225635d9e0bea0a879a0c",
+    "mafaulda:normal/18.432.csv": "107ce43196373fed39d4199d96bf7bd154a1d0543da453b2f50307b345289b2e",
+    "mafaulda:normal/19.6608.csv": "8750dda77e22b9641f6e62169679007d0dd0944e6c27854e475a81bceb731ffc",
+    "mafaulda:normal/20.2752.csv": "a347b64f120b223dd519de05aeb84bcc697d0e4267d056fcce116449aa6e0a54",
+    "mafaulda:normal/21.7088.csv": "2026d233dbc0bd490df0acffe1412a0ff6b52dacb8bc0831daf0db1f3bfb2cb1",
+    "mafaulda:normal/22.3232.csv": "f562f62686879889c2c25b90e6203500f92d6e4a46041a70d2135a35233cadbe",
+    "mafaulda:normal/23.552.csv": "ec54b7eceb28101f7ae9cb5c3d04bc5563617604878472ad79682d625cafdbce",
+    "mafaulda:normal/24.576.csv": "6865e029137a8dc023aeabf96067ea862a72c3622c716e8bea7468e05b657cf8",
+    "mafaulda:normal/25.6.csv": "d71c1f5eaa15521b337002c4e13dd5af378cb8a722bfb2b4fc9bbc94151469e3",
+    "mafaulda:normal/26.624.csv": "09afa801112d1ed5d73dffb0920be2a1e5c2b66111bd90c6f0157cb1b151a2d6",
+    "mafaulda:imbalance/6g/13.9264.csv": "53796f202b2926228bdfdfedcc29049c95bdbb2d5ed4306c57e3ca5fe1f6a9ae",
+    "mafaulda:imbalance/6g/20.2752.csv": "7f843f15b0738b7fc92f06d50a92259c7c73950ba4ef66ce34094690a6ae231c",
+    "mafaulda:imbalance/6g/26.8288.csv": "f0815cab5a7b2e114cda1f29b70c364003f1efc4fa488ab7a3ddf0e1683a303d",
+    "mafaulda:imbalance/20g/13.312.csv": "b078f3d4f89424ea40cda9b8936dbd5a87457dee2b4686c6bf4927748d3e10f1",
+    "mafaulda:imbalance/20g/19.456.csv": "aae49ff7caa691178c6205a5d028e3831b13fa225b7450b519a7c730deac41f0",
+    "mafaulda:imbalance/20g/26.4192.csv": "7674b931372a798df50cc544c8eb678f87fe15535990d256213b82d2889caa90",
+    "mafaulda:imbalance/35g/13.7216.csv": "279fe8d2ff1611aabb4552d81af628bacbe8c9ce1107e5893ec3b8f20dee7d52",
+    "mafaulda:imbalance/35g/19.8656.csv": "313bd5ed6d4caaaed47c0a0817b3360d1e42addb4bb3eaac97a888593120cf57",
+    "mafaulda:imbalance/35g/26.8288.csv": "b2243505b4bed36342a2806c1300dd999c0d7169cc3c085803adbb2b792bdcb9",
+    "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": "143fa6f341ddb521d772d6919304a3c0693a2282e642f6671868d792c3f2c429",
+    "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": "09f02b0f6e9ed60200d94d7cea659d938f46a53cabbe60043bb3c1087539ce69",
+    "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": "f5bc27e1a0f4d3e418c2f85ccc37b322e3eec717e759e8bb4eb91ccff5c480b5",
+    "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": "9f3b1da1d15bc207e649ef21346cc29dde83332a30d7318ff43e69189165e753",
+    "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": "26d0521d04f955a56a90e2c2e41394cc18c87c53f569ad9496116059a5cf5a03",
+    "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": "38f4b6438adcd04c1fbc9e12ab60d42afe2221f07a650705c2042ed1834c60a5"
+  },
+  "by_domain": {
+    "UFRJ_ABVT_independent": {
+      "shadow_native_factor_10_unit_unverified": {
+        "windows": 60,
+        "original_recordings": 30,
+        "normal_windows": 30,
+        "fault_windows": 30,
+        "normal_false_anomalies": 4,
+        "normal_false_anomaly_fraction_all_windows": 0.13333333333333333,
+        "normal_decision_windows": 4,
+        "normal_decision_coverage": 0.13333333333333333,
+        "normal_false_anomaly_fraction_decided": 1.0,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 26,
+        "normal_original_recordings": 15,
+        "normal_recordings_with_any_false_anomaly": 2,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "unbalance": {
+            "hold": 8,
+            "anomaly_unknown": 10
+          },
+          "misalignment": {
+            "hold": 10,
+            "anomaly_unknown": 2
+          }
+        },
+        "per_recording": {
+          "mafaulda:normal/12.288.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/13.1072.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/14.336.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/15.1552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/16.1792.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/17.2032.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/18.432.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/19.6608.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/20.2752.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/21.7088.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/22.3232.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/23.552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:normal/24.576.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/25.6.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/26.624.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/6g/13.9264.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/20.2752.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/13.312.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/19.456.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/20g/26.4192.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/13.7216.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/35g/19.8656.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          }
+        }
+      },
+      "shadow_native_factor_10_unit_unverified_gate": {
+        "windows": 60,
+        "original_recordings": 30,
+        "normal_windows": 30,
+        "fault_windows": 30,
+        "normal_false_anomalies": 4,
+        "normal_false_anomaly_fraction_all_windows": 0.13333333333333333,
+        "normal_decision_windows": 4,
+        "normal_decision_coverage": 0.13333333333333333,
+        "normal_false_anomaly_fraction_decided": 1.0,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 26,
+        "normal_original_recordings": 15,
+        "normal_recordings_with_any_false_anomaly": 2,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "unbalance": {
+            "hold": 8,
+            "anomaly": 10
+          },
+          "misalignment": {
+            "hold": 10,
+            "anomaly": 2
+          }
+        },
+        "per_recording": {
+          "mafaulda:normal/12.288.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/13.1072.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/14.336.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/15.1552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/16.1792.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/17.2032.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/18.432.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/19.6608.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/20.2752.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/21.7088.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/22.3232.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/23.552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:normal/24.576.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/25.6.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/26.624.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/6g/13.9264.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/20.2752.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/20g/13.312.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/20g/19.456.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/20g/26.4192.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/35g/13.7216.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/35g/19.8656.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/35g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          }
+        }
+      },
+      "shadow_native_factor_1_unit_unverified": {
+        "windows": 60,
+        "original_recordings": 30,
+        "normal_windows": 30,
+        "fault_windows": 30,
+        "normal_false_anomalies": 4,
+        "normal_false_anomaly_fraction_all_windows": 0.13333333333333333,
+        "normal_decision_windows": 4,
+        "normal_decision_coverage": 0.13333333333333333,
+        "normal_false_anomaly_fraction_decided": 1.0,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 26,
+        "normal_original_recordings": 15,
+        "normal_recordings_with_any_false_anomaly": 2,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "unbalance": {
+            "hold": 8,
+            "anomaly_unknown": 10
+          },
+          "misalignment": {
+            "hold": 10,
+            "anomaly_unknown": 2
+          }
+        },
+        "per_recording": {
+          "mafaulda:normal/12.288.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/13.1072.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/14.336.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/15.1552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/16.1792.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/17.2032.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/18.432.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/19.6608.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/20.2752.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/21.7088.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/22.3232.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/23.552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:normal/24.576.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/25.6.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/26.624.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/6g/13.9264.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/20.2752.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/13.312.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/19.456.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/20g/26.4192.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/13.7216.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/35g/19.8656.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          }
+        }
+      },
+      "shadow_native_factor_1_unit_unverified_gate": {
+        "windows": 60,
+        "original_recordings": 30,
+        "normal_windows": 30,
+        "fault_windows": 30,
+        "normal_false_anomalies": 4,
+        "normal_false_anomaly_fraction_all_windows": 0.13333333333333333,
+        "normal_decision_windows": 4,
+        "normal_decision_coverage": 0.13333333333333333,
+        "normal_false_anomaly_fraction_decided": 1.0,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 26,
+        "normal_original_recordings": 15,
+        "normal_recordings_with_any_false_anomaly": 2,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "unbalance": {
+            "hold": 8,
+            "anomaly": 10
+          },
+          "misalignment": {
+            "hold": 10,
+            "anomaly": 2
+          }
+        },
+        "per_recording": {
+          "mafaulda:normal/12.288.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/13.1072.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/14.336.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/15.1552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/16.1792.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/17.2032.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/18.432.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/19.6608.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/20.2752.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/21.7088.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/22.3232.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/23.552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:normal/24.576.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/25.6.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/26.624.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 2,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/6g/13.9264.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/20.2752.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/20g/13.312.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/20g/19.456.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/20g/26.4192.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/35g/13.7216.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/35g/19.8656.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:imbalance/35g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 2
+            }
+          }
+        }
+      },
+      "strict_api": {
+        "windows": 60,
+        "original_recordings": 30,
+        "normal_windows": 30,
+        "fault_windows": 30,
+        "normal_false_anomalies": 0,
+        "normal_false_anomaly_fraction_all_windows": 0.0,
+        "normal_decision_windows": 0,
+        "normal_decision_coverage": 0.0,
+        "normal_false_anomaly_fraction_decided": null,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 30,
+        "normal_original_recordings": 15,
+        "normal_recordings_with_any_false_anomaly": 0,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "unbalance": {
+            "hold": 18
+          },
+          "misalignment": {
+            "hold": 12
+          }
+        },
+        "per_recording": {
+          "mafaulda:normal/12.288.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/13.1072.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/14.336.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/15.1552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/16.1792.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/17.2032.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/18.432.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/19.6608.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/20.2752.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/21.7088.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/22.3232.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/23.552.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/24.576.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/25.6.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:normal/26.624.csv": {
+            "truth": "normal",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/13.9264.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/20.2752.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/6g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/20g/13.312.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/20g/19.456.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/20g/26.4192.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/35g/13.7216.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/35g/19.8656.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:imbalance/35g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 2
+            }
+          }
+        }
+      }
+    },
+    "UOS_AST_bearing_transfer": {
+      "shadow_physical_g": {
+        "windows": 520,
+        "original_recordings": 13,
+        "normal_windows": 240,
+        "fault_windows": 280,
+        "normal_false_anomalies": 240,
+        "normal_false_anomaly_fraction_all_windows": 1.0,
+        "normal_decision_windows": 240,
+        "normal_decision_coverage": 1.0,
+        "normal_false_anomaly_fraction_decided": 1.0,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 0,
+        "normal_original_recordings": 6,
+        "normal_recordings_with_any_false_anomaly": 6,
+        "fault_type_correct": 124,
+        "fault_type_accuracy_holds_wrong": 0.44285714285714284,
+        "fault_type_decisions": 280,
+        "fault_type_decision_coverage": 1.0,
+        "fault_type_accuracy_decided": 0.44285714285714284,
+        "confusion": {
+          "looseness": {
+            "misalignment": 38,
+            "looseness": 2
+          },
+          "misalignment": {
+            "misalignment": 120
+          },
+          "unbalance": {
+            "looseness": 1,
+            "misalignment": 117,
+            "unbalance": 2
+          }
+        },
+        "per_recording": {
+          "uos30204:H_H_16_30204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "misalignment": 37,
+              "unbalance": 3
+            }
+          },
+          "uos30204:H_H_16_30204_1200.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:L_H_16_30204_1200.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 2,
+            "predictions": {
+              "misalignment": 38,
+              "looseness": 2
+            }
+          },
+          "uos30204:M1_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 40,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:M2_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 40,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:M3_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 40,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:U1_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "looseness": 1,
+              "misalignment": 39
+            }
+          },
+          "uos30204:U2_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:U3_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 2,
+            "predictions": {
+              "misalignment": 38,
+              "unbalance": 2
+            }
+          },
+          "uos30204:H_H_16_30204_1400.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "looseness": 7,
+              "unbalance": 33
+            }
+          },
+          "uos30204:H_H_16_30204_1600.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "unbalance": 4,
+              "looseness": 17,
+              "misalignment": 19
+            }
+          },
+          "uos30204:H_H_16_30204_600.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "looseness": 34,
+              "misalignment": 5,
+              "unbalance": 1
+            }
+          },
+          "uos30204:H_H_16_30204_800.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "misalignment": 24,
+              "unbalance": 15,
+              "looseness": 1
+            }
+          }
+        }
+      },
+      "shadow_physical_g_gate": {
+        "windows": 520,
+        "original_recordings": 13,
+        "normal_windows": 240,
+        "fault_windows": 280,
+        "normal_false_anomalies": 240,
+        "normal_false_anomaly_fraction_all_windows": 1.0,
+        "normal_decision_windows": 240,
+        "normal_decision_coverage": 1.0,
+        "normal_false_anomaly_fraction_decided": 1.0,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 0,
+        "normal_original_recordings": 6,
+        "normal_recordings_with_any_false_anomaly": 6,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "looseness": {
+            "anomaly": 40
+          },
+          "misalignment": {
+            "anomaly": 120
+          },
+          "unbalance": {
+            "anomaly": 120
+          }
+        },
+        "per_recording": {
+          "uos30204:H_H_16_30204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:H_H_16_30204_1200.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:L_H_16_30204_1200.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:M1_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:M2_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:M3_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:U1_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:U2_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:U3_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:H_H_16_30204_1400.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:H_H_16_30204_1600.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:H_H_16_30204_600.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          },
+          "uos30204:H_H_16_30204_800.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 40,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly": 40
+            }
+          }
+        }
+      },
+      "strict_api": {
+        "windows": 520,
+        "original_recordings": 13,
+        "normal_windows": 240,
+        "fault_windows": 280,
+        "normal_false_anomalies": 0,
+        "normal_false_anomaly_fraction_all_windows": 0.0,
+        "normal_decision_windows": 0,
+        "normal_decision_coverage": 0.0,
+        "normal_false_anomaly_fraction_decided": null,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": 0.0,
+        "normal_holds": 240,
+        "normal_original_recordings": 6,
+        "normal_recordings_with_any_false_anomaly": 0,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "looseness": {
+            "hold": 40
+          },
+          "misalignment": {
+            "hold": 120
+          },
+          "unbalance": {
+            "hold": 120
+          }
+        },
+        "per_recording": {
+          "uos30204:H_H_16_30204_1000.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:H_H_16_30204_1200.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:L_H_16_30204_1200.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:M1_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:M2_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:M3_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:U1_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:U2_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:U3_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:H_H_16_30204_1400.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:H_H_16_30204_1600.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:H_H_16_30204_600.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          },
+          "uos30204:H_H_16_30204_800.mat": {
+            "truth": "normal",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "hold": 40
+            }
+          }
+        }
+      }
+    }
+  },
+  "conditional_fault_head": {
+    "UFRJ_ABVT_independent": {
+      "shadow_native_factor_10_unit_unverified_type_given_fault": {
+        "windows": 30,
+        "original_recordings": 15,
+        "normal_windows": 0,
+        "fault_windows": 30,
+        "normal_false_anomalies": 0,
+        "normal_false_anomaly_fraction_all_windows": null,
+        "normal_decision_windows": 0,
+        "normal_decision_coverage": null,
+        "normal_false_anomaly_fraction_decided": null,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": null,
+        "normal_holds": 0,
+        "normal_original_recordings": 0,
+        "normal_recordings_with_any_false_anomaly": 0,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "unbalance": {
+            "anomaly_unknown": 18
+          },
+          "misalignment": {
+            "anomaly_unknown": 12
+          }
+        },
+        "per_recording": {
+          "mafaulda:imbalance/6g/13.9264.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/6g/20.2752.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/6g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/13.312.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/19.456.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/26.4192.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/13.7216.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/19.8656.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          }
+        }
+      },
+      "shadow_native_factor_1_unit_unverified_type_given_fault": {
+        "windows": 30,
+        "original_recordings": 15,
+        "normal_windows": 0,
+        "fault_windows": 30,
+        "normal_false_anomalies": 0,
+        "normal_false_anomaly_fraction_all_windows": null,
+        "normal_decision_windows": 0,
+        "normal_decision_coverage": null,
+        "normal_false_anomaly_fraction_decided": null,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": null,
+        "normal_holds": 0,
+        "normal_original_recordings": 0,
+        "normal_recordings_with_any_false_anomaly": 0,
+        "fault_type_correct": 0,
+        "fault_type_accuracy_holds_wrong": 0.0,
+        "fault_type_decisions": 0,
+        "fault_type_decision_coverage": 0.0,
+        "fault_type_accuracy_decided": null,
+        "confusion": {
+          "unbalance": {
+            "anomaly_unknown": 18
+          },
+          "misalignment": {
+            "anomaly_unknown": 12
+          }
+        },
+        "per_recording": {
+          "mafaulda:imbalance/6g/13.9264.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/6g/20.2752.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/6g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/13.312.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/19.456.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/20g/26.4192.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/13.7216.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/19.8656.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:imbalance/35g/26.8288.csv": {
+            "truth": "unbalance",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/13.7216.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/1.0mm/26.0096.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/13.5168.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/20.2752.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          },
+          "mafaulda:horizontal-misalignment/2.0mm/26.4192.csv": {
+            "truth": "misalignment",
+            "windows": 2,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "anomaly_unknown": 2
+            }
+          }
+        }
+      }
+    },
+    "UOS_AST_bearing_transfer": {
+      "shadow_physical_g_type_given_fault": {
+        "windows": 280,
+        "original_recordings": 7,
+        "normal_windows": 0,
+        "fault_windows": 280,
+        "normal_false_anomalies": 0,
+        "normal_false_anomaly_fraction_all_windows": null,
+        "normal_decision_windows": 0,
+        "normal_decision_coverage": null,
+        "normal_false_anomaly_fraction_decided": null,
+        "normal_accepted": 0,
+        "normal_acceptance_rate": null,
+        "normal_holds": 0,
+        "normal_original_recordings": 0,
+        "normal_recordings_with_any_false_anomaly": 0,
+        "fault_type_correct": 124,
+        "fault_type_accuracy_holds_wrong": 0.44285714285714284,
+        "fault_type_decisions": 280,
+        "fault_type_decision_coverage": 1.0,
+        "fault_type_accuracy_decided": 0.44285714285714284,
+        "confusion": {
+          "looseness": {
+            "misalignment": 38,
+            "looseness": 2
+          },
+          "misalignment": {
+            "misalignment": 120
+          },
+          "unbalance": {
+            "looseness": 1,
+            "misalignment": 117,
+            "unbalance": 2
+          }
+        },
+        "per_recording": {
+          "uos30204:L_H_16_30204_1200.mat": {
+            "truth": "looseness",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 2,
+            "predictions": {
+              "misalignment": 38,
+              "looseness": 2
+            }
+          },
+          "uos30204:M1_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 40,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:M2_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 40,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:M3_H_16_30204_1200.mat": {
+            "truth": "misalignment",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 40,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:U1_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "looseness": 1,
+              "misalignment": 39
+            }
+          },
+          "uos30204:U2_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 0,
+            "predictions": {
+              "misalignment": 40
+            }
+          },
+          "uos30204:U3_H_16_30204_1200.mat": {
+            "truth": "unbalance",
+            "windows": 40,
+            "false_anomaly": 0,
+            "correct_type": 2,
+            "predictions": {
+              "misalignment": 38,
+              "unbalance": 2
+            }
+          }
+        }
+      }
+    }
+  },
+  "training_or_tuning_on_new_data": false,
+  "interpretation": "Strict API all holds is lack of supported-domain coverage, NOT demonstrated zero false-alarm performance. Shadow bypass is offline numerical stress, not production validation.",
+  "mafaulda_unit_warning": "Native CSV amplitude unit not explicit on official page. Both fixed scenarios are exploratory sensitivity checks, not calibrated physical FPR claims.",
+  "no_independent_looseness_on_ufrj": true,
+  "operational_use": false
+}

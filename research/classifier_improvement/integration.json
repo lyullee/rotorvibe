@@ -1,0 +1,26 @@
+{
+  "status": "pass",
+  "production_training_records": 5040,
+  "training_parameters_match_frozen": true,
+  "registry_predictions_match_all_test_windows": 1680,
+  "raw_signal_pipeline": [
+    {
+      "trial": 16,
+      "raw_pipeline_label": "misalignment"
+    },
+    {
+      "trial": 17,
+      "raw_pipeline_label": "misalignment"
+    },
+    {
+      "trial": 19,
+      "raw_pipeline_label": "looseness"
+    },
+    {
+      "trial": 20,
+      "raw_pipeline_label": "unbalance"
+    }
+  ],
+  "runtime": "output/classifier_improvement/production_runtime",
+  "operational_use": false
+}

@@ -1,0 +1,15 @@
+include README.md README.ko.md LICENSE NOTICE CITATION.cff CHANGELOG.md requirements.txt run.py start.cmd
+recursive-include vibration *.py *.html *.css *.js
+recursive-include rotorvibe *.py
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include scripts *.py
+recursive-include tools *.py
+recursive-include docs *.md *.rst *.txt
+recursive-include research *.json *.jsonl *.md
+prune docs/integration/upstream
+prune data
+prune output
+prune tmp
+prune runtime
+global-exclude *.pdf *.PDF *.npy *.npz *.mat *.csv *.lvm *.db *.sqlite* *.pyc

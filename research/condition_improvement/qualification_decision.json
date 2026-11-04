@@ -1,0 +1,7 @@
+{
+  "model_sha256": "4ebdd4393b4267eae4013b3ef649384624617defcb827e4d93f0652f8dc33ecd",
+  "decision": "experimental_normal_reference_improved; reject_automatic_fault_type_confirmation",
+  "operational_use": false,
+  "default_activation": false,
+  "no_post_test_tuning": true
+}

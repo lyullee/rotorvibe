@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "finished_utc": "2026-11-04T02:41:11.007933+00:00",
+  "model_sha256": "456b3388bbb2c6d73b6a1e443620aa7a761939419db0c5ab4fa3e28abfb3047b",
+  "results_sha256": "f881d0129e86b2b92eb68a8ad88d443481609c136fbc0de78653530c2ce2dd81",
+  "predictions_sha256": "c85d2920db373a8257dd52b6959bdb91cfb7c2779c87761e898f6bb80b4baa69",
+  "no_post_test_tuning": true
+}

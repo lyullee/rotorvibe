@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-11-04T01:37:01.445151+00:00",
+  "status": "complete",
+  "model_sha256": "4ebdd4393b4267eae4013b3ef649384624617defcb827e4d93f0652f8dc33ecd",
+  "result_sha256": "86f32bb7ca33e0583755901d4ae346cf0101aec31d064b7c2f38a44880589bca",
+  "prediction_sha256": "83a7d3458ea0812de17f461d2ff739482dcd8131e72176454aa33326cf70932c",
+  "new_test_arrays_opened": 8,
+  "new_windows": 320,
+  "no_post_test_tuning": true
+}
