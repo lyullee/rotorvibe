@@ -20,24 +20,24 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          target=d22eb1be2a5e0ced14f54d60b175cfc843a07d3f
+          target=1e1e8e07bb1eda431becdb54aebabc148b520a43
           if git merge-base --is-ancestor "$target" HEAD 2>/dev/null; then
             echo 'Reviewed development was already imported.'
             exit 0
           fi
-          echo '205d451512242c3e646afc0bbc38843138ad90f31eced3b128a239c3e0a056f0  release-transfer-0.1.0a4.bundle' | sha256sum -c -
-          git bundle verify release-transfer-0.1.0a4.bundle
-          git fetch ./release-transfer-0.1.0a4.bundle refs/heads/feat/p2-composability:refs/heads/reviewed-import-a4
-          test "$(git rev-parse reviewed-import-a4)" = "$target"
+          echo 'dc467c83eb1f32f4077d7657735d29706c494431e652cad7c5c52a00cdae179d  release-transfer-0.1.0a5.bundle' | sha256sum -c -
+          git bundle verify release-transfer-0.1.0a5.bundle
+          git fetch ./release-transfer-0.1.0a5.bundle refs/heads/release/0.1.0a4:refs/heads/reviewed-import-a5
+          test "$(git rev-parse reviewed-import-a5)" = "$target"
           git diff --quiet "$target" -- .github/workflows/release.yml .github/workflows/verify.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git merge --no-ff --no-commit "$target"
-          git rm -- release-transfer-0.1.0a4.bundle
+          git rm -- release-transfer-0.1.0a5.bundle
           python tools/audit_release.py
-          git commit -m 'Integrate reviewed P0-P2 development for RotorVibe 0.1.0a4'
+          git commit -m 'Integrate reviewed P0-P2 development for RotorVibe 0.1.0a5'
           git diff --quiet HEAD^ HEAD -- .github/workflows
           git push origin HEAD:main
-          git tag v0.1.0a4
-          python tools/release_contract.py --tag v0.1.0a4
-          git push origin refs/tags/v0.1.0a4
+          git tag v0.1.0a5
+          python tools/release_contract.py --tag v0.1.0a5
+          git push origin refs/tags/v0.1.0a5
