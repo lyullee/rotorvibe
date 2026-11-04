@@ -4,12 +4,12 @@ Python 배열을 직접 연결해 파형·FFT·베어링 주파수·정상 기�
 연구용 라이브러리입니다. 웹 서버를 띄우지 않고 다른 모듈의 함수·객체와 조립할 수 있습니다.
 기존 `vibration` import를 유지하며 새 `rotorvibe` 진입점도 제공합니다.
 
-**이 작업본은 0.1.0a2 알파 후보이며 아직 게시되지 않았습니다. 다른 장비와 베어링으로 옮기는 무학습 진단은 검증에
+**이 작업본은 0.1.0a3 알파 후보이며 아직 게시되지 않았습니다. 다른 장비와 베어링으로 옮기는 무학습 진단은 검증에
 실패했습니다. 고장 자동 확정·자동 정지·잔여수명·ISO 적합성 인증을 제공하지 않습니다.**
 
 ## 설치와 시작
 
-준비된 0.1.0a2 소스 작업본에서 설치합니다.
+준비된 0.1.0a3 소스 작업본에서 설치합니다.
 
 ```console
 python -m pip install .
@@ -26,10 +26,49 @@ Python 3.11 이상, NumPy 2.x, SciPy 1.13 이상이 필요합니다. 합성 파�
 `stages`로 사용자 계산을 추가하고 `sinks`로 결과를 전달합니다. 스케줄링과 저장은
 호스트가 맡습니다. 한 분석기 인스턴스를 여러 설비 스트림이 동시에 공유하지 않습니다.
 
+## P1 운영 모듈 — 0.1.0a3 후보
+
+설치·RPM·부하별 정상 기준, 별도 원본을 사용하는 교정, 보류 조치 안내, 경보/성능 평가,
+측정 RPM 기반 각도 분석, 수명주기와 유한 큐를 추가했습니다. **아직 게시하지 않은 로컬 후보**입니다.
+
+| 모듈 / 진입점 | 목적·입력 | 출력·조건 |
+|---|---|---|
+| `AcquisitionInfo`, `AcquisitionQualityStage` | 실제 장비·센서·설치·교정 ID, 측정/교정기한 날짜, 채널·축, Hz·가속도 단위·센서 대역·안티앨리어싱·RPM 출처와 확인 플래그 | accepted/hold/quality_hold와 누락 항목. 호스트 선언의 일관성을 검사하며 설치를 인증하지 않음 |
+| `NormalRecording` / `.from_plan` | 원본 기록/취득 그룹, 관측 결과, 정상 확인, normal_fit/normal_calibration 역할, 선택적 원본 SHA256 | 최종 시험 역할·중복 그룹·제공된 중복 해시 거부. 학습과 교정 각각 원본 그룹 2개 이상 |
+| `fit_normal_reference` | 학습/교정 원본, name·rpm_range·load_range·quantile, time/angle 표현·각도 grid; source의 load_unit 필수 | 그룹 동일 가중 중앙값/MAD 기준과 원본별 최대 점수의 교정 분위수. 현장 오경보율 보장 아님 |
+| `NormalReferenceBank`, `ReferenceStage` | 장비·설치·교정·축/채널·대역·단위·조건·RPM·부하가 맞는 프로파일과 현재 결과 | normal/hold/anomaly_unknown, normal_score·문턱값·참조 이름. 미등록·중복 범위·운전점 불일치는 보류 |
+| `GuidanceStage`, `hold_guidance` | 앞 모듈의 상태·보류 이유 | 필요한 조치 코드·대상 파라미터. 설비 이름을 임의 변경해 범위를 우회하지 않음 |
+| `angle_resample`, `angle_features` | N 또는 N×C 파형·Hz·샘플별 측정 RPM, samples_per_revolution=256·revolutions=16 | 위상 적분·저역통과 후 각도 배열과 채널당 23개 특징. 속도 범위/대역/회전 수 부족 거부 |
+| `fit_angle_fault_discriminator`, `AngleFaultDiscriminator`, `AngleFaultStage` | 별도 각도 특징으로 새로 학습한 모델·원본 그룹·측정 속도 출처. 앞 게이트의 이상 확인과 취득 품질 필요 | 실험적 고장 후보, 기본 비활성. 기존 고정속도 모델 자동 전환 없음. 새 실측 성능 검증은 남아 있음 |
+| `ValidationObservation`, `evaluate_observations` | 원본/취득/설비/clock·초 단위 구간·정답·실제 파이프라인 판정·경보·선택적 고장 발생시각 | 정상 수락/판정 범위·지원 정상 FPR·무조건/조건부 종류 정답률·고장 전용 head 별도 정확도·시간당 경보·탐지 지연. 분모 0은 None |
+| `DatasetRecord`, `ValidationPlan`, `FrozenEvaluation` | 실제 원본/세션/설치/시험대와 역할·정답·SHA256, 동결 모델/전처리 해시 | 역할 누출 거부·덮어쓰기 없는 동결·개봉 전 접근 기록·해시 확인 BytesIO로 loader 호출. 재사용은 replay 표시; 외부 코드의 임의 읽기를 막는 보안 샌드박스는 아님 |
+| `VibrationAnalyzer.reset` | reset_stages=False, preserve_profiles=True | 기존 reset은 버퍼만 초기화. 명시적 stage 초기화 또는 push의 구간 단절 시 경보·수집 상태 초기화. 공유 bank 삭제 없음 |
+| `RealtimeProcessor` | max_pending·max_chunk_samples·max_pending_bytes, reject/drop_oldest, 선택적 latency_budget_seconds; 호스트가 process_next/drain 호출 | 유한 큐·완성 결과·누락/거절/실패·처리/대기/전체 지연·예산 초과 계수. 소비자 1개, 자동 worker나 엄격한 실시간 보장 없음 |
+
+실행 가능한 전체 연결 예제는 [영문 README의 P1 예제](README.md)와
+[examples/p1_pipeline.py](examples/p1_pipeline.py)에 있습니다.
+취득 품질→정상 기준→공통 판정→조치 안내→경보→유한 큐를 연결하고, 설치가 바뀌면 보류되는지 확인합니다.
+예제의 합성 기록과 확인 플래그를 실제 센서 증빙처럼 사용하면 안 됩니다.
+
+고정속도 정상 기준은 창 내 RPM 변화율 <=3%가 필요합니다. 단일 채널 angle 정상 기준은
+representation='angle'과 실제 측정 RPM을 요구하며, 별도 특징 정의·grid를 저장합니다.
+원시 속도는 result.rpm_trace로 전달하고 include_features=False JSON에서는 제외합니다.
+기존 고정속도 모델은 지원하지 않는 가변속 입력을 계속 보류합니다.
+
+preserve_profiles=False는 BaselineStage의 소유 프로파일을 해제합니다. ReferenceStage는
+공유 bank를 삭제하지 않고 사용을 중단하며 activate()로 다시 연결합니다.
+analyze()의 스트림 경계는 호스트가 reset으로 선언하고, 자동 구간 검사는 push()에 적용합니다.
+
+성능 시험에서는 48 kHz·4채널의 4초 분량 일괄 입력이 0.25초 지연 예산을 초과했습니다.
+이를 통과로 표시하지 않았습니다. 새 외부 자료는 파형 개봉·학습·튜닝에 사용하지 않은
+후보 상태이며 실제 고장 종류 정답률 개선을 입증한 상태는 아닙니다.
+자세한 입력·출력·실행 절차는 [P1 사용 설명서](docs/P1_GUIDE.md),
+검사 결과와 남은 실증은 [P1 검증 보고서](docs/P1_VERIFICATION.md)에 있습니다.
+
 ## P0 수정과 공통 입출력 계약 — 0.1.0a2 후보
 
-이 작업본에는 P0 수정이 들어 있습니다. 이미 공개된 PyPI/Zenodo **0.1.0a1** 파일은
-그대로이며, 아래 새 API는 이 작업본 또는 새로 빌드한 0.1.0a2 wheel로 설치해야 합니다.
+이 작업본에는 앞선 0.1.0a2 후보의 P0 수정도 포함됩니다. 이미 공개된 PyPI/Zenodo **0.1.0a1** 파일은
+그대로이며, 아래 새 API는 이 작업본 또는 새로 빌드한 0.1.0a3 wheel로 설치해야 합니다.
 이번 수정은 새 실측 데이터 학습이나 현장 진단 성능 합격을 의미하지 않습니다.
 
 | 모듈 / API | 입력 변경 | 출력·호환성 |

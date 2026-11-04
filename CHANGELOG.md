@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0a3 — P1 candidate, not published
+
+- Add declared acquisition quality contracts and installation/RPM/load normal banks with original-group calibration.
+- Add actionable holds, lifecycle hooks, bounded host-driven processing and queue/latency/deadline measurements.
+- Add separate measured-speed angle features, normal references and conditional experimental fault head.
+- Add coverage/event-aware metrics and prospective split/freeze/snapshot access contracts.
+- Collect 1.34 GB of new provider-verified twin-spool candidates without waveform decoding or new training.
+- Preserve a measured high-rate burst latency budget failure; no field accuracy or hard realtime claim.
+
 ## 0.1.0a2 — candidate, not published
 
 - Apply the same required scope/feature/acquisition contract at fault-model fitting and loading.

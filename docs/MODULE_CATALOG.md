@@ -1,5 +1,9 @@
 # Module and API catalog
 
+P1 adds acquisition.py, references.py, angle.py, guidance.py, evaluation.py, realtime.py
+and validation_plan.py. See README for purpose/input/output tables and P1_GUIDE.md for
+operating contracts; API_REFERENCE.md contains complete signatures.
+
 Generated from public source. An entry is an interface, not an independent physical model or a qualification certificate.
 
 Detailed method conventions are in ALGORITHMS.md; experimental model scope is mandatory.

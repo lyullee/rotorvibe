@@ -1,7 +1,55 @@
 # Complete public API reference
 
-Source-derived declarations for RotorVibe 0.1.0a2 candidate. README explains purpose, units, shapes, outputs and composition.
-The candidate is not yet published. Dataclass annotations describe constructor fields; defaults are source expressions.
+Source-derived declarations for RotorVibe 0.1.0a3 candidate.
+README and P1_GUIDE.md explain purpose, units, shapes, outputs and lifecycle. Candidate not yet published.
+
+## vibration/acquisition.py
+
+[Implementation](../vibration/acquisition.py)
+
+### AcquisitionInfo
+
+| Constructor field | Type | Default |
+|---|---|---|
+| `asset_id` | `str` | `required` |
+| `sensor_id` | `str` | `required` |
+| `sensor_installation_id` | `str` | `required` |
+| `calibration_id` | `str` | `required` |
+| `measured_on` | `str` | `required` |
+| `calibration_due` | `str` | `required` |
+| `channel_names` | `tuple[str, ...]` | `required` |
+| `axes` | `tuple[str, ...]` | `required` |
+| `sample_rate_hz` | `float` | `required` |
+| `unit` | `str` | `required` |
+| `sensor_band_hz` | `tuple[float, float]` | `required` |
+| `anti_alias_cutoff_hz` | `float` | `required` |
+| `rpm_source` | `str` | `required` |
+| `frame` | `str` | `'housing'` |
+| `calibrated` | `bool` | `False` |
+| `mounting_verified` | `bool` | `False` |
+| `anti_alias_verified` | `bool` | `False` |
+
+```python
+AcquisitionInfo.validate(self)
+```
+
+```python
+AcquisitionInfo.to_dict(self)
+```
+
+```python
+check_acquisition(result, *, required_band_hz=None, require_measured_rpm=False)
+```
+
+### AcquisitionQualityStage
+
+```python
+AcquisitionQualityStage.__init__(self, *, required_band_hz=None, require_measured_rpm=False)
+```
+
+```python
+AcquisitionQualityStage.__call__(self, result)
+```
 
 ## vibration/adapters.py
 
@@ -34,7 +82,60 @@ AlarmStage.reset(self)
 ```
 
 ```python
+AlarmStage.reset_state(self, *, preserve_profiles=True)
+```
+
+```python
 AlarmStage.__call__(self, result)
+```
+
+## vibration/angle.py
+
+[Implementation](../vibration/angle.py)
+
+```python
+angle_resample(values, sample_rate_hz, rpm_trace, *, samples_per_revolution=256, revolutions=16)
+```
+
+### AngleFeatures
+
+| Constructor field | Type | Default |
+|---|---|---|
+| `names` | `tuple` | `required` |
+| `values` | `np.ndarray` | `required` |
+| `metadata` | `dict` | `required` |
+| `schema` | `str` | `ANGLE_SCHEMA` |
+
+```python
+angle_features(values, sample_rate_hz, rpm_trace, *, samples_per_revolution=256, revolutions=16)
+```
+
+```python
+fit_angle_fault_discriminator(x, labels, rpms, groups, *, names, scope, samples_per_revolution=256, revolutions=16, margin=0.03)
+```
+
+### AngleFaultDiscriminator
+
+```python
+AngleFaultDiscriminator.__init__(self, profile)
+```
+
+```python
+AngleFaultDiscriminator.analyze(self, values, sample_rate_hz, rpm_trace, *, scope)
+```
+
+### AngleFaultStage
+
+```python
+AngleFaultStage.__init__(self, model, *, gate_key='reference', experimental_enabled=False)
+```
+
+```python
+AngleFaultStage.analyze_window(self, result, values)
+```
+
+```python
+AngleFaultStage.__call__(self, result)
 ```
 
 ## vibration/baseline.py
@@ -71,6 +172,10 @@ BaselineStage.begin(self, name='normal', windows=60)
 
 ```python
 BaselineStage.export_profile(self)
+```
+
+```python
+BaselineStage.reset_state(self, *, preserve_profiles=True)
 ```
 
 ```python
@@ -352,6 +457,10 @@ AnalysisResult.metrics(self)
 ```
 
 ```python
+AnalysisResult.rpm_trace(self)
+```
+
+```python
 AnalysisResult.to_dict(self, *, include_features=True)
 ```
 
@@ -370,7 +479,7 @@ VibrationAnalyzer.config(self)
 ```
 
 ```python
-VibrationAnalyzer.reset(self)
+VibrationAnalyzer.reset(self, *, reset_stages=False, preserve_profiles=True)
 ```
 
 ```python
@@ -551,6 +660,28 @@ Engine.baseline_start(self, name, target)
 Engine.baseline_load(self, name)
 ```
 
+## vibration/evaluation.py
+
+[Implementation](../vibration/evaluation.py)
+
+### ValidationObservation
+
+| Constructor field | Type | Default |
+|---|---|---|
+| `record_id` | `str` | `required` |
+| `acquisition_id` | `str` | `required` |
+| `start_s` | `float` | `required` |
+| `end_s` | `float` | `required` |
+| `truth` | `str` | `required` |
+| `decision` | `dict` | `required` |
+| `alarm_level` | `str` | `'unavailable'` |
+| `clock_id` | `str` | `'elapsed'` |
+| `asset_id` | `str` | `'asset'` |
+
+```python
+evaluate_observations(observations, *, fault_onsets=None, max_gap_seconds=2.0)
+```
+
 ## vibration/fault_discrimination.py
 
 [Implementation](../vibration/fault_discrimination.py)
@@ -620,6 +751,24 @@ BearingMap.__init__(self, geometries)
 
 ```python
 BearingMap.frequencies(self, id, rpm)
+```
+
+## vibration/guidance.py
+
+[Implementation](../vibration/guidance.py)
+
+```python
+hold_guidance(output)
+```
+
+### GuidanceStage
+
+```python
+GuidanceStage.__init__(self, source_stage='decision')
+```
+
+```python
+GuidanceStage.__call__(self, result)
 ```
 
 ## vibration/independent_data.py
@@ -916,6 +1065,99 @@ WindowStage.analyze_window(self, result: AnalysisResult, values: Any)
 ResultSink.__call__(self, result: AnalysisResult)
 ```
 
+## vibration/realtime.py
+
+[Implementation](../vibration/realtime.py)
+
+### RealtimeProcessor
+
+```python
+RealtimeProcessor.__init__(self, analyzer, *, max_pending=4, max_chunk_samples=None, max_pending_bytes=64 * 1024 * 1024, overflow='reject', latency_budget_seconds=None)
+```
+
+```python
+RealtimeProcessor.submit(self, block)
+```
+
+```python
+RealtimeProcessor.process_next(self)
+```
+
+```python
+RealtimeProcessor.drain(self, *, limit=None)
+```
+
+```python
+RealtimeProcessor.stats(self)
+```
+
+```python
+RealtimeProcessor.close(self)
+```
+
+## vibration/references.py
+
+[Implementation](../vibration/references.py)
+
+### NormalRecording
+
+| Constructor field | Type | Default |
+|---|---|---|
+| `record_id` | `str` | `required` |
+| `group_id` | `str` | `required` |
+| `observations` | `tuple` | `required` |
+| `confirmed_normal` | `bool` | `required` |
+| `role` | `str` | `'unassigned'` |
+| `sha256` | `str \| None` | `None` |
+
+```python
+NormalRecording.from_plan(cls, record, observations, *, confirmed_normal)
+```
+
+```python
+fit_normal_reference(fit_records, calibration_records, *, name, rpm_range, load_range, quantile=0.99, representation='time', samples_per_revolution=256, revolutions=16)
+```
+
+### NormalReferenceBank
+
+```python
+NormalReferenceBank.__init__(self, profiles=())
+```
+
+```python
+NormalReferenceBank.register(self, profile)
+```
+
+```python
+NormalReferenceBank.export(self)
+```
+
+```python
+NormalReferenceBank.clear(self)
+```
+
+```python
+NormalReferenceBank.analyze(self, result, *, representation='time')
+```
+
+### ReferenceStage
+
+```python
+ReferenceStage.__init__(self, bank, *, representation='time')
+```
+
+```python
+ReferenceStage.reset_state(self, *, preserve_profiles=True)
+```
+
+```python
+ReferenceStage.activate(self)
+```
+
+```python
+ReferenceStage.__call__(self, result)
+```
+
 ## vibration/rotor_features.py
 
 [Implementation](../vibration/rotor_features.py)
@@ -1096,4 +1338,45 @@ TwoStageStage.__call__(self, result)
 
 ```python
 TwoStageStage.analyze_window(self, result, values)
+```
+
+## vibration/validation_plan.py
+
+[Implementation](../vibration/validation_plan.py)
+
+### DatasetRecord
+
+| Constructor field | Type | Default |
+|---|---|---|
+| `record_id` | `str` | `required` |
+| `acquisition_id` | `str` | `required` |
+| `session_id` | `str` | `required` |
+| `installation_id` | `str` | `required` |
+| `rig_id` | `str` | `required` |
+| `label` | `str` | `required` |
+| `role` | `str` | `required` |
+| `sha256` | `str` | `required` |
+
+### ValidationPlan
+
+```python
+ValidationPlan.__init__(self, records, *, independent_by='acquisition')
+```
+
+```python
+ValidationPlan.fitting_records(self, role)
+```
+
+```python
+ValidationPlan.freeze(self, path, *, model_sha256, preprocessing_sha256)
+```
+
+### FrozenEvaluation
+
+```python
+FrozenEvaluation.__init__(self, plan_path, *, plan_sha256, access_log, max_record_bytes=128 * 1024 * 1024)
+```
+
+```python
+FrozenEvaluation.load_test(self, record_id, path, loader, *, model_sha256, preprocessing_sha256, replay=False)
 ```

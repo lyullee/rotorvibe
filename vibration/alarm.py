@@ -23,6 +23,9 @@ class AlarmStage:
     def reset(self):
         self.level='unavailable'; self.pending=None; self.since=None; self.last=None; self.identity=None
 
+    def reset_state(self,*,preserve_profiles=True):
+        self.reset()
+
     def __call__(self,result):
         t=result.end_time_s; identity=(result.clock_id,result.episode_id)
         if self.identity!=identity: self.reset(); self.identity=identity

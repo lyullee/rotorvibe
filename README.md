@@ -6,7 +6,7 @@ RotorVibe turns calibrated waveform blocks into spectra, bearing-frequency marke
 condition-relative evidence and inspectable diagnostic candidates. Use the NumPy API
 inside your own application; the local web dashboard is optional.
 
-**Alpha research candidate, version 0.1.0a2 (not yet published).** Signal calculations and bounded software
+**Alpha research candidate, version 0.1.0a3 (not yet published).** Signal calculations and bounded software
 checks are documented. Fault classifiers have **not** qualified for unattended field
 diagnosis: new-bearing and independent-rig transfer tests failed. No remaining-life
 prediction, automatic shutdown authority or standards certification is supplied.
@@ -19,7 +19,7 @@ prediction, automatic shutdown authority or standards certification is supplied.
 
 Python 3.11+ with NumPy 2.x and SciPy 1.13+ is required.
 
-From the prepared 0.1.0a2 source checkout:
+From the prepared 0.1.0a3 source checkout:
 
 ```console
 python -m pip install .
@@ -40,10 +40,113 @@ The public facade is `rotorvibe`; the earlier `vibration` namespace remains avai
 so existing Python integrations can keep their imports. Raw experimental data and
 trained rig-specific profiles are acquired separately, not installed by pip.
 
+## P1 monitoring APIs — 0.1.0a3 candidate
+
+P1 adds installation/RPM/load-scoped normal registration, recording-disjoint
+calibration, actionable holds, coverage-aware evaluation, measured-speed angle
+features, explicit lifecycle hooks and a bounded host-driven processing queue.
+It is a local **unpublished candidate**; install this checkout or its 0.1.0a3 wheel.
+
+| Unit / API | Inputs | Outputs / boundary |
+|---|---|---|
+| `AcquisitionInfo(...)`, `AcquisitionQualityStage(required_band_hz=None, require_measured_rpm=False)` | Asset, sensor/installation/calibration IDs; measurement/due dates; channel order/axes; Hz, g or m/s^2, sensor band and anti-alias cutoff; RPM provenance; explicit calibration/mounting/anti-alias flags | accepted / hold / quality_hold, issues; checks host declarations, never certifies a sensor installation |
+| `NormalRecording(record_id, group_id, observations, confirmed_normal, role='unassigned', sha256=None)` | Original acquisition group, valid analysis results, explicit normal_fit or normal_calibration role; optional actual raw checksum. `from_plan(record, observations, confirmed_normal=...)` binds a DatasetRecord. | Reference-fitting input; final-test roles, repeated groups and supplied duplicate hashes rejected |
+| `fit_normal_reference(fit_records, calibration_records, *, name, rpm_range, load_range, quantile=.99, representation='time', samples_per_revolution=256, revolutions=16)` | At least 2 original groups per role, reviewed acquisition evidence, explicit rev/min and load interval; source load_unit required | JSON-compatible reference; equal group-weighted median/MAD, calibration uses maximum score per recording; empirical limits, no field FPR guarantee |
+| `NormalReferenceBank(profiles=())`, `ReferenceStage(bank, representation='time')` | Compatible registered profiles and results; matches asset, installation, calibration, frame, channel/axis order, filters, units, condition, RPM and load | normal / hold / anomaly_unknown + normal_score, thresholds, reference ID. Missing/overlapping/out-of-range references hold; no silent overwrite |
+| `hold_guidance(output)`, `GuidanceStage(source_stage='decision')` | Named producer's status/reason | required_actions with machine-readable codes and affected parameters; never relabels asset/scope automatically |
+| `angle_resample(values, sample_rate_hz, rpm_trace, *, samples_per_revolution=256, revolutions=16)` | Calibrated N or N×C waveform and measured per-sample rev/min; bounded angular grid | Read-only angle array and speed/filter metadata; trapezoidal phase integration, conservative prefilter, rejects unresolved bandwidth |
+| `angle_features(...)` | Same waveform/trace/settings | AngleFeatures(names, values, metadata); 23 features/channel: log RMS/crest/kurtosis and 0.5X..10X fractions; separate angle schema |
+| `fit_angle_fault_discriminator(...)`, `AngleFaultDiscriminator(profile)`, `AngleFaultStage(model, gate_key='reference', experimental_enabled=False)` | New angle features/profiles, independent original groups, real channel/RPM provenance. Stage needs an earlier confirmed anomaly and qualified measured RPM | Experimental conditional fault candidates only; old fixed-speed profiles cannot be reused. Off by default; measured-data qualification pending |
+| `ValidationObservation(...)`, `evaluate_observations(rows, fault_onsets=None, max_gap_seconds=2)` | Original record/acquisition/asset/clock identities, interval seconds, ground truth, pipeline decision and alarm level; optional actual onset | Acceptance, decision coverage, supported-normal FPR, unconditional and conditional type metrics, separate known-fault head accuracy, acquisition counts, union exposure time, observed alarms/hour and delay. Zero supported denominator -> None |
+| `DatasetRecord(...)`, `ValidationPlan(records, independent_by='acquisition')`, `FrozenEvaluation(plan_path, plan_sha256=..., access_log=..., max_record_bytes=134217728)` | Actual record/group/session/installation/rig IDs, role, label, SHA256; explicit freeze of model/preprocessing hashes | Reject leakage, no-overwrite freeze, record access before decode; loader receives a verified BytesIO snapshot. Reopened tests require replay=True and remain exposed; not a sandbox for external host reads |
+| `VibrationAnalyzer.reset(reset_stages=False, preserve_profiles=True)` | Explicit lifecycle policy | Legacy reset stays buffer-only. With reset_stages=True invokes optional reset_state hooks. Established push-stream gaps/identity changes reset state automatically; the first push does not cancel an explicitly started collection |
+| `RealtimeProcessor(analyzer, max_pending=4, max_chunk_samples=None, max_pending_bytes=67108864, overflow='reject', latency_budget_seconds=None)` | Immutable chunk snapshots; explicit queue/byte/chunk limits and reject/drop_oldest policy; host calls process_next/drain | Completed result list, admission receipt and bounded timing stats (processing/queue/latency/deadline misses). One consumer, no implicit worker, no hard realtime guarantee |
+
+### P1 complete composition example
+
+This synthetic example tests API wiring. The four generated records do **not** prove
+independent normal sessions, and its evidence flags must not be copied to field data.
+
+```python
+import numpy as np
+from rotorvibe import (AcquisitionInfo, AcquisitionQualityStage, AnalysisConfig,
+    SignalBlock, VibrationAnalyzer, NormalRecording, fit_normal_reference,
+    NormalReferenceBank, ReferenceStage, DecisionStage, GuidanceStage,
+    AlarmStage, RealtimeProcessor)
+
+fs = 12000
+config = AnalysisConfig(sample_rate_hz=fs, unit="g", window_seconds=2,
+                        hop_seconds=2, load=0.5, rpm=1200)
+# Synthetic test declarations only; measured data need actual reviewed evidence.
+info = AcquisitionInfo("demo-rig", "sensor-1", "mount-1", "demo-calibration",
+    "2026-11-04", "2027-01-01", ("radial",), ("radial",), fs, "g",
+    (1, 6000), 5500, "controller_nominal",
+    calibrated=True, mounting_verified=True, anti_alias_verified=True)
+
+def block(index, amplitude, installation="mount-1"):
+    source = {"asset_id": "demo-rig", "condition_id": "steady",
+              "load_unit": "fraction_rated", "acquisition": info.to_dict()}
+    source["acquisition"]["sensor_installation_id"] = installation
+    samples = amplitude * np.sin(2 * np.pi * 20 * np.arange(fs * 2) / fs)
+    return SignalBlock(samples, fs, unit="g", rpm=1200, start_time_s=index * 2,
+                       channels=("radial",), metadata=source)
+
+preprocessor = VibrationAnalyzer(config)
+def recording(index, amplitude, role):
+    return NormalRecording(f"record-{index}", f"acquisition-{index}",
+        (preprocessor.analyze(block(index, amplitude)),), True, role)
+
+profile = fit_normal_reference(
+    [recording(0, 1.00, "normal_fit"), recording(1, 1.04, "normal_fit")],
+    [recording(2, 1.01, "normal_calibration"),
+     recording(3, 1.03, "normal_calibration")],
+    name="demo-reference", rpm_range=(1188, 1212), load_range=(0.4, 0.6))
+bank = NormalReferenceBank([profile])
+analyzer = VibrationAnalyzer(config, stages={
+    "acquisition": AcquisitionQualityStage(),
+    "reference": ReferenceStage(bank),
+    "decision": DecisionStage("reference"),
+    "guidance": GuidanceStage("decision"),
+    "alarm": AlarmStage(score_stage="decision", expected_score_name="normal_score",
+        warning=profile["anomaly_limit"], danger=2 * profile["anomaly_limit"],
+        persistence_seconds=0, release_seconds=0),
+})
+processor = RealtimeProcessor(analyzer, max_pending=2, overflow="reject")
+assert processor.submit(block(4, 1.02))["accepted"]
+normal = processor.process_next()[0]
+assert normal.payload["decision"]["status"] == "normal"
+assert processor.submit(block(5, 1.02, installation="new-mount"))["accepted"]
+held = processor.process_next()[0]
+assert held.payload["decision"]["status"] == "hold"
+assert held.payload["guidance"]["required_actions"]
+assert held.payload["alarm"]["level"] == "unavailable"
+print(normal.payload["decision"]["status"], held.payload["guidance"])
+processor.close()
+```
+
+The time reference path requires <=3% within-window speed variation. The optional
+single-channel angle reference path uses representation='angle' and actual measured
+RPM; its grid and feature schema are stored in the new profile. The raw trace is
+available as result.rpm_trace / payload['_rpm_trace']; to_dict(include_features=False)
+omits it. Existing fixed-speed models still hold on unsupported variable speed.
+
+Profile lifecycle belongs to the host. preserve_profiles=False clears an owned
+BaselineStage profile; a ReferenceStage detaches from its shared bank without deleting
+host profiles. Call stage.activate() to reattach; bank.clear() is an explicit host action.
+For direct analyze() windows the host still declares stream boundaries with reset;
+automatic continuity detection applies to push(). Custom stages opt in via
+reset_state(*, preserve_profiles=True).
+
+Benchmarks include a real observed limit: queued 48 kHz/4-channel bursts exceeded a
+0.25 s latency budget. Queue controls expose this; they do not make the condition pass.
+New external archives are sealed and have not trained or qualified these models.
+See [P1 operating guide](docs/P1_GUIDE.md), [verification and remaining qualification](docs/P1_VERIFICATION.md)
+and [new data receipt](research/p1_data_receipt.json).
+
 ## P0 fixes and common module I/O (0.1.0a2 candidate)
 
-This checkout contains the P0 fixes. The archived/PyPI **0.1.0a1** distribution remains
-unchanged; install this checkout or its newly built 0.1.0a2 wheel for these APIs.
+This checkout includes the P0 fixes introduced in the earlier 0.1.0a2 candidate. The archived/PyPI **0.1.0a1** distribution remains
+unchanged; install this checkout or its newly built 0.1.0a3 wheel for these APIs.
 No new measured-data accuracy or field qualification is claimed.
 
 | API / module | Input changes | Output / compatibility |

@@ -5,7 +5,7 @@ standards-table implementations that are intentionally absent here.
 
 ## 1. Installation and environment ownership
 
-Use Python 3.11 or newer. This source is the 0.1.0a2 candidate; install it with
+Use Python 3.11 or newer. This source is the 0.1.0a3 candidate; install it with
 `python -m pip install .`. PyPI 0.1.0a1 remains the earlier archived version. For an editable
 checkout with `python -m pip install -e ".[verification]"`. NumPy and SciPy are numerical
 dependencies, not bundled source copies. The optional verification extra provides
@@ -224,3 +224,10 @@ The adapter never invents probabilities, scores for unscored heads or new thresh
 Held/invalid outputs do not recover a previously raised alarm. Old malformed profiles
 with blank scope or missing original-acquisition metadata must be repaired from actual
 provenance, not filled with invented asset identities.
+
+## 12. P1 monitoring contracts
+
+See [P1_GUIDE.md](P1_GUIDE.md) for acquisition evidence, recording-disjoint normal
+references, angle-domain models, bounded processing, lifecycle and prospective
+validation access. These are additive research APIs; measured cross-rig qualification
+and a strict real-time service guarantee remain unestablished.

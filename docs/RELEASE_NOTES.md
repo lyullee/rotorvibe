@@ -1,12 +1,9 @@
-RotorVibe 0.1.0a2 candidate fixes four P0 contracts: strict fault-profile scope and
-schema loading, finite numeric distance handling, explicit common decision/alarm
-composition, and immutable tag-based build/publish without source restoration.
+RotorVibe 0.1.0a3 is an unshipped P1 candidate including the earlier P0 fixes.
+It adds acquisition declarations, scoped normal registration and separate calibration,
+angle-domain experimental models, actionable holds, lifecycle hooks, bounded queues,
+coverage/alarm metrics and prospective validation access. See docs/P1_VERIFICATION.md.
 
-DecisionStage and normalize_decision are additive APIs. Malformed profiles previously
-accepted now raise ValueError; invalid caller scope holds, extreme features raise
-ValueError, and held scores cannot recover an alarm. Set alarm thresholds for the
-selected score definition; no automatic recalibration or fault probability is supplied.
-
-This is an unshipped candidate until an explicit validated release tag is published.
-No new training or independent measured-data performance claim is made. Cross-rig
-limitations and copyright exclusions remain. See docs/P0_VERIFICATION.md and README.
+New archives remain sealed candidates; no new independent measured-data accuracy is
+claimed. A 48 kHz/4-channel burst workload exceeded a 0.25 s latency budget. No field
+diagnostic certification or hard realtime guarantee is supplied. Existing archived
+0.1.0a1 remains unchanged. External data rights remain separate from software MIT.

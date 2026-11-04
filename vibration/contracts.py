@@ -94,6 +94,11 @@ class AnalysisResult:
     @property
     def metrics(self): return self.payload.get('metrics',{})
 
+    @property
+    def rpm_trace(self):
+        """Read-only per-sample measured RPM, or None; never fabricate a trace."""
+        return self.payload.get('_rpm_trace')
+
     def to_dict(self, *, include_features=True):
         p={k:v for k,v in self.payload.items() if include_features or not k.startswith('_')}
         return json_value({'schema':'vibration.analysis.v1','start_time_s':self.start_time_s,

@@ -32,9 +32,20 @@ class VibrationAnalyzer:
     @property
     def config(self): return copy.deepcopy(self._config)
 
-    def reset(self):
-        self._a=None; self._valid=None; self._rpm=None; self._next=None
+    def reset(self,*,reset_stages=False,preserve_profiles=True):
+        """Reset buffering; opt in to stage lifecycle, preserving references by default.
+
+        Legacy reset() remains buffer-only. A stream discontinuity resets compliant
+        stage state automatically; external host objects without a hook are untouched.
+        """
+        if not isinstance(reset_stages,bool) or not isinstance(preserve_profiles,bool):
+            raise ValueError('Reset options must be bool.')
+        self._a=None; self._valid=None; self._rpm=None; self._rpm_measured=None; self._next=None
         self._identity=None; self._sequence=None; self._time=0.0
+        if reset_stages:
+            for stage in self.stages.values():
+                hook=getattr(stage,'reset_state',None)
+                if callable(hook): hook(preserve_profiles=preserve_profiles)
 
     def analyze(self, block: SignalBlock) -> AnalysisResult:
         c=self._config
@@ -67,6 +78,8 @@ class VibrationAnalyzer:
         if not quality:
             trace=rpm if isinstance(rpm,np.ndarray) else None
             payload.update(analyze(a,cfg,trace,bf,native=True))
+            if trace is not None:
+                trace=trace.copy(); trace.setflags(write=False); payload['_rpm_trace']=trace
         metadata={'measurement':c.to_dict(),'source':dict(block.metadata)}
         result=AnalysisResult(block.start_time_s,block.start_time_s+len(a)/c.sample_rate_hz,
                               block.clock_id,block.episode_id,block.channels,not quality,payload,metadata)
@@ -86,7 +99,8 @@ class VibrationAnalyzer:
         expected='V' if c.input_representation=='volts' else c.unit
         if block.unit!=expected: raise ValueError(f'Expected input unit {expected!r}.')
         identity_fields=('asset_id','asset','sensor_id','sensor_ids','calibration_id','condition_id','condition',
-                         'operating_mode','measurement_frame','source_id','sensor_installation')
+                         'operating_mode','measurement_frame','source_id','sensor_installation',
+                         'sensor_installation_id','load_unit','acquisition')
         try:
             source_identity=json.dumps(json_value({k:block.metadata[k] for k in identity_fields if k in block.metadata}),sort_keys=True,allow_nan=False)
         except (TypeError,ValueError) as ex: raise ValueError('Stream identity metadata must be JSON-compatible and finite.') from ex
@@ -94,7 +108,10 @@ class VibrationAnalyzer:
         discontinuity=(self._identity!=identity or self._next is None or
                        abs(block.start_time_s-self._next)>0.25/fs or
                        (block.sequence is not None and self._sequence is not None and block.sequence!=self._sequence+1))
-        if discontinuity: self.reset(); self._time=block.start_time_s
+        if discontinuity:
+            # First input must not cancel a normal collection explicitly begun
+            # before push(). Only an established stream boundary resets stages.
+            self.reset(reset_stages=self._identity is not None); self._time=block.start_time_s
         self._identity=identity; self._sequence=block.sequence
         self._next=block.start_time_s+len(block.values)/fs
         rpm=block.rpm if block.rpm is not None else c.rpm
@@ -106,16 +123,25 @@ class VibrationAnalyzer:
             self._a=block.values[sl].copy() if self._a is None else np.concatenate((self._a,block.values[sl]))
             self._valid=block.valid[sl].copy() if self._valid is None else np.concatenate((self._valid,block.valid[sl]))
             self._rpm=r[sl].copy() if self._rpm is None else np.concatenate((self._rpm,r[sl]))
+            measured=np.full(len(block.values[sl]),isinstance(rpm,np.ndarray),dtype=bool)
+            self._rpm_measured=measured if self._rpm_measured is None else np.concatenate((self._rpm_measured,measured))
             while len(self._a)>=n:
                 rt=self._rpm[:n]
                 if np.isnan(rt).all(): rt=None
                 elif not np.isfinite(rt).all():
                     # Mixed tachometer availability cannot support this window.
                     self._valid[:n]=False; rt=None
+                elif not self._rpm_measured[:n].all():
+                    # Internal scalar expansion is buffering, not a measured
+                    # tachometer trace. Never upgrade nominal values to evidence.
+                    if self._rpm_measured[:n].any() or np.ptp(rt)>0:
+                        self._valid[:n]=False; rt=None
+                    else: rt=float(rt[0])
                 w=SignalBlock(self._a[:n],fs,block.unit,self._time,block.clock_id,block.episode_id,
                               block.channels,self._valid[:n],rt,metadata=block.metadata)
                 results.append(self.analyze(w))
                 self._a=self._a[hop:]; self._valid=self._valid[hop:]; self._rpm=self._rpm[hop:]
+                self._rpm_measured=self._rpm_measured[hop:]
                 self._time+=hop/fs
         return results
 

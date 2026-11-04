@@ -67,6 +67,12 @@ class BaselineStage:
         import copy
         return copy.deepcopy(self.baseline.profile)
 
+    def reset_state(self,*,preserve_profiles=True):
+        import copy
+        profile=copy.deepcopy(self.baseline.profile) if preserve_profiles else None
+        self.baseline=Baseline(); self.baseline.profile=profile
+        self.source_scope=copy.deepcopy(profile.get('source_scope')) if profile else None
+
     def __call__(self, result):
         from .config import AnalysisConfig
         if not result.valid: return {'status':'quality_hold','score':None}
