@@ -22,6 +22,155 @@ Python 3.11 이상, NumPy 2.x, SciPy 1.13 이상이 필요합니다. 합성 파�
 `stages`로 사용자 계산을 추가하고 `sinks`로 결과를 전달합니다. 스케줄링과 저장은
 호스트가 맡습니다. 한 분석기 인스턴스를 여러 설비 스트림이 동시에 공유하지 않습니다.
 
+## 단위 모듈 선택표: 목적 · 입력 · 출력
+
+**다른 Python 시스템과 연결할 때 이 절부터 확인하세요.** `rotorvibe`는 대표 API를
+재공개하는 진입점이고, 세부 모듈은 아래 `vibration.*` 경로로 import합니다.
+`N`은 샘플 수, `C`는 채널 수, `W`는 관측 창 수, `F`는 특징 수입니다.
+핵심 계산에는 웹 서버·DB·외부 서비스가 필요하지 않습니다.
+
+```text
+호스트 센서/DAQ -> SignalBlock + AnalysisConfig -> VibrationAnalyzer
+  -> DSP/베어링 주파수 -> 순서 있는 stages -> AnalysisResult -> 호스트 sinks
+                         정상 기준 -> 경보
+                         정상/이상 게이트 -> 조건부 고장 종류 분류
+                         측정량 -> 사용자 제공 기준 평가
+```
+
+### 신호 계약과 핵심 계산
+
+| 단위 모듈 / 진입점 | 목적 | 입력 파라미터 | 출력 / 연결 대상 |
+|---|---|---|---|
+| [`contracts.SignalBlock`](vibration/contracts.py) | 신호·단위·시간·식별정보를 하나의 계약으로 전달 | `values[N]` 또는 `[N,C]`, `sample_rate_hz`, `unit`, 시간/채널/RPM/유효성/metadata | 복사 후 읽기 전용인 `[N,C]` 입력 블록 |
+| [`config.AnalysisConfig`](vibration/config.py) | 분석 창·교정·대역·채널 설정 | 아래 설정 파라미터 표 참조 | 검증된 설정; `create(dict)`, `to_dict()`, `signature()` |
+| [`core.VibrationAnalyzer`](vibration/core.py) | 동기 계산 및 연속 입력 창 분할 | `config=None`, keyword `bearing_provider=None`, `stages=None`, `sinks=()` | `analyze(block)` -> 결과 1개; `push(block)` -> 완성된 결과 목록; `reset()` -> 버퍼 초기화 |
+| `core.analyze_signal(values, config=None, **block_options)` | 한 번의 함수 호출로 창 하나 계산 | 배열, 설정, SignalBlock 부가 파라미터 | `AnalysisResult`; 매번 새 분석기를 만들므로 스트림 상태 미보존 |
+| [`dsp.spectrum(x, fs, window='hann')`](vibration/dsp.py) | FFT와 PSD | 1차원 파형, 샘플링 Hz, 창 함수 | `(주파수[Hz], 진폭[입력단위], PSD[입력단위²/Hz])` 배열 |
+| `dsp.channel_features(data, fs)` | 공통 특징 추출 | `[N,C]` 파형과 Hz | `(names, vector)`; 채널당 7개: log RMS·log crest·첨도·4개 log 대역 비율 |
+| `dsp.analyze(data, config, rpm_trace=None, bearing_frequencies=None, *, native=False)` | 지표·엔벨로프·오더·고조파 증거 | 물리 단위 파형, 검증 설정, RPM 배열, 주파수 사전 | 아래 출력 계약의 DSP payload 사전; 교정/품질/식별 검사는 상위 분석기 사용 |
+| `dsp.waveform(...)`, `compact_spectrum(...)` | 표시용 배열 축약 | 파형/주파수/진폭 배열, 최대 점 수, `native` | `{x,y}`; `native=True`면 전체 배열, 표시 축약값을 정량 측정 입력으로 쓰지 않음 |
+| `dsp.peak_evidence(f, amplitude, target, tolerance_ratio, resolution, *, spacing_hz=None)` | 예상 주파수 주변 피크 확인 | Hz·진폭 배열, 목표 Hz·허용 비율·분해능·고조파 간격 | 증거 사전 또는 `None`; 분리 불가능한 검색 대역을 명시 |
+| [`geometry.BearingGeometry`](vibration/geometry.py) | 이상 운동학 베어링 결함주파수 | `rolling_elements`, `rolling_diameter`, `pitch_diameter`, `contact_angle_deg=0`; `.frequencies(rpm)` | `{BPFI, BPFO, FTF, BSF, 2BSF}` Hz; 두 지름 단위 동일, 각도 도, 미끄럼 모델 없음 |
+| `geometry.BearingMap(geometries)` | 사용자 베어링 목록 주입 | `{형번: BearingGeometry}`, `.frequencies(id,rpm)` | Hz 사전; 분석기 `bearing_provider`와 `config.bearing_id`로 연결 |
+| [`ports`](vibration/ports.py) | 사용자 모듈 구조적 인터페이스 | provider `.frequencies(id,rpm)`, stage `__call__(result)`, 선택적 `.analyze_window(result, readonly_values)`, sink `__call__(result)` | provider -> Hz 사전; stage -> 이름 있는 payload; sink -> 호스트 부수효과, 반환값 미사용 |
+
+### 정상 기준·경보·고장 후보
+
+학습용 특징은 `[W,F]`, `groups[W]`는 **원본 취득 기록 식별자**입니다. 창을 무작위로
+섞은 번호가 아닙니다. `scope`는 실제 장비·센서·운전 조건의 적용 범위입니다.
+정상 기준 학습, 문턱값 교정, 최종 시험에는 서로 다른 원본을 사용해야 합니다.
+프로파일은 명시적인 사전이며 훈련 완료 모델을 패키지에 내장하지 않습니다.
+
+| 단위 모듈 / 진입점 | 목적 | 입력 파라미터 | 출력 / 연결 대상 |
+|---|---|---|---|
+| [`baseline.BaselineStage(config, *, profile=None)`](vibration/baseline.py) | 정상 기준 수집·상대 점수 | 설정, 선택적 정상 profile; `.begin(name='normal', windows=60)` 후 유효 결과 입력 | `status`, 지원될 때 `score`, 기여 특징; `.export_profile()` -> 사전 또는 `None` |
+| [`alarm.AlarmStage`](vibration/alarm.py) | 관측 시간 기반 경보 지속/해제 | keyword `score_stage='baseline'`, `warning=3`, `danger=6`, `persistence_seconds=2`, `release_seconds=3`, `max_gap_seconds=2`; 이전 stage 점수와 시간/유효성 | `level`, `pending`, `score` 또는 unavailable/retained_level; 자동 정지 명령 아님 |
+| [`rotor_features.extract_rotor_features`](vibration/rotor_features.py) | 회전수 기준 고조파·방향 비율·레벨 | `values`, `sample_rate_hz`, `rpm`, keyword `channel_names=None` | `RotorFeatures(names, values, sample_rate_hz, rpm, channel_names, sample_count, schema)` |
+| [`classifier.fit_gaussian`](vibration/classifier.py) / `GaussianClassifier(profile)` | 대각 공분산 Gaussian 기준 분류 | `x[W,F]`, `y[W]`, `groups`; `variance_floor=0.25`, feature schema; 추론 `.predict(vector)` | 학습 profile / label·matches 사전; 보정된 고장 확률 아님 |
+| [`two_stage.fit_two_stage`](vibration/two_stage.py) | 정상 게이트와 고장 원형 학습 | `normal_fit`, `normal_fit_groups`, `normal_calibration`, `calibration_groups`, `faults`, `fault_labels`, `fault_groups`; `feature_names`, `scope`, mode·quantile·margin | profile; `TwoStageDiagnostic(profile)`로 사용 |
+| `TwoStageDiagnostic` / `TwoStageStage(model)` | 정상 먼저 판단한 뒤 고장 후보 | `.predict(features, *, scope)` 또는 `.analyze(values, sample_rate_hz, rpm, *, scope, channel_names=None)`; stage는 결과와 원시 창 | `status`, `label`, 이상 증거·보류 사유를 포함한 사전 |
+| [`conditioned.fit_conditioned`](vibration/conditioned.py) | RPM별 정상 기준 학습 | `normal`, `normal_rpm`, `normal_groups`, `calibration`, `calibration_rpm`, `calibration_groups`, `faults`, `fault_rpm`, `fault_labels`, `fault_groups`; `feature_names`, `scope`, mode·보간·RPM 간격·불확도·margin | profile; `ConditionedDiagnostic(profile)`로 사용 |
+| `ConditionedDiagnostic` / `ConditionedStage(model)` | 운전속도에 맞는 정상/이상 게이트 | `.predict(features, *, scope)` 또는 `.analyze(values, sample_rate_hz, rpm, *, scope, channel_names=None)` | 정상·이상·보류 사전; 적용 범위 밖은 보류, 다음 고장 head에 연결 |
+| [`fault_discrimination.fault_features`](vibration/fault_discrimination.py) | 헐거움·불평형·정렬불량 형태 특징 | `values`: **정확히 2초, 단일 채널**, `sample_rate_hz`, `rpm` | `(names, vector[61])`; 일정 속도 연구용 특징 |
+| `fit_fault_discriminator` | 조건부 고장 종류 원형 학습 | `x`, `labels`, `rpms`, `groups`; keyword `names`, `scope`, `mode='morphology'`, `rpm_penalty=1`, `margin=0.03` | 고장 전용 profile; 정상 클래스 없음 |
+| `FaultDiscriminator(profile)` | 이상이 확인된 창의 고장 종류 | `.predict(features, rpm, *, scope)` 또는 `.analyze(values, sample_rate_hz, rpm, *, scope)` | `hold` / `anomaly_unknown` / `fault_candidate`와 label·거리 증거 |
+| `FaultDiscriminationStage(model, gate_key='conditioned')` | 게이트 후 고장 head 순서 강제 | 이전 `payload[gate_key]['anomaly'] is True`, 유효 창·적용 범위·RPM 변화율 <=3% | 고장 후보 사전; 조건 미충족이면 이유와 함께 보류 |
+| [`stages.ClassifierStage(registry)` / `LifeStage(estimator)`](vibration/stages.py) | 호스트 객체를 stage로 연결 | 주입한 registry/estimator와 결과/원시 창 | 분류/수명 payload; 생성자에서 자동 학습하지 않음 |
+| [`models.ModelRegistry(storage, catalog)`](vibration/models.py) | 선택적 모델 저장·학습 작업 | 저장소/자료목록, `load(name)`, `use_two_stage(profile)`, `use_conditioned(profile)`, `train(name)` | 분류 결과/작업 상태; `.close()` 필수 |
+| `models.LifeEstimator(catalog).estimate(source)` | PRONOSTIA 참고 수명 유사도 | 학습용 완전 수명 catalog, 현재까지의 dataset·record_id·RPM·baseline/recent RMS 이력 | 거부 상태 또는 실험적 `remaining_seconds`·참고 범위·매칭; **현장 잔여수명 검증 미완료**, 범위는 신뢰구간 아님 |
+
+### 측정량과 사용자 제공 평가 기준
+
+**공개 `vibration.iso`에는 ISO/KS 기준표·기계 분류별 기준 선택기가 없습니다.**
+`available_standards()`는 `()`입니다. 평가 기준은 사용자가 적법하게 확보해 주입합니다.
+
+| 단위 모듈 / 진입점 | 목적 | 입력 파라미터 | 출력 / 연결 대상 |
+|---|---|---|---|
+| [`iso.contracts.MachineContext`](vibration/iso/contracts.py) | 평가 대상과 운전 상태 명시 | 필수 `asset_id`, `machine`; `operating_state`, `condition_id`, `location` 및 선택적 기계 정보 | 검증된 context; 부가 기계 분류 필드가 규정 기준 선택 기능을 켜지는 않음 |
+| `Measurement` | 측정점의 물리량 계약 | `value`, `quantity`, `unit`, `statistic`, `frame`, `band_hz`, `duration_s`, `axis`, `point_id`; 교정·취득 확인·시간·출처 | 관측 객체; `.canonical_value()` -> 가속도 m/s²·속도 mm/s·변위 µm |
+| `Rule` | 사용자 기준 계약 | `standard`, `key`, `quantity`, `statistic`, `frames`, 오름차순 `limits`, `band_hz`, `source_page`, `source_clause`; zones·최소 시간·notes | 검증 기준 객체/사전; RMS와 피크를 임의 변환하지 않음 |
+| [`iso.measurements.measure_waveform`](vibration/iso/measurements.py) | 파형에서 대역별 물리량 측정 | `values`; keyword `sample_rate_hz`, `input_unit`, `quantity`, `statistic`, `frame`, `band_hz`, `point_id`, `axes`; 교정/취득 플래그·시간·clock·선택적 order/filter bandwidth | 채널별 `list[Measurement]`; DFT 대역 측정, 계측기 인증 아님 |
+| `energy_equivalent_average(measurements)` / `EnergyEquivalentAccumulator(period_s).push(measurement)` | 시간 가중 RMS 평균 | 단위·측정점·대역·시간이 호환되는 RMS 관측, 누적 기간 초 | 평균 `Measurement`; 누적 기간 전에는 `None` |
+| [`iso.evaluation.evaluate`](vibration/iso/evaluation.py) | 관측 하나와 사용자 한계값 비교 | `standard`, `context`, `measurement`, keyword `custom_rule=None` | `status`, `zone`, 표준화 값/단위·기준 출처; 기준 누락/조건 불일치면 zone 없음 |
+| `aggregate(results)` | 측정점 평가 범위 취합 | 같은 장비·기준·조건의 비어 있지 않은 평가 목록 | 취합 사전; `whole_machine_compliance=False` |
+| [`iso.stage.IsoStage`](vibration/iso/stage.py) | 파형→측정→평가 stage | `standard`, `context`; keyword `custom_rule`, `point_id`, `axis='radial'`, `calibrated=False`, `acquisition_verified=False` | 평가 payload; 단일 채널 입력, 기준 없으면 indeterminate |
+
+### 다른 시스템 연결과 선택적 실행 모듈
+
+| 단위 모듈 / 진입점 | 목적 | 입력 파라미터 | 출력 / 관리 책임 |
+|---|---|---|---|
+| [`adapters.from_process_batch`](vibration/adapters.py) | 외부 배치를 신호 블록으로 변환 | `batch`의 time_s·values·동일 units·channels·origin·metadata; keyword `sample_rate_hz`, `clock_id`, `rpm=None` | `SignalBlock`; 혼합 episode/mode는 먼저 분리 |
+| `adapters.to_process_batch(results)` | 결과들을 특징 배치로 전달 | 시간축·분석 설정·특징 순서가 호환되는 결과 목록 | 외부 `process_monitoring.SignalBatch[W,F]`, 창 종료 시각 사용; **해당 외부 패키지는 호스트가 별도 설치** |
+| `adapters.condition_evidence(result, *, asset_id)` | 타 시스템에 상태 증거 전달 | 결과와 명시적 설비 ID | `vibration.condition-evidence.v1` 사전; 사고 확률·빈도 아님 |
+| [`datasets.DatasetCatalog`](vibration/datasets.py) | 로컬 자료 검색·읽기·가져오기 | 로컬 파일, `search`, `details(id)`, `load(id,snapshot=0)`, `imported(filename,payload,fs,unit,channels_axis,skip_columns)` | 목록/메타데이터 또는 `(배열, metadata)`; 자료 자동 다운로드 없음 |
+| [`independent_data.IndependentRotorCatalog`](vibration/independent_data.py) | 원본 단위로 분리한 회전기기 자료 읽기 | root·manifest, `rows(*, role=None, normal_only=False)`, `load(record_id, *, frozen_model_sha256=None)`, Marra archive 메서드 | 원본 ID / 파형·metadata; 원본 단위 분리 유지 |
+| [`condition_data.UosRotorCatalog` / `ExposedCrossSpeedDevelopment`](vibration/condition_data.py) | 조건부 모델 연구 자료 접근 | 로컬 root; UOS는 `rows(role=None)`, `load(record_id, *, frozen_model_sha256=None)` | 목록 또는 `(배열, metadata)`; 이미 개봉한 자료를 새 holdout으로 간주하지 않음 |
+| [`client.VibrationClient`](vibration/client.py) | HTTP/UDP 신호 송신 | `base_url`, `token`, `timeout`; `start(sample_rate_hz,channels,unit,rpm,**configuration)`, `push(samples,**kwargs)`, `push_udp`, `stop` | 서버 JSON/패킷 응답; 네트워크·재시도는 호스트 책임 |
+| [`engine.Engine(storage,catalog,bearings,models)`](vibration/engine.py) | 선택적 수집/재생 worker | 주입 서비스, `configure`, `live`, `ingest(payload)`, `replay(id,speed,loop,...)` | 상태·이벤트·이력; `EventHub` 이벤트 분배, `Ring` 버퍼; `.close()` |
+| [`storage.Storage`](vibration/storage.py) | 선택적 SQLite 저장 | 세션·설정·프레임·이벤트·이름 있는 profile, `save/get/history` | ID·저장 행·조회 자료; writable runtime 사용, `.close()` |
+| [`server.Application` / `rotorvibe-monitor`](vibration/server.py) | 선택적 HTTP/SSE/UDP 대시보드 | `--host`, `--port`, runtime/project 경로·설정된 인증 | 로컬 UI/서비스; 직접 계산 API와 별개, 자원 종료 필요 |
+| [`bearings.Bearings`](vibration/bearings.py), [`bootstrap`](vibration/bootstrap.py) | 대시보드용 목록·경로 지원 | 별도 로컬 베어링 자료와 프로젝트/runtime 경로 | 서비스 조회·경로; 이식 가능한 직접 API는 Geometry/Map 사용 |
+
+### 실제 입력 파라미터 계약
+
+`analyze`는 `N == round(sample_rate_hz * window_seconds)`인 **정확히 한 창**을 요구합니다.
+`push`는 임의 길이의 비어 있지 않은 청크를 받고 완성된 창만 반환합니다.
+블록과 설정의 샘플링률·채널 수·입력 단위가 같아야 합니다.
+
+| `SignalBlock` 파라미터 | 자료형 / 기본값 | 의미·단위 |
+|---|---|---|
+| `values` | 필수 `[N]` / `[N,C]` 배열 | 샘플, 1..16채널; 복사 후 읽기 전용 |
+| `sample_rate_hz` | 필수 양의 유한 수 | 실제 샘플링 Hz |
+| `unit` | `'unknown'` | `g`, `m/s^2`, `V`, 또는 단위 미확인 |
+| `start_time_s` | `0.0` | 선언한 clock에서 첫 샘플 시각, 초 |
+| `clock_id`, `episode_id` | `'sample_clock'`, `'default'` | 시간 기준과 연속 취득 구간 ID; 실제 사용 시 명시 |
+| `channels` | `()` | 열 순서와 일치하는 고유 센서/축 이름; 생략하면 자동 생성 |
+| `valid` | `None` 또는 bool `[N]` | 샘플 유효성; 비유한 값도 무효 처리 |
+| `rpm` | `None`, 수 하나 또는 `[N]` | 외부에서 측정한 회전수 rev/min; config보다 우선 |
+| `sequence` | `None` 또는 음이 아닌 정수 | 연속 패킷 순서 |
+| `metadata` | `{}` | 실제 asset/sensor/condition/calibration/frame 식별정보, 결과 source로 전달 |
+
+| `AnalysisConfig` 파라미터와 기본값 | 목적·단위 |
+|---|---|
+| `sample_rate_hz=12000`, `channels=1`, `channel=0` | Hz·총 채널 수·스칼라 지표/스펙트럼용 0기반 채널 번호; 특징은 전체 채널 사용 |
+| `window_seconds=1`, `hop_seconds=0.25` | 창/갱신 간격 초; 창 256..2,000,000샘플, hop >=0.02초·창 이하 |
+| `unit='unknown'`, `input_representation='physical'` | 출력 가속도 단위 g/m/s²/unknown; 입력 표현 physical/volts |
+| `sensitivity_mv_per_g=None`, `conditioner_gain=1`, `bias_voltage_v=0`, `calibration_id=''` | 전압 교정 `(V-bias)/(감도/1000*gain)`; 감도 양수 목록 1개 또는 C개, volts 모드는 교정 후 단위 필수 |
+| `rpm=None`, `bearing_id=None`, `condition`, `load=None` | rev/min·사용자 베어링 ID·운전조건 이름·선택적 부하 정보 |
+| `window='hann'` | FFT 창, hamming/boxcar도 지원 |
+| `envelope_low_hz=500`, `envelope_high_hz=5000` | 엔벨로프 반송 대역 Hz, Nyquist 미만; 저속 샘플링이면 별도 조정 |
+| `velocity_low_hz=10`, `velocity_high_hz=1000` | 속도 적분 대역 Hz; 출력 mm/s RMS |
+| `peak_tolerance_ratio=0.03` | 주파수 탐색 상대 허용오차, 분해능 조건도 적용 |
+| `warning_score=3`, `danger_score=6`, `persistence_seconds=2`, `release_seconds=3` | 선택적 서비스 경보 설정; 직접 API의 AlarmStage는 자체 인자를 명시해 연결 |
+| `rms_warning=None`, `rms_danger=None`, `clip_abs=None` | 선택적 서비스 RMS 기준·절대 클리핑 기준, 설정 단위; clip 검사는 직접 core에도 적용 |
+| `model_enabled=False`, `order_tracking=True` | 선택적 서비스 분류 활성화·RPM trace 오더 재표본화; 직접 API는 모델 stage를 명시적으로 연결 |
+
+### 출력 파라미터 계약
+
+| `AnalysisResult` 필드 / payload | 의미·단위 |
+|---|---|
+| `start_time_s`, `end_time_s`, `clock_id`, `episode_id`, `channels` | 창 식별; 종료 시각은 미포함(exclusive), 선언 clock 기준 초 |
+| `valid`, `payload['quality']['flags']` | **수치 계산 품질이지 정상 판정 아님**; 무효 창에는 수치 DSP 결과 없음 |
+| `metrics` | AC rms·peak·peak_to_peak·mean·rms_raw는 설정 단위; crest_factor·Pearson kurtosis·skewness는 무차원; velocity_rms_mm_s, envelope_rms, band_power(단위²) |
+| `payload['spectrum']`, `['psd']`, `['envelope_spectrum']` | `{x,y}` 배열; x=Hz, y=진폭·단위²/Hz·엔벨로프 진폭 |
+| `payload['waveform']` | 상대 시간 초와 교정된 선택 채널 샘플 `{x,y}` |
+| `payload['spectrogram']` | 한 창의 frequencies와 log-PSD db 행; **시간별 행을 호스트가 쌓아** 스펙트로그램 구성 |
+| `payload['rpm']`, `['rpm_variation_ratio']`, `['frequency_resolution_hz']`, `['order_spectrum']` | rev/min·무차원 변화율·Hz 간격·선택적 cycles/revolution 오더와 재표본화 mode |
+| `payload['bearing_markers']`, `['rotation_markers']`, `['diagnosis']` | 예상/관측 Hz·피크 대비·중복 가능한 후보 증거, 확정 진단 아님 |
+| `features`, `feature_names` | 특징 벡터와 정확한 순서/이름; profile schema·설정과 함께 전달 |
+| `payload[stage_name]` | 정상 점수·경보·진단·사용자 기준 등 stage별 사전 |
+| `metadata['measurement']`, `metadata['source']` | 실제 적용된 설정·호스트 원본 metadata |
+| `to_dict(include_features=True)` | JSON 호환 `vibration.analysis.v1`; False면 밑줄로 시작하는 내부 특징 필드 제외 |
+
+stage는 넣은 순서로 실행하고 앞 stage 출력을 다음 stage가 읽습니다. 원시 창 stage는
+표시용 축약 파형 대신 교정된 전체 배열을 받습니다. sink는 stage 완료 후 동기 실행됩니다.
+예외는 호출자에게 전달되므로 재시도·저장 중복 방지는 호스트가 맡습니다.
+`hold`나 점수 누락을 정상/위험도 0으로 바꿔 연결하지 마세요.
+
+모든 공개 생성자·메서드의 정확한 전체 시그니처와 dataclass 필드는
+[전체 API 레퍼런스](docs/API_REFERENCE.md)에 있습니다. 여기 표가 모듈 선택과 연결의
+기준이고, [사용 설명서](docs/USER_GUIDE.md)는 실행 순서를 설명합니다.
+
 ## 계산 결과를 해석하는 방법
 
 - 파형 품질·단위·시간축이 유효해야 숫자의 의미를 해석할 수 있습니다.
@@ -55,6 +204,15 @@ Python 3.11 이상, NumPy 2.x, SciPy 1.13 이상이 필요합니다. 합성 파�
 
 이 변경은 원본 연구 폴더에 덮어쓰지 않았습니다. 로컬 원본의 동결 모델과 감사
 기록은 그대로 보존했습니다. 공개본의 달라진 파일과 과거 결과의 범위는 별도 목록에 있습니다.
+
+## 공개 배포본과 문서 버전
+
+[PyPI](https://pypi.org/project/rotorvibe/0.1.0a1/) ·
+[GitHub Release](https://github.com/lyullee/rotorvibe/releases/tag/v0.1.0a1) ·
+[Zenodo DOI](https://doi.org/10.5281/zenodo.23937890)의 0.1.0a1 wheel·소스 압축본은
+서로 SHA-256이 같은 공개 파일입니다. GitHub main의 이 README는 이후 API 설명을
+보강한 최신 문서입니다. 이미 발행한 0.1.0a1 압축본과 PyPI 내부 README는 최초 발행
+스냅샷을 보존합니다. 이번 보강은 수치 모델·학습 자료를 변경하지 않습니다.
 
 ## 자세한 문서
 
